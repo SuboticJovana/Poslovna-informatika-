@@ -1,2 +1,2 @@
-# Poslovna-informatika-
+# Poslovna-informatika
 Spring app
