@@ -10,7 +10,7 @@ public interface PDVRateServiceInterface {
 	
 	PDVRate save(PDVRate pdvRate);
 	
-	PDVRate remove(PDVRate pdv_rate_id);
+	PDVRate remove(Integer prv_rate_id);
 	
 	List<PDVRate> findAll();
 }

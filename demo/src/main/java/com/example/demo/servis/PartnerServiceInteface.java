@@ -10,7 +10,7 @@ public interface PartnerServiceInteface {
 	
 	Partner save(Partner partner);
 	
-	Partner remove(Partner partner_id);
+	Partner remove(Integer partner_id);
 	
 	List<Partner> findAll();
 	

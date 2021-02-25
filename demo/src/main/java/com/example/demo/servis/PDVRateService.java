@@ -25,7 +25,7 @@ public class PDVRateService implements PDVRateServiceInterface{
 	}
 
 	@Override
-	public PDVRate remove(PDVRate pdv_rate_id) {
+	public PDVRate remove(Integer pdv_rate_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

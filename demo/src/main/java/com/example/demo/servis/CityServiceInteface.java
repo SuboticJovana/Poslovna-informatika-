@@ -10,7 +10,7 @@ public interface CityServiceInteface {
 
 	City save(City city);
 	
-	City remove(City city_id);
+	City remove(Integer city_id);
 	
 	List<City> findAll();
 }

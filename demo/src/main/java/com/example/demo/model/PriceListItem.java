@@ -29,7 +29,9 @@ public class PriceListItem implements Serializable {
 	@JoinColumn(name="cenovnik_id", referencedColumnName="cenovnik_id", nullable=false)
 	 private Cenovnik pricelist;
 	
-//	Veza ka robi
+	@ManyToOne
+	@JoinColumn(name="roba_id", referencedColumnName="roba_id", nullable=false)
+	 private RobaUsluga roba_id;
 	
 	public PriceListItem() {
 		

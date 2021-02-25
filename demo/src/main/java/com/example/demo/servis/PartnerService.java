@@ -25,7 +25,7 @@ public class PartnerService implements PartnerServiceInteface{
 	}
 
 	@Override
-	public Partner remove(Partner partner_id) {
+	public Partner remove(Integer partner_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -25,7 +25,7 @@ public class PriceListItemService implements PriceListItemServiceInterface{
 	}
 
 	@Override
-	public PriceListItem remove(PriceListItem price_list_item_id) {
+	public PriceListItem remove(Integer price_list_item_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,7 +30,9 @@ public class PDVRate implements Serializable{
 	@Column(name="date", unique=false, nullable=false)
 	private Date date;
 	
-//	Veza ka PDV kategorija
+	@ManyToOne
+	@JoinColumn(name="id", referencedColumnName="id", nullable=false)
+	 private PDVCategory id;
 	
 	public PDVRate() {
 		

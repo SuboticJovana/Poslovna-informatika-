@@ -25,7 +25,7 @@ public class CityService implements CityServiceInteface{
 	}
 
 	@Override
-	public City remove(City city_id) {
+	public City remove(Integer city_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
