@@ -1,0 +1,68 @@
+package com.example.demo.dto;
+
+import java.io.Serializable;
+
+public class ServiceGroupDTO implements Serializable{
+
+	private Integer id;
+
+	private String  name;
+
+	private PDVCategoryDTO PDVCategory;
+
+	private PreduzeceDTO firm;
+
+	public ServiceGroupDTO() {
+		super();
+	}
+
+	public ServiceGroupDTO(String name, PDVCategoryDTO PDVCategory, PreduzeceDTO firm) {
+		this.name=name;
+		this.PDVCategory=PDVCategory;
+		this.firm=firm;
+	}
+	
+	public ServiceGroupDTO(int id, String name, PDVCategoryDTO PDVCategory, PreduzeceDTO firm) {
+		super();
+		this.id = id;
+		this.name=name;
+		this.PDVCategory=PDVCategory;
+		this.firm=firm;
+	}
+	//
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public PDVCategoryDTO getPDVCategory() {
+		return PDVCategory;
+	}
+
+	public void setPDVCategory(PDVCategoryDTO pDVCategory) {
+		PDVCategory = pDVCategory;
+	}
+
+	public PreduzeceDTO getFirm() {
+		return firm;
+	}
+
+	public void setFirm(PreduzeceDTO firm) {
+		this.firm = firm;
+	}
+	
+	
+
+}
+
