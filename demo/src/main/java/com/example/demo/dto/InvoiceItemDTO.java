@@ -20,7 +20,7 @@ public class InvoiceItemDTO implements Serializable{
 
 	private  double total_amount;
 
-	private RobaDTO usluga;
+	private ServicesDTO usluga;
 	
 	public InvoiceItemDTO() {
 		super();
@@ -107,11 +107,11 @@ public class InvoiceItemDTO implements Serializable{
 		this.total_amount = total_amount;
 	}
 
-	public RobaDTO getUsluga() {
+	public ServicesDTO getUsluga() {
 		return usluga;
 	}
 
-	public void setUsluga(RobaDTO usluga) {
+	public void setUsluga(ServicesDTO usluga) {
 		this.usluga = usluga;
 	}
 	

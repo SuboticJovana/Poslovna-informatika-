@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -39,6 +41,14 @@ public class Invoice {
 	
 	@Column(name="status", unique=false, nullable=false)
 	private String  status;
+	
+	@ManyToOne
+	@JoinColumn(name="enterprise_id", referencedColumnName="enterprise_id", nullable=false)
+	 private Enterprise enterprise;
+	
+	@ManyToOne
+	@JoinColumn(name="partneri_id", referencedColumnName="partner_id", nullable=false)
+	 private Partner partner;
 	
 public Invoice() {
 	
@@ -107,6 +117,23 @@ public String getStatus() {
 public void setStatus(String status) {
 	this.status = status;
 }
+
+public Enterprise getEnterprise() {
+	return enterprise;
+}
+
+public void setEnterprise(Enterprise enterprise) {
+	this.enterprise = enterprise;
+}
+
+public Partner getPartner() {
+	return partner;
+}
+
+public void setPartner(Partner partner) {
+	this.partner = partner;
+}
+
 
 
 }

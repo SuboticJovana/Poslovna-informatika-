@@ -35,7 +35,11 @@ public class Pricelist implements Serializable {
 	
 	@Column(name="total_price", unique=false, nullable=false)
 	private Integer total_price;
-
+		
+	
+	public Pricelist() {
+		
+	}
 	public Pricelist(Integer pricelist_id, Date date_from, Date date_to, Integer percentage, Integer total_price) {
 		super();
 		this.pricelist_id = pricelist_id;

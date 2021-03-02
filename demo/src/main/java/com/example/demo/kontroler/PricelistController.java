@@ -23,12 +23,12 @@ import com.example.demo.model.Pricelist;
 import com.example.demo.servis.PricelistServiceInterface;
 
 @RestController
-@RequestMapping("prodaja/cenovnici")
+@RequestMapping("sales-system/pricelists")
 public class PricelistController {
 	
 	@Autowired 
 	private PricelistServiceInterface pricelistService;
-	/*
+	
 	@GetMapping
 	public ResponseEntity<List<PricelistDTO>> getPricelist() {
 	List<Pricelist> pricelists = pricelistService.findAll();
@@ -39,9 +39,9 @@ public class PricelistController {
 	return new ResponseEntity<List<PricelistDTO>>(pricelistDTO, HttpStatus.OK);
 
 	}
-	@GetMapping(value="/{id}")
-	public ResponseEntity<PricelistDTO> getPricelist(@PathVariable("id") Integer id){
-		Pricelist pricelist = pricelist.findOne(id);
+	@GetMapping(value="/{pricelist_id}")
+	public ResponseEntity<PricelistDTO> getPricelist(@PathVariable("pricelist_id") Integer pricelist_id){
+		Pricelist pricelist = pricelistService.findOne(pricelist_id);
 		if(pricelist == null){
 			return new ResponseEntity<PricelistDTO>(HttpStatus.NOT_FOUND);
 		}
@@ -51,16 +51,12 @@ public class PricelistController {
 	@PostMapping(consumes="application/json")
 	public ResponseEntity<PricelistDTO> savePricelist(@RequestBody PricelistDTO pDTO){
 		//ispraviti
-		Pricelist pricelist = new Pricelist(null, null, null, null, null);
+		Pricelist pricelist = new Pricelist();
 		pricelist.setDate_from(pDTO.getDate_from());
 		pricelist.setDate_to(pDTO.getDate_to());
 		pricelist.setPercentage(pDTO.getPercentage());
 		pricelist.setTotal_price(pDTO.getTotal_price());
 		
-	
-
-
-
 		pricelistService.save(pricelist);
 		PricelistDTO pricelistDTO = new PricelistDTO(pricelist);
 		return new ResponseEntity<PricelistDTO>(pricelistDTO, HttpStatus.CREATED);	
@@ -89,5 +85,5 @@ public class PricelistController {
 		}		
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
-	*/
+	
 }

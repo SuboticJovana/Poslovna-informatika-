@@ -2,6 +2,8 @@ package com.example.demo.dto;
 
 import java.util.Date;
 
+import com.example.demo.model.Invoice;
+
 public class InvoiceDTO {
 
 	private Integer id;
@@ -11,8 +13,13 @@ public class InvoiceDTO {
 	private Double total_base;
 	private Double total_amount;
 	private Double total_pdv;
+	private String status;
+	
+	public InvoiceDTO() {
+		
+	}
 	public InvoiceDTO(Integer id, Integer invoice_number, Date date_invoice, Date date_currency, Double total_base,
-			Double total_amount, Double total_pdv) {
+			Double total_amount, Double total_pdv, String status) {
 		super();
 		this.id = id;
 		this.invoice_number = invoice_number;
@@ -21,6 +28,10 @@ public class InvoiceDTO {
 		this.total_base = total_base;
 		this.total_amount = total_amount;
 		this.total_pdv = total_pdv;
+		this.status=status;
+	}
+	public InvoiceDTO(Invoice item) {
+		// TODO Auto-generated constructor stub
 	}
 	public Integer getId() {
 		return id;
@@ -63,6 +74,12 @@ public class InvoiceDTO {
 	}
 	public void setTotal_pdv(Double total_pdv) {
 		this.total_pdv = total_pdv;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	

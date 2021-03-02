@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -31,12 +33,20 @@ public class Services implements Serializable {
 	@Column(name="goods", unique=false, nullable=false)
 	private Boolean goods;
 
+	@ManyToOne
+	@JoinColumn(name="groupserv_id", referencedColumnName="id", nullable=false)
+	private ServiceGroup firm;
+	
 	public Services(Integer service_id, String name, String description, Boolean goods) {
 		super();
 		this.service_id = service_id;
 		this.name = name;
 		this.description = description;
 		this.goods = goods;
+	}
+
+	public Services() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getService_id() {
@@ -69,6 +79,14 @@ public class Services implements Serializable {
 
 	public void setGoods(Boolean goods) {
 		this.goods = goods;
+	}
+
+	public ServiceGroup getFirm() {
+		return firm;
+	}
+
+	public void setFirm(ServiceGroup firm) {
+		this.firm = firm;
 	}
 
 	

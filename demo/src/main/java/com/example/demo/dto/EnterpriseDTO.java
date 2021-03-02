@@ -2,6 +2,8 @@ package com.example.demo.dto;
 
 import java.io.Serializable;
 
+import com.example.demo.model.Enterprise;
+
 public class EnterpriseDTO implements Serializable {
 
 	
@@ -17,6 +19,9 @@ public class EnterpriseDTO implements Serializable {
 		this.address = address;
 		this.phone = phone;
 		this.fax = fax;
+	}
+	public EnterpriseDTO(Enterprise enterprise) {
+		this(enterprise.getEnterprise_id(),enterprise.getAddress(),enterprise.getFax(),enterprise.getNameEnterprise(),enterprise.getPhone());
 	}
 	public int getEnteprise_id() {
 		return enteprise_id;

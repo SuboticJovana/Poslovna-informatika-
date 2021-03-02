@@ -43,6 +43,10 @@ public class Enterprise implements Serializable {
 		this.fax = fax;
 	}
 
+	public Enterprise() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getEnterprise_id() {
 		return enterprise_id;
 	}
