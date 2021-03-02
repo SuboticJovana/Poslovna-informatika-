@@ -3,7 +3,8 @@ package com.example.demo.repozitorijum;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.model.InvoiceItem;
-import com.example.demo.model.RobaUsluga;
+import com.example.demo.model.Services;
+
 
 public interface InvoiceItemRepository extends JpaRepository<InvoiceItem, Integer>{
 
@@ -19,5 +20,5 @@ public interface InvoiceItemRepository extends JpaRepository<InvoiceItem, Intege
 
 	InvoiceItem findByTotal_amount(double a);
 
-	InvoiceItem findByRobaUsluga(RobaUsluga service);
+	InvoiceItem findByRobaUsluga(Services service);
 }

@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.Enterprise;
 import com.example.demo.model.PDVCategory;
-import com.example.demo.model.Preduzece;
-import com.example.demo.model.RobaUsluga;
 import com.example.demo.model.ServiceGroup;
+import com.example.demo.model.Services;
 import com.example.demo.repozitorijum.ServiceGroupRepository;
 
 @Service
@@ -38,7 +38,7 @@ public class ServiceGroupService implements ServiceGroupServiceInterface {
 	}
 
 	@Override
-	public ServiceGroup findByRobaUsluga(RobaUsluga service) {
+	public ServiceGroup findByRobaUsluga(Services service) {
 		return repository.findByRobaUsluga(service);
 	}
 
@@ -48,7 +48,7 @@ public class ServiceGroupService implements ServiceGroupServiceInterface {
 	}
 
 	@Override
-	public ServiceGroup findByPreduzece(Preduzece p) {
+	public ServiceGroup findByPreduzece(Enterprise p) {
 		return repository.findByPreduzece(p);
 	}
 

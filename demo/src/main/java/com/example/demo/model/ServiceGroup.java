@@ -28,15 +28,15 @@ public class ServiceGroup {
 	private String  name;
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="service_group")
-	private Set<RobaUsluga> services = new HashSet<RobaUsluga>();
+	private Set<Services> services = new HashSet<Services>();
 
 	@ManyToOne
 	@JoinColumn(name="pdv_category_id", referencedColumnName="id", nullable=false)
 	private PDVCategory PDVCategory;
 
 	@ManyToOne
-	@JoinColumn(name="firm_id", referencedColumnName="preduzece_id", nullable=false)
-	private Preduzece firm;
+	@JoinColumn(name="firm_id", referencedColumnName="enterprise_id", nullable=false)
+	private Enterprise firm;
 	
 	public ServiceGroup() {
 		
@@ -58,11 +58,11 @@ public class ServiceGroup {
 		this.name = name;
 	}
 
-	public Set<RobaUsluga> getServices() {
+	public Set<Services> getServices() {
 		return services;
 	}
 
-	public void setServices(Set<RobaUsluga> services) {
+	public void setServices(Set<Services> services) {
 		this.services = services;
 	}
 
@@ -74,12 +74,14 @@ public class ServiceGroup {
 		PDVCategory = pDVCategory;
 	}
 
-	public Preduzece getFirm() {
+	public Enterprise getFirm() {
 		return firm;
 	}
 
-	public void setFirm(Preduzece firm) {
+	public void setFirm(Enterprise firm) {
 		this.firm = firm;
 	}
+
+	
 	
 }

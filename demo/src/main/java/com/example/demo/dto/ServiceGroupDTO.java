@@ -10,19 +10,19 @@ public class ServiceGroupDTO implements Serializable{
 
 	private PDVCategoryDTO PDVCategory;
 
-	private PreduzeceDTO firm;
+	private EnterpriseDTO firm;
 
 	public ServiceGroupDTO() {
 		super();
 	}
 
-	public ServiceGroupDTO(String name, PDVCategoryDTO PDVCategory, PreduzeceDTO firm) {
+	public ServiceGroupDTO(String name, PDVCategoryDTO PDVCategory, EnterpriseDTO firm) {
 		this.name=name;
 		this.PDVCategory=PDVCategory;
 		this.firm=firm;
 	}
 	
-	public ServiceGroupDTO(int id, String name, PDVCategoryDTO PDVCategory, PreduzeceDTO firm) {
+	public ServiceGroupDTO(int id, String name, PDVCategoryDTO PDVCategory, EnterpriseDTO firm) {
 		super();
 		this.id = id;
 		this.name=name;
@@ -54,13 +54,17 @@ public class ServiceGroupDTO implements Serializable{
 		PDVCategory = pDVCategory;
 	}
 
-	public PreduzeceDTO getFirm() {
+	public EnterpriseDTO getFirm() {
 		return firm;
 	}
 
-	public void setFirm(PreduzeceDTO firm) {
+	public void setFirm(EnterpriseDTO firm) {
 		this.firm = firm;
 	}
+
+
+
+
 	
 	
 

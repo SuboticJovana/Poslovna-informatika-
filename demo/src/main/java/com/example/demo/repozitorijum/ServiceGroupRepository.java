@@ -2,18 +2,19 @@ package com.example.demo.repozitorijum;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.example.demo.model.Enterprise;
 import com.example.demo.model.PDVCategory;
-import com.example.demo.model.Preduzece;
-import com.example.demo.model.RobaUsluga;
+
 import com.example.demo.model.ServiceGroup;
+import com.example.demo.model.Services;
 
 public interface ServiceGroupRepository  extends JpaRepository<ServiceGroup,Integer> {
 	
 	ServiceGroup findByName(String name);
 	
-	ServiceGroup findByRobaUsluga(RobaUsluga service);
+	ServiceGroup findByRobaUsluga(Services service);
 
 	ServiceGroup findByPDVCategory(PDVCategory p);
 
-	ServiceGroup findByPreduzece(Preduzece p);
+	ServiceGroup findByPreduzece(Enterprise p);
 }

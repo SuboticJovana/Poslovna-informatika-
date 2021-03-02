@@ -29,7 +29,7 @@ public class UnitOfMeasure {
 	private String  short_name;
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="unit_of_measure")
-	private Set<RobaUsluga> services = new HashSet<RobaUsluga>();
+	private Set<Services> services = new HashSet<Services>();
 
 	public UnitOfMeasure() {
 		
@@ -59,11 +59,11 @@ public class UnitOfMeasure {
 		this.short_name = short_name;
 	}
 
-	public Set<RobaUsluga> getServices() {
+	public Set<Services> getServices() {
 		return services;
 	}
 
-	public void setServices(Set<RobaUsluga> services) {
+	public void setServices(Set<Services> services) {
 		this.services = services;
 	}
 	

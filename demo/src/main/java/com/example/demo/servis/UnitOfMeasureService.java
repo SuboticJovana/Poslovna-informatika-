@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.RobaUsluga;
+import com.example.demo.model.Services;
 import com.example.demo.model.UnitOfMeasure;
 import com.example.demo.repozitorijum.UnitOfMeasureRepository;
 
@@ -41,7 +41,7 @@ public class UnitOfMeasureService implements UnitOfMeasureServiceInterface{
 	}
 
 	@Override
-	public UnitOfMeasure findByRobaUsluga(RobaUsluga r) {
+	public UnitOfMeasure findByRobaUsluga(Services r) {
 		return repository.findByRobaUsluga(r);
 	}
 

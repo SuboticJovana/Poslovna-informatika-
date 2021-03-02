@@ -26,12 +26,12 @@ public class PriceListItem implements Serializable {
 	private Double price;
 	
 	@ManyToOne
-	@JoinColumn(name="cenovnik_id", referencedColumnName="cenovnik_id", nullable=false)
-	 private Cenovnik pricelist;
+	@JoinColumn(name="pricelist_id", referencedColumnName="pricelist_id", nullable=false)
+	 private Pricelist pricelist;
 	
 	@ManyToOne
 	@JoinColumn(name="roba_id", referencedColumnName="roba_id", nullable=false)
-	 private RobaUsluga roba_id;
+	 private Services roba_id;
 	
 	public PriceListItem() {
 		
@@ -53,11 +53,11 @@ public class PriceListItem implements Serializable {
 		this.price = price;
 	}
 
-	public Cenovnik getPricelist() {
+	public Pricelist getPricelist() {
 		return pricelist;
 	}
 
-	public void setPricelist(Cenovnik pricelist) {
+	public void setPricelist(Pricelist pricelist) {
 		this.pricelist = pricelist;
 	}
 

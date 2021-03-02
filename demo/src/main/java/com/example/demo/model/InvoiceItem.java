@@ -38,13 +38,13 @@ public class InvoiceItem {
 	@Column(name="total_amount", unique=false, nullable=false)
 	private  double total_amount;
 
-//	@ManyToOne faktura
-//	@JoinColumn(name="invoice_id", referencedColumnName="id", nullable=false)
-//	private Invoice invoice;
+	@ManyToOne 
+	@JoinColumn(name="invoice_id", referencedColumnName="id", nullable=false)
+	private Invoice invoice;
 	
 	@ManyToOne
 	@JoinColumn(name="service_id", referencedColumnName="roba_id", nullable=false)
-	private RobaUsluga usluga;
+	private Services usluga;
 
 	public InvoiceItem() {
 		
@@ -105,19 +105,19 @@ public class InvoiceItem {
 		this.total_amount = total_amount;
 	}
 
-//	public Invoice getInvoice() {
-//		return invoice;
-//	}
-//
-//	public void setInvoice(Invoice invoice) {
-//		this.invoice = invoice;
-//	}
+	public Invoice getInvoice() {
+		return invoice;
+	}
 
-	public RobaUsluga getUsluga() {
+	public void setInvoice(Invoice invoice) {
+		this.invoice = invoice;
+	}
+
+	public Services getUsluga() {
 		return usluga;
 	}
 
-	public void setUsluga(RobaUsluga usluga) {
+	public void setUsluga(Services usluga) {
 		this.usluga = usluga;
 	}
 

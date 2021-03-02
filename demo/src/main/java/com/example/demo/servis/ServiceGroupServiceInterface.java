@@ -2,10 +2,10 @@ package com.example.demo.servis;
 
 import java.util.List;
 
+import com.example.demo.model.Enterprise;
 import com.example.demo.model.PDVCategory;
-import com.example.demo.model.Preduzece;
-import com.example.demo.model.RobaUsluga;
 import com.example.demo.model.ServiceGroup;
+import com.example.demo.model.Services;
 
 public interface ServiceGroupServiceInterface {
 
@@ -17,11 +17,11 @@ public interface ServiceGroupServiceInterface {
 	
 	ServiceGroup findByName(String name);
 	
-	ServiceGroup findByRobaUsluga(RobaUsluga service);
+	ServiceGroup findByRobaUsluga(Services service);
 
 	ServiceGroup findByPDVCategory(PDVCategory p);
 
-	ServiceGroup findByPreduzece(Preduzece p);
+	ServiceGroup findByPreduzece(Enterprise p);
 	
 	List<ServiceGroup> findAll();
 }

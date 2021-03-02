@@ -31,7 +31,7 @@ public class City {
 	private String city_name;
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="city")
-	private Set<Preduzece> companies = new HashSet<Preduzece>();
+	private Set<Enterprise> enterprises = new HashSet<Enterprise>();
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="city")
 	private Set<Partner> partners = new HashSet<Partner>();
@@ -64,12 +64,14 @@ public class City {
 		this.city_name = city_name;
 	}
 
-	public Set<Preduzece> getCompanies() {
-		return companies;
+
+
+	public Set<Enterprise> getEnterprises() {
+		return enterprises;
 	}
 
-	public void setCompanies(Set<Preduzece> companies) {
-		this.companies = companies;
+	public void setEnterprises(Set<Enterprise> enterprises) {
+		this.enterprises = enterprises;
 	}
 
 	public Set<Partner> getPartners() {

@@ -48,8 +48,8 @@ public class Partner implements Serializable{
 	 private City city;
 	
 	@ManyToOne
-	@JoinColumn(name="preduzece_id", referencedColumnName="preduzece_id", nullable=false)
-	 private Preduzece company;
+	@JoinColumn(name="enterprise_id", referencedColumnName="enterprise_id", nullable=false)
+	 private Enterprise company;
 	
 //	Veza ka fakturi
 	
@@ -113,11 +113,12 @@ public class Partner implements Serializable{
 		this.type_of_partner = type_of_partner;
 	}
 
-	public Preduzece getCompany() {
+	
+	public Enterprise getCompany() {
 		return company;
 	}
 
-	public void setCompany(Preduzece company) {
+	public void setCompany(Enterprise company) {
 		this.company = company;
 	}
 

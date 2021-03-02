@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.InvoiceItem;
-import com.example.demo.model.RobaUsluga;
+
+import com.example.demo.model.Services;
 import com.example.demo.repozitorijum.InvoiceItemRepository;
 
 @Service
@@ -61,7 +62,7 @@ public class InvoiceItemService implements InvoiceItemServiceInterface{
 	}
 
 	@Override
-	public InvoiceItem findByRobaUsluga(RobaUsluga service) {
+	public InvoiceItem findByRobaUsluga(Services service) {
 		return repository.findByRobaUsluga(service);
 	}
 

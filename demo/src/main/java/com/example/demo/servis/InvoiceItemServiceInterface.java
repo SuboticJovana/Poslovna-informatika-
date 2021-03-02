@@ -3,7 +3,7 @@ package com.example.demo.servis;
 import java.util.List;
 
 import com.example.demo.model.InvoiceItem;
-import com.example.demo.model.RobaUsluga;
+import com.example.demo.model.Services;
 
 public interface InvoiceItemServiceInterface {
 	
@@ -25,7 +25,7 @@ public interface InvoiceItemServiceInterface {
 
 	InvoiceItem findByTotal_amount(double a);
 
-	InvoiceItem findByRobaUsluga(RobaUsluga service);
+	InvoiceItem findByRobaUsluga(Services service);
 	
 	List<InvoiceItem> findAll();
 
