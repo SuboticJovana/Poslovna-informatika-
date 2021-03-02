@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="cenovnici")
+@Table(name="pricelists")
 public class Pricelist implements Serializable {
 
 

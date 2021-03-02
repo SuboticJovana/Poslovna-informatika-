@@ -3,6 +3,8 @@ package com.example.demo.dto;
 import java.io.Serializable;
 import java.sql.Date;
 
+import com.example.demo.model.Pricelist;
+
 
 	public class PricelistDTO implements Serializable {
 		
@@ -21,6 +23,10 @@ import java.sql.Date;
 			this.date_to = date_to;
 			this.percentage = percentage;
 			this.total_price = total_price;
+		}
+
+		public PricelistDTO(Pricelist p) {
+			// TODO Auto-generated constructor stub
 		}
 
 		public int getPricelist_id() {
