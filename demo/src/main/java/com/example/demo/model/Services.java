@@ -37,6 +37,10 @@ public class Services implements Serializable {
 	@JoinColumn(name="groupserv_id", referencedColumnName="id", nullable=false)
 	private ServiceGroup firm;
 	
+	@ManyToOne
+	@JoinColumn(name="unitmea_id", referencedColumnName="id", nullable=false)
+	private UnitOfMeasure unit;
+	
 	public Services(Integer service_id, String name, String description, Boolean goods) {
 		super();
 		this.service_id = service_id;
@@ -87,6 +91,14 @@ public class Services implements Serializable {
 
 	public void setFirm(ServiceGroup firm) {
 		this.firm = firm;
+	}
+
+	public UnitOfMeasure getUnit() {
+		return unit;
+	}
+
+	public void setUnit(UnitOfMeasure unit) {
+		this.unit = unit;
 	}
 
 	
