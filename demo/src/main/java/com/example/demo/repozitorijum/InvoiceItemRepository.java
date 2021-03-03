@@ -20,5 +20,5 @@ public interface InvoiceItemRepository extends JpaRepository<InvoiceItem, Intege
 
 	InvoiceItem findByTotal_amount(double a);
 
-	InvoiceItem findByRobaUsluga(Services service);
+	InvoiceItem findByService(Services service);
 }

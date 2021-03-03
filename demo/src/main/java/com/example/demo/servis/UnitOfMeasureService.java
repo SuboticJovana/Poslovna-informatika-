@@ -41,11 +41,6 @@ public class UnitOfMeasureService implements UnitOfMeasureServiceInterface{
 	}
 
 	@Override
-	public UnitOfMeasure findByRobaUsluga(Services r) {
-		return repository.findByRobaUsluga(r);
-	}
-
-	@Override
 	public List<UnitOfMeasure> findAll() {
 		return repository.findAll();
 	}

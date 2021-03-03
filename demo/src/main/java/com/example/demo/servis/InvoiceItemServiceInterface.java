@@ -25,7 +25,7 @@ public interface InvoiceItemServiceInterface {
 
 	InvoiceItem findByTotal_amount(double a);
 
-	InvoiceItem findByRobaUsluga(Services service);
+	InvoiceItem findByService(Services service);
 	
 	List<InvoiceItem> findAll();
 

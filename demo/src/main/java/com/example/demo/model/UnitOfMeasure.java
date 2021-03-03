@@ -25,7 +25,7 @@ public class UnitOfMeasure {
 	@Column(name="name", unique=false, nullable=false)
 	private String name;
 	
-	@Column(name="name", unique=false, nullable=false)
+	@Column(name="short_name", unique=false, nullable=false)
 	private String  short_name;
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="unit_of_measure")

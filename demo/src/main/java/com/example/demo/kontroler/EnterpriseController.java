@@ -24,7 +24,7 @@ import com.example.demo.servis.PartnerServiceInteface;
 
 
 @RestController
-@RequestMapping(value="sales-system/enterprises")
+@RequestMapping(value="salesystem/enterprises")
 public class EnterpriseController {
 	@Autowired 
 	private EnterpriseServiceInterface ent;

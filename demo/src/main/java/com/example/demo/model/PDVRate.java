@@ -27,12 +27,12 @@ public class PDVRate implements Serializable{
 	@Column(name="percentage", unique=false, nullable=false)
 	private Integer percentage;
 	
-	@Column(name="date", unique=false, nullable=false)
-	private Date date;
+	@Column(name="date_of", unique=false, nullable=false)
+	private Date dateOf;
 	
 	@ManyToOne
-	@JoinColumn(name="id", referencedColumnName="id", nullable=false)
-	 private PDVCategory id;
+	@JoinColumn(name="pdv_category_id", referencedColumnName="id", nullable=false)
+	 private PDVCategory pdvCategory;
 	
 	public PDVRate() {
 		
@@ -54,12 +54,12 @@ public class PDVRate implements Serializable{
 		this.percentage = percentage;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getDateOf() {
+		return dateOf;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDateOf(Date dateOf) {
+		this.dateOf = dateOf;
 	}
 
 	public static long getSerialversionuid() {

@@ -10,7 +10,5 @@ public interface UnitOfMeasureRepository extends JpaRepository<UnitOfMeasure, In
 	
 	UnitOfMeasure findByShort_name(String sh_name);
 	
-	UnitOfMeasure findByRobaUsluga(Services r);
-
 
 }

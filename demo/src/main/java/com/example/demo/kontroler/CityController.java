@@ -20,7 +20,7 @@ import com.example.demo.model.City;
 import com.example.demo.servis.CityServiceInteface;
 
 @RestController
-@RequestMapping(value="sales-system/cities")
+@RequestMapping(value="salesystem/cities")
 public class CityController {
 
 	@Autowired

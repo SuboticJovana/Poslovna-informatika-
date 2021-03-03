@@ -25,7 +25,7 @@ public class PDVRateDTO implements Serializable{
 	}
 	
 	public PDVRateDTO(PDVRate pdvr) {
-		this(pdvr.getPdv_rate_id(), pdvr.getPercentage(), pdvr.getDate());
+		this(pdvr.getPdv_rate_id(), pdvr.getPercentage(), pdvr.getDateOf());
 	}
 
 	public Integer getPdv_rate_id() {

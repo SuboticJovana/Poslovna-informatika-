@@ -18,7 +18,7 @@ import com.example.demo.model.UnitOfMeasure;
 import com.example.demo.servis.UnitOfMeasureServiceInterface;
 
 @RestController
-@RequestMapping(value="sales-system/units")
+@RequestMapping(value="salesystem/units")
 public class UnitOfMeasureController {
 	
 	@Autowired

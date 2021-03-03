@@ -38,18 +38,13 @@ public class ServiceGroupService implements ServiceGroupServiceInterface {
 	}
 
 	@Override
-	public ServiceGroup findByRobaUsluga(Services service) {
-		return repository.findByRobaUsluga(service);
-	}
-
-	@Override
 	public ServiceGroup findByPDVCategory(PDVCategory p) {
 		return repository.findByPDVCategory(p);
 	}
 
 	@Override
-	public ServiceGroup findByPreduzece(Enterprise p) {
-		return repository.findByPreduzece(p);
+	public ServiceGroup findByEnterprise(Enterprise p) {
+		return repository.findByEnterprise(p);
 	}
 
 	@Override

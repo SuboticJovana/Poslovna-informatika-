@@ -23,7 +23,7 @@ import com.example.demo.servis.PDVCategoryServiceInterface;
 import com.example.demo.servis.ServiceGroupServiceInterface;
 
 @RestController
-@RequestMapping(value="sales-system/service-groups")
+@RequestMapping(value="salesystem/service-groups")
 public class ServiceGroupController {
 
 	@Autowired

@@ -43,8 +43,8 @@ public class InvoiceItem {
 	private Invoice invoice;
 	
 	@ManyToOne
-	@JoinColumn(name="service_id", referencedColumnName="roba_id", nullable=false)
-	private Services usluga;
+	@JoinColumn(name="service_id", referencedColumnName="service_id", nullable=false)
+	private Services service;
 
 	public InvoiceItem() {
 		
@@ -113,12 +113,12 @@ public class InvoiceItem {
 		this.invoice = invoice;
 	}
 
-	public Services getUsluga() {
-		return usluga;
+	public Services getService() {
+		return service;
 	}
 
-	public void setUsluga(Services usluga) {
-		this.usluga = usluga;
+	public void setService(Services service) {
+		this.service = service;
 	}
 
 	

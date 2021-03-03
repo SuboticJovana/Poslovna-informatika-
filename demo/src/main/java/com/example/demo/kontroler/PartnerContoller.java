@@ -20,7 +20,7 @@ import com.example.demo.model.Partner;
 import com.example.demo.servis.PartnerServiceInteface;
 
 @RestController
-@RequestMapping(value="sales-system/partners")
+@RequestMapping(value="salesystem/partners")
 public class PartnerContoller {
 	
 	@Autowired

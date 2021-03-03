@@ -35,8 +35,8 @@ public class ServiceGroup {
 	private PDVCategory PDVCategory;
 
 	@ManyToOne
-	@JoinColumn(name="firm_id", referencedColumnName="enterprise_id", nullable=false)
-	private Enterprise firm;
+	@JoinColumn(name="enterprise_id", referencedColumnName="enterprise_id", nullable=false)
+	private Enterprise enterprise;
 	
 	public ServiceGroup() {
 		
@@ -74,14 +74,15 @@ public class ServiceGroup {
 		PDVCategory = pDVCategory;
 	}
 
-	public Enterprise getFirm() {
-		return firm;
+	public Enterprise getEnterprise() {
+		return enterprise;
 	}
 
-	public void setFirm(Enterprise firm) {
-		this.firm = firm;
+	public void setEnterprise(Enterprise enterprise) {
+		this.enterprise = enterprise;
 	}
 
+	
 	
 	
 }

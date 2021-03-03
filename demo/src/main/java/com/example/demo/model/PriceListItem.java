@@ -30,8 +30,8 @@ public class PriceListItem implements Serializable {
 	 private Pricelist pricelist;
 	
 	@ManyToOne
-	@JoinColumn(name="roba_id", referencedColumnName="roba_id", nullable=false)
-	 private Services roba_id;
+	@JoinColumn(name="service_id", referencedColumnName="service_id", nullable=false)
+	 private Services service;
 	
 	public PriceListItem() {
 		

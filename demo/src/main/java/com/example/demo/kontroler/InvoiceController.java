@@ -20,7 +20,7 @@ import com.example.demo.model.Invoice;
 import com.example.demo.servis.InvoiceServiceInterface;
 
 @RestController
-@RequestMapping(value="sales-system/invoice")
+@RequestMapping(value="salesystem/invoice")
 public class InvoiceController {
 
 

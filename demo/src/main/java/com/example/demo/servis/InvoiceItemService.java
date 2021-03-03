@@ -62,8 +62,8 @@ public class InvoiceItemService implements InvoiceItemServiceInterface{
 	}
 
 	@Override
-	public InvoiceItem findByRobaUsluga(Services service) {
-		return repository.findByRobaUsluga(service);
+	public InvoiceItem findByService(Services service) {
+		return repository.findByService(service);
 	}
 
 	@Override

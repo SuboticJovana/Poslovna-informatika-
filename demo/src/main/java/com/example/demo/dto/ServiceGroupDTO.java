@@ -2,6 +2,9 @@ package com.example.demo.dto;
 
 import java.io.Serializable;
 
+import com.example.demo.model.PDVCategory;
+import com.example.demo.model.ServiceGroup;
+
 public class ServiceGroupDTO implements Serializable{
 
 	private Integer id;
@@ -29,7 +32,12 @@ public class ServiceGroupDTO implements Serializable{
 		this.PDVCategory=PDVCategory;
 		this.firm=firm;
 	}
-	//
+	
+	public ServiceGroupDTO(ServiceGroup s) {
+		this(s.getId(), s.getName(), new PDVCategoryDTO(s.getPDVCategory()), new EnterpriseDTO(s.getEnterprise()));
+	}
+
+	
 	public Integer getId() {
 		return id;
 	}

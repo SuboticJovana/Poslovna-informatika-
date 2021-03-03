@@ -17,7 +17,5 @@ public interface UnitOfMeasureServiceInterface {
 	
 	UnitOfMeasure findByShort_name(String sh_name);
 	
-	UnitOfMeasure findByRobaUsluga(Services r);
-
 	List<UnitOfMeasure> findAll();
 }

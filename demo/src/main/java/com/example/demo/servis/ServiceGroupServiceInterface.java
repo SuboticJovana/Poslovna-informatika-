@@ -17,11 +17,9 @@ public interface ServiceGroupServiceInterface {
 	
 	ServiceGroup findByName(String name);
 	
-	ServiceGroup findByRobaUsluga(Services service);
-
 	ServiceGroup findByPDVCategory(PDVCategory p);
 
-	ServiceGroup findByPreduzece(Enterprise p);
+	ServiceGroup findByEnterprise(Enterprise p);
 	
 	List<ServiceGroup> findAll();
 }

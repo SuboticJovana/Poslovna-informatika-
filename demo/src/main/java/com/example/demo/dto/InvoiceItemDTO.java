@@ -20,23 +20,23 @@ public class InvoiceItemDTO implements Serializable{
 
 	private  double total_amount;
 
-	private ServicesDTO usluga;
+	private ServicesDTO service;
 	
 	public InvoiceItemDTO() {
 		super();
 	}
 
-	public InvoiceItemDTO(double quantity, double discount,double unit_price, double PDV_base,double PDV_amount,double total_amount  ) {
+	public InvoiceItemDTO(double quantity, double discount,double unit_price, double PDV_base,double PDV_amount,double total_amount,ServicesDTO service  ) {
 		this.quantity=quantity;
 		this.discount=discount;
 		this.unit_price=unit_price;
 		this.PDV_base=PDV_base;
 		this.PDV_amount=PDV_amount;
 		this.total_amount=total_amount;
-		//
+		this.service=service;
 	}
 	
-	public InvoiceItemDTO(Integer id, double quantity, double discount,double unit_price, double PDV_base,double PDV_amount,double total_amount  ) {
+	public InvoiceItemDTO(Integer id, double quantity, double discount,double unit_price, double PDV_base,double PDV_amount,double total_amount,ServicesDTO service  ) {
 		super();
 		this.id = id;
 		this.quantity=quantity;
@@ -45,10 +45,11 @@ public class InvoiceItemDTO implements Serializable{
 		this.PDV_base=PDV_base;
 		this.PDV_amount=PDV_amount;
 		this.total_amount=total_amount;
+		this.service=service;
 	}
 	
 	public InvoiceItemDTO(InvoiceItem u) {
-		this(u.getId(),u.getQuantity(), u.getDiscount(), u.getUnit_price(), u.getPDV_base(), u.getPDV_amount(), u.getTotal_amount());
+		this(u.getId(),u.getQuantity(), u.getDiscount(), u.getUnit_price(), u.getPDV_base(), u.getPDV_amount(), u.getTotal_amount(), new ServicesDTO(u.getService()));
 	}
 
 	public Integer getId() {
@@ -107,13 +108,14 @@ public class InvoiceItemDTO implements Serializable{
 		this.total_amount = total_amount;
 	}
 
-	public ServicesDTO getUsluga() {
-		return usluga;
+	public ServicesDTO getService() {
+		return service;
 	}
 
-	public void setUsluga(ServicesDTO usluga) {
-		this.usluga = usluga;
+	public void setService(ServicesDTO service) {
+		this.service = service;
 	}
+
 	
 	
 

@@ -26,7 +26,7 @@ import com.example.demo.model.PriceListItem;
 import com.example.demo.servis.PDVRateServiceInterface;
 
 @RestController
-@RequestMapping(value="sales-system/pdv-rates")
+@RequestMapping(value="salesystem/pdv-rates")
 public class PDVRateContoller {
 	
 	@Autowired
@@ -58,7 +58,7 @@ public class PDVRateContoller {
 		PDVRate rate = new PDVRate();
 		rate.setPdv_rate_id(rDTO.getPdv_rate_id());
 		rate.setPercentage(rDTO.getPercentage());
-		rate.setDate(rDTO.getDate());
+		rate.setDateOf(rDTO.getDate());
 		pdvRateServiceInterface.save(rate);
 		return new ResponseEntity<PDVRateDTO>(rDTO, HttpStatus.CREATED);
 	}
@@ -71,7 +71,7 @@ public class PDVRateContoller {
 		}				
 		rate.setPdv_rate_id(rDTO.getPdv_rate_id());
 		rate.setPercentage(rDTO.getPercentage());
-		rate.setDate(rDTO.getDate());
+		rate.setDateOf(rDTO.getDate());
 		pdvRateServiceInterface.save(rate);
 		PDVRateDTO rateDTO = new PDVRateDTO(rate);
 		return new ResponseEntity<PDVRateDTO>(rateDTO, HttpStatus.OK);	

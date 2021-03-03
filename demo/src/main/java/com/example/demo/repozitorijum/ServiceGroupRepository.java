@@ -12,9 +12,7 @@ public interface ServiceGroupRepository  extends JpaRepository<ServiceGroup,Inte
 	
 	ServiceGroup findByName(String name);
 	
-	ServiceGroup findByRobaUsluga(Services service);
-
 	ServiceGroup findByPDVCategory(PDVCategory p);
 
-	ServiceGroup findByPreduzece(Enterprise p);
+	ServiceGroup findByEnterprise(Enterprise p);
 }

@@ -16,7 +16,6 @@ import javax.persistence.Table;
 @Table(name="services")
 public class Services implements Serializable {
 
-
 	private static final long serialVersionUID = -186152084960632736L;
 
 	@Id

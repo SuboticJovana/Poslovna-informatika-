@@ -20,7 +20,7 @@ import com.example.demo.model.InvoiceItem;
 import com.example.demo.servis.InvoiceItemServiceInterface;
 
 @RestController
-@RequestMapping(value="sales-system/invoice-items")
+@RequestMapping(value="salesystem/invoice-items")
 public class InvoiceItemController {
 
 	@Autowired
