@@ -37,7 +37,7 @@ public class UnitOfMeasureService implements UnitOfMeasureServiceInterface{
 
 	@Override
 	public UnitOfMeasure findByShort_name(String sh_name) {
-		return repository.findByShort_name(sh_name);
+		return repository.findByShortName(sh_name);
 	}
 
 	@Override

@@ -8,8 +8,8 @@ import com.example.demo.model.Invoice;
 
 public interface InvoiceRepository extends JpaRepository<Invoice, Integer> {
 
-	Invoice findByNumberInvoice(Integer number_invoice);
-	Invoice findByDateInvoice(Date date_invoice);
+	Invoice findByNumber(Integer number_invoice);
+	Invoice findByDate(Date date_invoice);
 	Invoice findByDateCurrency(Date date_currency);
 	Invoice findByTotalPdv(Double total_pdv);
 	

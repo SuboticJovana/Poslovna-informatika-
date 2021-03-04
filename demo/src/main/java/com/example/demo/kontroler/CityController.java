@@ -51,7 +51,7 @@ public class CityController {
 		City city = new City();
 		city.setCity_id(cDTO.getCity_id());
 		city.setPtt(cDTO.getPtt());
-		city.setCity_name(cDTO.getCity_name());
+		city.setName(cDTO.getCity_name());
 		cityServiceInteface.save(city);
 		return new ResponseEntity<CityDTO>(cDTO, HttpStatus.CREATED);
 	}
@@ -64,7 +64,7 @@ public class CityController {
 		}
 		city.setCity_id(cDTO.getCity_id());
 		city.setPtt(cDTO.getPtt());
-		city.setCity_name(cDTO.getCity_name());
+		city.setName(cDTO.getCity_name());
 		cityServiceInteface.save(city);
 		CityDTO cityDTO = new CityDTO(city);
 		return new ResponseEntity<CityDTO>(cityDTO, HttpStatus.OK);

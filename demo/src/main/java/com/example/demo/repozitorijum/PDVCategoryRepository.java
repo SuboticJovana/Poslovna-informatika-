@@ -10,8 +10,8 @@ public interface PDVCategoryRepository extends JpaRepository<PDVCategory, Intege
 
 	PDVCategory findByName(String name);
 	
-	PDVCategory findByServiceGroup(ServiceGroup s);
+//	PDVCategory findByServiceGroup(ServiceGroup s);
 
-	PDVCategory findByPDVRate(PDVRate p);
+//	PDVCategory findByPDVRates(PDVRate p);
 
 }

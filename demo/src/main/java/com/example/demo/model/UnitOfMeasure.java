@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="unit_of_measure")
+@Table(name="unitOfMeasures")
 public class UnitOfMeasure {
 	
 	@Id
@@ -25,10 +25,10 @@ public class UnitOfMeasure {
 	@Column(name="name", unique=false, nullable=false)
 	private String name;
 	
-	@Column(name="short_name", unique=false, nullable=false)
-	private String  short_name;
+	@Column(name="shortName", unique=false, nullable=false)
+	private String  shortName;
 	
-	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="unit_of_measure")
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="unitOfMeasure")
 	private Set<Services> services = new HashSet<Services>();
 
 	public UnitOfMeasure() {
@@ -51,12 +51,12 @@ public class UnitOfMeasure {
 		this.name = name;
 	}
 
-	public String getShort_name() {
-		return short_name;
+	public String getShortName() {
+		return shortName;
 	}
 
-	public void setShort_name(String short_name) {
-		this.short_name = short_name;
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
 	}
 
 	public Set<Services> getServices() {

@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="invoice_items")
+@Table(name="invoiceItems")
 public class InvoiceItem {
 
 	@Id
@@ -24,19 +24,19 @@ public class InvoiceItem {
 	@Column(name="discount", unique=false, nullable=false)
 	private  double discount;
 
-	@Column(name="unit_price", unique=false, nullable=false)
-	private  double unit_price;
+	@Column(name="unitPrice", unique=false, nullable=false)
+	private  double unitPrice;
 
 	//pdv stopa veza ili atribut ? 
 	
-	@Column(name="PDV_base", unique=false, nullable=false)
-	private  double PDV_base;
+	@Column(name="PDVBase", unique=false, nullable=false)
+	private  double PDVBase;
 
-	@Column(name="quantity", unique=false, nullable=false)
-	private  double PDV_amount;
+	@Column(name="PDVAmount", unique=false, nullable=false)
+	private  double PDVAmount;
 
-	@Column(name="total_amount", unique=false, nullable=false)
-	private  double total_amount;
+	@Column(name="totalAmount", unique=false, nullable=false)
+	private  double totalAmount;
 
 	@ManyToOne 
 	@JoinColumn(name="invoice_id", referencedColumnName="id", nullable=false)
@@ -44,7 +44,7 @@ public class InvoiceItem {
 	
 	@ManyToOne
 	@JoinColumn(name="service_id", referencedColumnName="service_id", nullable=false)
-	private Services service;
+	private Services services;
 
 	public InvoiceItem() {
 		
@@ -73,36 +73,36 @@ public class InvoiceItem {
 		this.discount = discount;
 	}
 
-	public double getUnit_price() {
-		return unit_price;
+	public double getUnitPrice() {
+		return unitPrice;
 	}
 
-	public void setUnit_price(double unit_price) {
-		this.unit_price = unit_price;
+	public void setUnitPrice(double unitPrice) {
+		this.unitPrice = unitPrice;
 	}
 
-	public double getPDV_base() {
-		return PDV_base;
+	public double getPDVBase() {
+		return PDVBase;
 	}
 
-	public void setPDV_base(double pDV_base) {
-		PDV_base = pDV_base;
+	public void setPDVBase(double pDVBase) {
+		PDVBase = pDVBase;
 	}
 
-	public double getPDV_amount() {
-		return PDV_amount;
+	public double getPDVAmount() {
+		return PDVAmount;
 	}
 
-	public void setPDV_amount(double pDV_amount) {
-		PDV_amount = pDV_amount;
+	public void setPDVAmount(double pDVAmount) {
+		PDVAmount = pDVAmount;
 	}
 
-	public double getTotal_amount() {
-		return total_amount;
+	public double getTotalAmount() {
+		return totalAmount;
 	}
 
-	public void setTotal_amount(double total_amount) {
-		this.total_amount = total_amount;
+	public void setTotalAmount(double totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 
 	public Invoice getInvoice() {
@@ -113,12 +113,12 @@ public class InvoiceItem {
 		this.invoice = invoice;
 	}
 
-	public Services getService() {
-		return service;
+	public Services getServices() {
+		return services;
 	}
 
-	public void setService(Services service) {
-		this.service = service;
+	public void setServices(Services services) {
+		this.services = services;
 	}
 
 	

@@ -3,10 +3,11 @@ package com.example.demo.servis;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Enterprise;
 import com.example.demo.repozitorijum.EnterpriseRepository;
-
+@Service
 public class EnterpriseService implements EnterpriseServiceInterface {
 	@Autowired
 	EnterpriseRepository enterpriseRepository;
@@ -38,7 +39,7 @@ public class EnterpriseService implements EnterpriseServiceInterface {
 	@Override
 	public Enterprise findByName(String nameEnterprise) {
 		// TODO Auto-generated method stub
-		return enterpriseRepository.findByName(nameEnterprise);
+		return enterpriseRepository.findByNameEnterprise(nameEnterprise);
 	}
 
 }

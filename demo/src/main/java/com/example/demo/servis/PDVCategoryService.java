@@ -37,15 +37,15 @@ public class PDVCategoryService implements PDVCategoryServiceInterface{
 		return repository.findByName(name);
 	}
 
-	@Override
-	public PDVCategory findByServiceGroup(ServiceGroup s) {
-		return repository.findByServiceGroup(s);
-	}
+//	@Override
+//	public PDVCategory findByServiceGroup(ServiceGroup s) {
+//		return repository.findByServiceGroup(s);
+//	}
 
-	@Override
-	public PDVCategory findByPDVRate(PDVRate p) {
-		return repository.findByPDVRate(p);
-	}
+//	@Override
+//	public PDVCategory findByPDVRate(PDVRate p) {
+//		return repository.findByPDVRate(p);
+//	}
 
 	@Override
 	public List<PDVCategory> findAll() {

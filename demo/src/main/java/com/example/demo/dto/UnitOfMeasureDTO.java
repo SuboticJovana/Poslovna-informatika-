@@ -26,7 +26,7 @@ public class UnitOfMeasureDTO {
 		this.short_name=short_name;
 	}
 	public UnitOfMeasureDTO(UnitOfMeasure u) {
-		this(u.getId(), u.getName(), u.getShort_name());
+		this(u.getId(), u.getName(), u.getShortName());
 	}
 
 	public Integer getId() {

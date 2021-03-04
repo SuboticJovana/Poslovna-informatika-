@@ -3,10 +3,11 @@ package com.example.demo.servis;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.model.PDVRate;
 import com.example.demo.repozitorijum.PDVRateRepository;
-
+@Service
 public class PDVRateService implements PDVRateServiceInterface{
 	
 	@Autowired
@@ -14,26 +15,22 @@ public class PDVRateService implements PDVRateServiceInterface{
 
 	@Override
 	public PDVRate findOne(Integer pdv_rate_id) {
-		// TODO Auto-generated method stub
-		return null;
+		return pdvRateRepository.getOne(pdv_rate_id);
 	}
 
 	@Override
 	public PDVRate save(PDVRate pdvRate) {
-		// TODO Auto-generated method stub
-		return null;
+		return pdvRateRepository.save(pdvRate);
 	}
 
 	@Override
-	public PDVRate remove(Integer pdv_rate_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public void remove(Integer pdv_rate_id) {
+		pdvRateRepository.deleteById(pdv_rate_id);
 	}
 
 	@Override
 	public List<PDVRate> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return pdvRateRepository.findAll();
 	}
 	
 	

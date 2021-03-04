@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="service_group")
+@Table(name="serviceGroups")
 public class ServiceGroup {
 
 	@Id
@@ -27,13 +27,13 @@ public class ServiceGroup {
 	@Column(name="name", unique=false, nullable=false)
 	private String  name;
 	
-	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="service_group")
+	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="serviceGroup")
 	private Set<Services> services = new HashSet<Services>();
 
 	@ManyToOne
-	@JoinColumn(name="pdv_category_id", referencedColumnName="id", nullable=false)
+	@JoinColumn(name="pdv_id", referencedColumnName = "id", nullable = false)
 	private PDVCategory PDVCategory;
-
+	
 	@ManyToOne
 	@JoinColumn(name="enterprise_id", referencedColumnName="enterprise_id", nullable=false)
 	private Enterprise enterprise;
@@ -66,13 +66,6 @@ public class ServiceGroup {
 		this.services = services;
 	}
 
-	public PDVCategory getPDVCategory() {
-		return PDVCategory;
-	}
-
-	public void setPDVCategory(PDVCategory pDVCategory) {
-		PDVCategory = pDVCategory;
-	}
 
 	public Enterprise getEnterprise() {
 		return enterprise;
@@ -80,6 +73,14 @@ public class ServiceGroup {
 
 	public void setEnterprise(Enterprise enterprise) {
 		this.enterprise = enterprise;
+	}
+
+	public PDVCategory getPDVCategory() {
+		return PDVCategory;
+	}
+
+	public void setPDVCategory(PDVCategory pDVCategory) {
+		PDVCategory = pDVCategory;
 	}
 
 	

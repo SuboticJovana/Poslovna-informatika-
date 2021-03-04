@@ -3,10 +3,11 @@ package com.example.demo.servis;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Invoice;
 import com.example.demo.repozitorijum.InvoiceRepository;
-
+@Service
 public class InvoiceService implements InvoiceServiceInterface{
 
 	@Autowired

@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="price_list_items")
+@Table(name="priceListItems")
 public class PriceListItem implements Serializable {
 	
 	private static final long serialVersionUID = -5652339993553733589L;
@@ -31,7 +31,7 @@ public class PriceListItem implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="service_id", referencedColumnName="service_id", nullable=false)
-	 private Services service;
+	 private Services services;
 	
 	public PriceListItem() {
 		

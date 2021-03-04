@@ -53,18 +53,18 @@ public class InvoiceItemService implements InvoiceItemServiceInterface{
 
 	@Override
 	public InvoiceItem findByPDV_amount(double pdv_a) {
-		return repository.findByPDV_amount(pdv_a);
+		return repository.findByPDVAmount(pdv_a);
 	}
 
 	@Override
 	public InvoiceItem findByTotal_amount(double a) {
-		return repository.findByTotal_amount(a);
+		return repository.findByTotalAmount(a);
 	}
 
-	@Override
-	public InvoiceItem findByService(Services service) {
-		return repository.findByService(service);
-	}
+//	@Override
+//	public InvoiceItem findByService(Services service) {
+//		return repository.findByService(service);
+//	}
 
 	@Override
 	public List<InvoiceItem> findAll() {

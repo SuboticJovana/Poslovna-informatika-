@@ -48,7 +48,7 @@ public class UnitOfMeasureController {
 	public ResponseEntity<UnitOfMeasureDTO> saveUnit(@RequestBody UnitOfMeasureDTO uDTO){
 		UnitOfMeasure unit = new UnitOfMeasure();
 		unit.setName(uDTO.getName());
-		unit.setShort_name(uDTO.getShort_name());
+		unit.setShortName(uDTO.getShort_name());
 		service.save(unit);
 		return new ResponseEntity<UnitOfMeasureDTO>(uDTO, HttpStatus.CREATED);	
 	}
@@ -60,7 +60,7 @@ public class UnitOfMeasureController {
 			return new ResponseEntity<UnitOfMeasureDTO>(HttpStatus.BAD_REQUEST);
 		}				
 		unit.setName(uDTO.getName());
-		unit.setShort_name(uDTO.getShort_name());
+		unit.setShortName(uDTO.getShort_name());
 		service.save(unit);
 		UnitOfMeasureDTO unitDTO = new UnitOfMeasureDTO(unit);
 		return new ResponseEntity<UnitOfMeasureDTO>(unitDTO, HttpStatus.OK);	

@@ -8,7 +8,7 @@ public interface UnitOfMeasureRepository extends JpaRepository<UnitOfMeasure, In
 
 	UnitOfMeasure findByName(String name);
 	
-	UnitOfMeasure findByShort_name(String sh_name);
+	UnitOfMeasure findByShortName(String sh_name);
 	
 
 }

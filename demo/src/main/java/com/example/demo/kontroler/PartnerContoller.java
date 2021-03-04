@@ -50,9 +50,9 @@ public class PartnerContoller {
 	public ResponseEntity<PartnerDTO> savePartner(@RequestBody PartnerDTO pDTO){
 		Partner partner = new Partner();
 		partner.setPartner_id(pDTO.getPartner_id());
-		partner.setPartner_name(pDTO.getPartner_name());
+		partner.setName(pDTO.getPartner_name());
 		partner.setAddress(pDTO.getAddress());
-		partner.setPhone_number(pDTO.getPhone_number());
+		partner.setPhoneNumber(pDTO.getPhone_number());
 		partner.setFax(pDTO.getFax());
 		partner.setEmail(pDTO.getEmail());
 		partnerServiceInteface.save(partner);
@@ -66,9 +66,9 @@ public class PartnerContoller {
 			return new ResponseEntity<PartnerDTO>(HttpStatus.BAD_REQUEST);
 		}
 		partner.setPartner_id(pDTO.getPartner_id());
-		partner.setPartner_name(pDTO.getPartner_name());
+		partner.setName(pDTO.getPartner_name());
 		partner.setAddress(pDTO.getAddress());
-		partner.setPhone_number(pDTO.getPhone_number());
+		partner.setPhoneNumber(pDTO.getPhone_number());
 		partner.setFax(pDTO.getFax());
 		partner.setEmail(pDTO.getEmail());
 		partnerServiceInteface.save(partner);

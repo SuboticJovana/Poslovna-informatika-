@@ -3,10 +3,11 @@ package com.example.demo.servis;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.model.PriceListItem;
 import com.example.demo.repozitorijum.PriceListItemRepository;
-
+@Service
 public class PriceListItemService implements PriceListItemServiceInterface{
 	
 	@Autowired
@@ -14,26 +15,22 @@ public class PriceListItemService implements PriceListItemServiceInterface{
 
 	@Override
 	public PriceListItem findOne(Integer price_list_item_id) {
-		// TODO Auto-generated method stub
-		return null;
+		return priceListItemRepository.getOne(price_list_item_id);
 	}
 
 	@Override
 	public PriceListItem save(PriceListItem priceListItem) {
-		// TODO Auto-generated method stub
-		return null;
+		return priceListItemRepository.save(priceListItem);
 	}
 
 	@Override
-	public PriceListItem remove(Integer price_list_item_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public void remove(Integer price_list_item_id) {
+		priceListItemRepository.deleteById(price_list_item_id);
 	}
 
 	@Override
 	public List<PriceListItem> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return priceListItemRepository.findAll();
 	}
 	
 	

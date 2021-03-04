@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="invoice")
+@Table(name="invoices")
 public class Invoice {
 	
 	@Id
@@ -21,20 +21,20 @@ public class Invoice {
 	@Column(name="id", unique=true, nullable=false)
 	private Integer id;
 	
-	@Column(name="invoice_number", unique=false, nullable=false)
-	private  Integer invoice_number;
+	@Column(name="number", unique=false, nullable=false)
+	private  Integer number;
 	
-	@Column(name="date_invoice", unique=false, nullable=false)
-	private  Date date_invoice;
+	@Column(name="date", unique=false, nullable=false)
+	private  Date date;
 	
-	@Column(name="date_currency", unique=false, nullable=false)
-	private Date  date_currency;
+	@Column(name="dateCurrency", unique=false, nullable=false)
+	private Date  dateCurrency;
 	
 	@Column(name="total_base", unique=false, nullable=false)
 	private Double  total_base;
 	
-	@Column(name="total_pdv", unique=false, nullable=false)
-	private Double  total_pdv;
+	@Column(name="totalPdv", unique=false, nullable=false)
+	private Double  totalPdv;
 	
 	@Column(name="total_amount", unique=false, nullable=false)
 	private Double  total_amount;
@@ -62,28 +62,28 @@ public void setId(Integer id) {
 	this.id = id;
 }
 
-public Integer getInvoice_number() {
-	return invoice_number;
+public Integer getNnumber() {
+	return number;
 }
 
-public void setInvoice_number(Integer invoice_number) {
-	this.invoice_number = invoice_number;
+public void setNumber(Integer number) {
+	this.number = number;
 }
 
-public Date getDate_invoice() {
-	return date_invoice;
+public Date getDate() {
+	return date;
 }
 
-public void setDate_invoice(Date date_invoice) {
-	this.date_invoice = date_invoice;
+public void setDate(Date date) {
+	this.date = date;
 }
 
-public Date getDate_currency() {
-	return date_currency;
+public Date getDateCurrency() {
+	return dateCurrency;
 }
 
-public void setDate_currency(Date date_currency) {
-	this.date_currency = date_currency;
+public void setDate_currency(Date dateCurrency) {
+	this.dateCurrency = dateCurrency;
 }
 
 public Double getTotal_base() {
@@ -94,12 +94,12 @@ public void setTotal_base(Double total_base) {
 	this.total_base = total_base;
 }
 
-public Double getTotal_pdv() {
-	return total_pdv;
+public Double getTotalPdv() {
+	return totalPdv;
 }
 
-public void setTotal_pdv(Double total_pdv) {
-	this.total_pdv = total_pdv;
+public void setTotalPdv(Double totalPdv) {
+	this.totalPdv = totalPdv;
 }
 
 public Double getTotal_amount() {

@@ -2,12 +2,20 @@ package com.example.demo.model;
 
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,14 +41,29 @@ public class Enterprise implements Serializable {
 	
 	@Column(name="fax", unique=false, nullable=false)
 	private String fax;
+	
+	@ManyToOne
+	@JoinColumn(name="city_id", referencedColumnName="city_id", nullable=false)
+	 private City city;
+	
+	
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="enterprise")
+	private Set<ServiceGroup> groups = new HashSet<ServiceGroup>();
+	
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="enterprise")
+	private Set<Partner> partners = new HashSet<Partner>();
+	
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="enterprise")
+	private Set<Invoice> invoices = new HashSet<Invoice>();
 
-	public Enterprise(Integer enterprise_id, String nameEnterprise, String address, String phone, String fax) {
+	public Enterprise(Integer enterprise_id, String nameEnterprise, String address, String phone, String fax, City city) {
 		super();
 		this.enterprise_id = enterprise_id;
 		this.nameEnterprise = nameEnterprise;
 		this.address = address;
 		this.phone = phone;
 		this.fax = fax;
+		this.city = city;
 	}
 
 	public Enterprise() {
@@ -87,6 +110,43 @@ public class Enterprise implements Serializable {
 		this.fax = fax;
 	}
 
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
+
+	public Set<ServiceGroup> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(Set<ServiceGroup> groups) {
+		this.groups = groups;
+	}
+
+	public Set<Partner> getPartners() {
+		return partners;
+	}
+
+	public void setPartners(Set<Partner> partners) {
+		this.partners = partners;
+	}
+
+	public Set<Invoice> getInvoices() {
+		return invoices;
+	}
+
+	public void setInvoices(Set<Invoice> invoices) {
+		this.invoices = invoices;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	
 	
 	
 	

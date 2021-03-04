@@ -50,11 +50,11 @@ public class InvoiceItemController {
 	public ResponseEntity<InvoiceItemDTO> saveItem(@RequestBody InvoiceItemDTO uDTO){
 		InvoiceItem item = new InvoiceItem();
 		item.setDiscount(uDTO.getDiscount());
-		item.setPDV_amount(uDTO.getPDV_amount());
-		item.setPDV_base(uDTO.getPDV_base());
+		item.setPDVAmount(uDTO.getPDVAmount());
+		item.setPDVBase(uDTO.getPDVBase());
 		item.setQuantity(uDTO.getQuantity());
-		item.setTotal_amount(uDTO.getTotal_amount());
-		item.setUnit_price(uDTO.getUnit_price());
+		item.setTotalAmount(uDTO.getTotalAmount());
+		item.setUnitPrice(uDTO.getUnitPrice());
 		//item.setUsluga(uDTO.getUsluga());
 		service.save(item);
 		return new ResponseEntity<InvoiceItemDTO>(uDTO, HttpStatus.CREATED);	
@@ -67,11 +67,11 @@ public class InvoiceItemController {
 			return new ResponseEntity<InvoiceItemDTO>(HttpStatus.BAD_REQUEST);
 		}				
 		item.setDiscount(uDTO.getDiscount());
-		item.setPDV_amount(uDTO.getPDV_amount());
-		item.setPDV_base(uDTO.getPDV_base());
+		item.setPDVAmount(uDTO.getPDVAmount());
+		item.setPDVBase(uDTO.getPDVBase());
 		item.setQuantity(uDTO.getQuantity());
-		item.setTotal_amount(uDTO.getTotal_amount());
-		item.setUnit_price(uDTO.getUnit_price());
+		item.setTotalAmount(uDTO.getTotalAmount());
+		item.setUnitPrice(uDTO.getUnitPrice());
 		//item.setUsluga(uDTO.getUsluga());
 		service.save(item);
 		InvoiceItemDTO itemDTO = new InvoiceItemDTO(item);

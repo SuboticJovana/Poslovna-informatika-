@@ -1,19 +1,24 @@
 package com.example.demo.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="services")
+@Table(name="servicess")
 public class Services implements Serializable {
 
 	private static final long serialVersionUID = -186152084960632736L;
@@ -34,11 +39,17 @@ public class Services implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name="groupserv_id", referencedColumnName="id", nullable=false)
-	private ServiceGroup firm;
+	private ServiceGroup serviceGroup;
 	
 	@ManyToOne
 	@JoinColumn(name="unitmea_id", referencedColumnName="id", nullable=false)
-	private UnitOfMeasure unit;
+	private UnitOfMeasure unitOfMeasure;
+	
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="services")
+	private Set<PriceListItem> priceListItems = new HashSet<PriceListItem>();
+	
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="services")
+	private Set<InvoiceItem> invoiceItems = new HashSet<InvoiceItem>();
 	
 	public Services(Integer service_id, String name, String description, Boolean goods) {
 		super();
@@ -84,20 +95,36 @@ public class Services implements Serializable {
 		this.goods = goods;
 	}
 
-	public ServiceGroup getFirm() {
-		return firm;
+	public ServiceGroup getServiceGroup() {
+		return serviceGroup;
 	}
 
-	public void setFirm(ServiceGroup firm) {
-		this.firm = firm;
+	public void setFirm(ServiceGroup serviceGroup) {
+		this.serviceGroup = serviceGroup;
 	}
 
-	public UnitOfMeasure getUnit() {
-		return unit;
+	public UnitOfMeasure getUnitOfMeasure() {
+		return unitOfMeasure;
 	}
 
-	public void setUnit(UnitOfMeasure unit) {
-		this.unit = unit;
+	public void setUnit(UnitOfMeasure unitOfMeasure) {
+		this.unitOfMeasure = unitOfMeasure;
+	}
+
+	public Set<PriceListItem> getPriceListItems() {
+		return priceListItems;
+	}
+
+	public void setPriceListItems(Set<PriceListItem> priceListItems) {
+		this.priceListItems = priceListItems;
+	}
+
+	public Set<InvoiceItem> getInvoiceItems() {
+		return invoiceItems;
+	}
+
+	public void setInvoiceItems(Set<InvoiceItem> invoiceItems) {
+		this.invoiceItems = invoiceItems;
 	}
 
 	

@@ -37,7 +37,7 @@ public class PartnerDTO implements Serializable{
 	}
 	
 	public PartnerDTO(Partner p) {
-		this(p.getPartner_id(), p.getPartner_name(), p.getAddress(), p.getPhone_number(), p.getFax(), p.getEmail());
+		this(p.getPartner_id(), p.getName(), p.getAddress(), p.getPhoneNumber(), p.getFax(), p.getEmail());
 	}
 
 	public Integer getPartner_id() {

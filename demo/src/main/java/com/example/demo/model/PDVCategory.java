@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="pdv_category")
+@Table(name="pdvCategories")
 public class PDVCategory {
 	
 	@Id
@@ -25,11 +25,13 @@ public class PDVCategory {
 	@Column(name="name", unique=false, nullable=false)
 	private String  name;
 	
-	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="pdv_category")
-	private Set<ServiceGroup> groups = new HashSet<ServiceGroup>();
+
+	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="PDVCategory")
+	private Set<ServiceGroup> serviceGroups = new HashSet<ServiceGroup>();
 	
-	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="pdv_category")
-	private Set<PDVRate> rates = new HashSet<PDVRate>();
+
+	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY,mappedBy="PDVCategory")
+	private Set<PDVRate> PDVRates = new HashSet<PDVRate>();
 	
 	public PDVCategory() {
 		
@@ -51,20 +53,21 @@ public class PDVCategory {
 		this.name = name;
 	}
 
-	public Set<ServiceGroup> getGroups() {
-		return groups;
+
+	public Set<PDVRate> getPDVRates() {
+		return PDVRates;
 	}
 
-	public void setGroups(Set<ServiceGroup> groups) {
-		this.groups = groups;
+	public void setPDVRates(Set<PDVRate> PDVrates) {
+		this.PDVRates = PDVrates;
 	}
 
-	public Set<PDVRate> getRates() {
-		return rates;
+	public Set<ServiceGroup> getServiceGroups() {
+		return serviceGroups;
 	}
 
-	public void setRates(Set<PDVRate> rates) {
-		this.rates = rates;
+	public void setServiceGroups(Set<ServiceGroup> serviceGroups) {
+		this.serviceGroups = serviceGroups;
 	}
 	
 }

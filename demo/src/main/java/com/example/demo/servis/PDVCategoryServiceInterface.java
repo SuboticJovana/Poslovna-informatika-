@@ -18,9 +18,9 @@ public interface PDVCategoryServiceInterface {
 
 	PDVCategory findByName(String name);
 	
-	PDVCategory findByServiceGroup(ServiceGroup s);
+//	PDVCategory findByServiceGroup(ServiceGroup s);
 
-	PDVCategory findByPDVRate(PDVRate p);
+//	PDVCategory findByPDVRate(PDVRate p);
 
 	List<PDVCategory> findAll();
 }

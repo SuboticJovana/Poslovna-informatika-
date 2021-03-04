@@ -28,7 +28,7 @@ public class City {
 	private Integer ptt;
 	
 	@Column(name="city_name", unique=false, nullable=false)
-	private String city_name;
+	private String name;
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="city")
 	private Set<Enterprise> enterprises = new HashSet<Enterprise>();
@@ -56,12 +56,12 @@ public class City {
 		this.ptt = ptt;
 	}
 
-	public String getCity_name() {
-		return city_name;
+	public String getName() {
+		return name;
 	}
 
-	public void setCity_name(String city_name) {
-		this.city_name = city_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 

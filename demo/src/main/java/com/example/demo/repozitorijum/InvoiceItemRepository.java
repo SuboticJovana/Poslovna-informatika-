@@ -8,17 +8,17 @@ import com.example.demo.model.Services;
 
 public interface InvoiceItemRepository extends JpaRepository<InvoiceItem, Integer>{
 
-	InvoiceItem findByQuantity(String name);
+	InvoiceItem findByQuantity(String quantity);
 	
 	InvoiceItem findByDiscount(double d);
 
-	InvoiceItem findByUnit_price(double u);
+	InvoiceItem findByUnitPrice(double u);
 
-	InvoiceItem findByPDV_base(double pdv_b);
+	InvoiceItem findByPDVBase(double pdv_b);
 	
-	InvoiceItem findByPDV_amount(double pdv_a);
+	InvoiceItem findByPDVAmount(double pdv_a);
 
-	InvoiceItem findByTotal_amount(double a);
+	InvoiceItem findByTotalAmount(double a);
 
-	InvoiceItem findByService(Services service);
+//	InvoiceItem findByService(Services services);
 }

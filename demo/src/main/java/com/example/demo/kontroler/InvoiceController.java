@@ -53,12 +53,12 @@ public class InvoiceController {
 		Invoice item = new Invoice();
 		item.setId(uDTO.getId());
 		item.setDate_currency(uDTO.getDate_currency());
-		item.setDate_invoice(uDTO.getDate_invoice());
-		item.setInvoice_number(uDTO.getInvoice_number());
+		item.setDate(uDTO.getDate_invoice());
+		item.setNumber(uDTO.getInvoice_number());
 		item.setStatus(uDTO.getStatus());
 		item.setTotal_amount(uDTO.getTotal_amount());
 		item.setTotal_base(uDTO.getTotal_base());
-		item.setTotal_pdv(uDTO.getTotal_pdv());
+		item.setTotalPdv(uDTO.getTotal_pdv());
 		
 		//item.setUsluga(uDTO.getUsluga());
 		service.save(item);
@@ -73,12 +73,12 @@ public class InvoiceController {
 		}				
 		item.setId(uDTO.getId());
 		item.setDate_currency(uDTO.getDate_currency());
-		item.setDate_invoice(uDTO.getDate_invoice());
-		item.setInvoice_number(uDTO.getInvoice_number());
+		item.setDate(uDTO.getDate_invoice());
+		item.setNumber(uDTO.getInvoice_number());
 		item.setStatus(uDTO.getStatus());
 		item.setTotal_amount(uDTO.getTotal_amount());
 		item.setTotal_base(uDTO.getTotal_base());
-		item.setTotal_pdv(uDTO.getTotal_pdv());
+		item.setTotalPdv(uDTO.getTotal_pdv());
 		service.save(item);
 		InvoiceDTO itemDTO = new InvoiceDTO(item);
 		return new ResponseEntity<InvoiceDTO>(itemDTO, HttpStatus.OK);	

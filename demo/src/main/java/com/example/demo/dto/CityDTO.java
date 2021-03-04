@@ -28,7 +28,7 @@ public class CityDTO implements Serializable{
 	}
 	
 	public CityDTO(City c) {
-		this(c.getCity_id(), c.getPtt(), c.getCity_name());
+		this(c.getCity_id(), c.getPtt(), c.getName());
 	}
 
 	public Integer getCity_id() {

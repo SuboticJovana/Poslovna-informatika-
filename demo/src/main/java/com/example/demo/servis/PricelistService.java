@@ -3,12 +3,13 @@ package com.example.demo.servis;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Pricelist;
 
 import com.example.demo.repozitorijum.PricelistRepository;
 
-
+@Service
 public class PricelistService implements PricelistServiceInterface {
 	
 	@Autowired

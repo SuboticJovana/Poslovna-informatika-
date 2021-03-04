@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="pdv_rates")
+@Table(name="pdvRates")
 public class PDVRate implements Serializable{
 	
 	private static final long serialVersionUID = -5652339993553733589L;
@@ -27,12 +27,12 @@ public class PDVRate implements Serializable{
 	@Column(name="percentage", unique=false, nullable=false)
 	private Integer percentage;
 	
-	@Column(name="date_of", unique=false, nullable=false)
-	private Date dateOf;
+	@Column(name="date", unique=false, nullable=false)
+	private Date date;
 	
 	@ManyToOne
 	@JoinColumn(name="pdv_category_id", referencedColumnName="id", nullable=false)
-	 private PDVCategory pdvCategory;
+	 private PDVCategory PDVCategory;
 	
 	public PDVRate() {
 		
@@ -54,17 +54,26 @@ public class PDVRate implements Serializable{
 		this.percentage = percentage;
 	}
 
-	public Date getDateOf() {
-		return dateOf;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setDateOf(Date dateOf) {
-		this.dateOf = dateOf;
+	public void setDateOf(Date date) {
+		this.date = date;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public PDVCategory getPDVCategory() {
+		return PDVCategory;
+	}
+
+	public void setPDVCategory(PDVCategory pDVCategory) {
+		PDVCategory = pDVCategory;
+	}
+	
 	
 	
 

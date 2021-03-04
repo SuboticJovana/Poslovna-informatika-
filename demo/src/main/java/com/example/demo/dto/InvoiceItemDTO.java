@@ -12,13 +12,13 @@ public class InvoiceItemDTO implements Serializable{
 
 	private  double discount;
 
-	private  double unit_price;
+	private  double unitPrice;
 
-	private  double PDV_base;
+	private  double PDVBase;
 
-	private  double PDV_amount;
+	private  double PDVAmount;
 
-	private  double total_amount;
+	private  double totalAmount;
 
 	private ServicesDTO service;
 	
@@ -29,10 +29,10 @@ public class InvoiceItemDTO implements Serializable{
 	public InvoiceItemDTO(double quantity, double discount,double unit_price, double PDV_base,double PDV_amount,double total_amount,ServicesDTO service  ) {
 		this.quantity=quantity;
 		this.discount=discount;
-		this.unit_price=unit_price;
-		this.PDV_base=PDV_base;
-		this.PDV_amount=PDV_amount;
-		this.total_amount=total_amount;
+		this.unitPrice=unit_price;
+		this.PDVBase=PDV_base;
+		this.PDVAmount=PDV_amount;
+		this.totalAmount=total_amount;
 		this.service=service;
 	}
 	
@@ -41,15 +41,15 @@ public class InvoiceItemDTO implements Serializable{
 		this.id = id;
 		this.quantity=quantity;
 		this.discount=discount;
-		this.unit_price=unit_price;
-		this.PDV_base=PDV_base;
-		this.PDV_amount=PDV_amount;
-		this.total_amount=total_amount;
+		this.unitPrice=unit_price;
+		this.PDVBase=PDV_base;
+		this.PDVAmount=PDV_amount;
+		this.totalAmount=total_amount;
 		this.service=service;
 	}
 	
 	public InvoiceItemDTO(InvoiceItem u) {
-		this(u.getId(),u.getQuantity(), u.getDiscount(), u.getUnit_price(), u.getPDV_base(), u.getPDV_amount(), u.getTotal_amount(), new ServicesDTO(u.getService()));
+		this(u.getId(),u.getQuantity(), u.getDiscount(), u.getUnitPrice(), u.getPDVBase(), u.getPDVAmount(), u.getTotalAmount(), new ServicesDTO(u.getServices()));
 	}
 
 	public Integer getId() {
@@ -76,36 +76,36 @@ public class InvoiceItemDTO implements Serializable{
 		this.discount = discount;
 	}
 
-	public double getUnit_price() {
-		return unit_price;
+	public double getUnitPrice() {
+		return unitPrice;
 	}
 
-	public void setUnit_price(double unit_price) {
-		this.unit_price = unit_price;
+	public void setUnitPrice(double unitPrice) {
+		this.unitPrice = unitPrice;
 	}
 
-	public double getPDV_base() {
-		return PDV_base;
+	public double getPDVBase() {
+		return PDVBase;
 	}
 
-	public void setPDV_base(double pDV_base) {
-		PDV_base = pDV_base;
+	public void setPDVBase(double pDVBase) {
+		PDVBase = pDVBase;
 	}
 
-	public double getPDV_amount() {
-		return PDV_amount;
+	public double getPDVAmount() {
+		return PDVAmount;
 	}
 
-	public void setPDV_amount(double pDV_amount) {
-		PDV_amount = pDV_amount;
+	public void setPDVAmount(double pDVAmount) {
+		PDVAmount = pDVAmount;
 	}
 
-	public double getTotal_amount() {
-		return total_amount;
+	public double getTotalAmount() {
+		return totalAmount;
 	}
 
-	public void setTotal_amount(double total_amount) {
-		this.total_amount = total_amount;
+	public void setTotalAmount(double totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 
 	public ServicesDTO getService() {

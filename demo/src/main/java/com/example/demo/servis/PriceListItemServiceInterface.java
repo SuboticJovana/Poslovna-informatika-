@@ -10,7 +10,7 @@ public interface PriceListItemServiceInterface {
 	
 	PriceListItem save(PriceListItem priceListItem);
 	
-	PriceListItem remove(Integer price_list_item_id);
+	void remove(Integer price_list_item_id);
 	
 	List<PriceListItem> findAll();
 

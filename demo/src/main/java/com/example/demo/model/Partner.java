@@ -1,16 +1,21 @@
 package com.example.demo.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,14 +29,14 @@ public class Partner implements Serializable{
 	@Column(name="partner_id", unique=true, nullable=false)
 	private Integer partner_id;
 	
-	@Column(name="partner_name", unique=false, nullable=false)
-	private String partner_name;
+	@Column(name="name", unique=false, nullable=false)
+	private String name;
 	
 	@Column(name="address", unique=false, nullable=false)
 	private String address;
 	
-	@Column(name="phone_number", unique=false, nullable=false)
-	private String phone_number;
+	@Column(name="phoneNumber", unique=false, nullable=false)
+	private String phoneNumber;
 	
 	@Column(name="fax", unique=false, nullable=false)
 	private String fax;
@@ -49,9 +54,10 @@ public class Partner implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name="enterprise_id", referencedColumnName="enterprise_id", nullable=false)
-	 private Enterprise company;
+	 private Enterprise enterprise;
 	
-//	Veza ka fakturi
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="partner")
+	private Set<Invoice> invoices = new HashSet<Invoice>();
 	
 	public Partner() {
 		
@@ -65,12 +71,12 @@ public class Partner implements Serializable{
 		this.partner_id = partner_id;
 	}
 
-	public String getPartner_name() {
-		return partner_name;
+	public String getName() {
+		return name;
 	}
 
-	public void setPartner_name(String partner_name) {
-		this.partner_name = partner_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getAddress() {
@@ -81,12 +87,12 @@ public class Partner implements Serializable{
 		this.address = address;
 	}
 
-	public String getPhone_number() {
-		return phone_number;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getFax() {
@@ -114,12 +120,12 @@ public class Partner implements Serializable{
 	}
 
 	
-	public Enterprise getCompany() {
-		return company;
+	public Enterprise getEnterprise() {
+		return enterprise;
 	}
 
-	public void setCompany(Enterprise company) {
-		this.company = company;
+	public void setEnterprise(Enterprise enterprise) {
+		this.enterprise = enterprise;
 	}
 
 	public static long getSerialversionuid() {
