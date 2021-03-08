@@ -2,3 +2,13 @@
 @import "partials/global.css";
 @import "partials/header.css";
 
+#unosFakture{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -100px;
+}
+#service-dropdown{
+    width:265px;
+}

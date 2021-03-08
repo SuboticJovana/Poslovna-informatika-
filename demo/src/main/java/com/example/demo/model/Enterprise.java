@@ -22,7 +22,6 @@ import javax.persistence.Table;
 @Table(name="enterprises")
 public class Enterprise implements Serializable {
 
-
 	private static final long serialVersionUID = -7823756286553586902L;
 
 	@Id
@@ -30,7 +29,7 @@ public class Enterprise implements Serializable {
 	@Column(name="enterprise_id", unique=true, nullable=false)
 	private Integer enterprise_id;
 	
-	@Column(name="nameEnterprise",unique=false,nullable=false)
+	@Column(name="name_enterprise",unique=false,nullable=false)
 	private String nameEnterprise;
 	
 	@Column(name="address", unique=false, nullable=false)

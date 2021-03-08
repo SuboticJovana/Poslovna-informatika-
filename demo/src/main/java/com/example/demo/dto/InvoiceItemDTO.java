@@ -22,6 +22,8 @@ public class InvoiceItemDTO implements Serializable{
 
 	private ServicesDTO service;
 	
+	private Integer service_id;
+	
 	public InvoiceItemDTO() {
 		super();
 	}
@@ -35,6 +37,16 @@ public class InvoiceItemDTO implements Serializable{
 		this.totalAmount=total_amount;
 		this.service=service;
 	}
+	public InvoiceItemDTO(double quantity, double discount,double unit_price, double PDV_base,double PDV_amount,double total_amount,Integer service_id  ) {
+		this.quantity=quantity;
+		this.discount=discount;
+		this.unitPrice=unit_price;
+		this.PDVBase=PDV_base;
+		this.PDVAmount=PDV_amount;
+		this.totalAmount=total_amount;
+		this.service_id=service_id;
+	}
+
 	
 	public InvoiceItemDTO(Integer id, double quantity, double discount,double unit_price, double PDV_base,double PDV_amount,double total_amount,ServicesDTO service  ) {
 		super();
@@ -114,6 +126,14 @@ public class InvoiceItemDTO implements Serializable{
 
 	public void setService(ServicesDTO service) {
 		this.service = service;
+	}
+
+	public Integer getService_id() {
+		return service_id;
+	}
+
+	public void setService_id(Integer service_id) {
+		this.service_id = service_id;
 	}
 
 	

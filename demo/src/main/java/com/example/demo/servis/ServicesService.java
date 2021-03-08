@@ -15,8 +15,7 @@ public class ServicesService implements ServicesServiceInterface {
 
 	@Override
 	public Services findOne(Integer services_id) {
-		// TODO Auto-generated method stub
-		return null;
+		return servicesRepository.getOne(services_id);
 	}
 
 	@Override

@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="invoices")
 public class Invoice {
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id", unique=true, nullable=false)
@@ -24,16 +24,16 @@ public class Invoice {
 	@Column(name="number", unique=false, nullable=false)
 	private  Integer number;
 	
-	@Column(name="date", unique=false, nullable=false)
+	@Column(name="date_invoice", unique=false, nullable=false)
 	private  Date date;
 	
-	@Column(name="dateCurrency", unique=false, nullable=false)
+	@Column(name="date_currency", unique=false, nullable=false)
 	private Date  dateCurrency;
 	
 	@Column(name="total_base", unique=false, nullable=false)
 	private Double  total_base;
 	
-	@Column(name="totalPdv", unique=false, nullable=false)
+	@Column(name="total_pdv", unique=false, nullable=false)
 	private Double  totalPdv;
 	
 	@Column(name="total_amount", unique=false, nullable=false)

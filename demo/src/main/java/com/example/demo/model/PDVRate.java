@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class PDVRate implements Serializable{
 	
 	private static final long serialVersionUID = -5652339993553733589L;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="pdv_rate_id", unique=true, nullable=false)
@@ -27,7 +27,7 @@ public class PDVRate implements Serializable{
 	@Column(name="percentage", unique=false, nullable=false)
 	private Integer percentage;
 	
-	@Column(name="date", unique=false, nullable=false)
+	@Column(name="date_of", unique=false, nullable=false)
 	private Date date;
 	
 	@ManyToOne

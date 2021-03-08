@@ -21,7 +21,6 @@ import javax.persistence.Table;
 @Table(name="pricelists")
 public class Pricelist implements Serializable {
 
-
 	private static final long serialVersionUID = -8368749296479586744L;
 
 	@Id
@@ -29,16 +28,16 @@ public class Pricelist implements Serializable {
 	@Column(name="pricelist_id", unique=true, nullable=false)
 	private Integer pricelist_id;
 	
-	@Column(name="dateFrom", unique=false, nullable=false)
+	@Column(name="date_from", unique=false, nullable=false)
 	private Date dateFrom;
 	
-	@Column(name="dateTo", unique=false, nullable=false)
+	@Column(name="date_to", unique=false, nullable=false)
 	private Date dateTo;
 	
 	@Column(name="percentage", unique=false, nullable=false)
 	private Integer percentage;
 	
-	@Column(name="totalPrice", unique=false, nullable=false)
+	@Column(name="total_price", unique=false, nullable=false)
 	private Integer totalPrice;
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="pricelist")

@@ -1,7 +1,10 @@
 package com.example.demo.kontroler;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +19,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.InvoiceItemDTO;
+import com.example.demo.model.Invoice;
 import com.example.demo.model.InvoiceItem;
+import com.example.demo.servis.EnterpriseServiceInterface;
 import com.example.demo.servis.InvoiceItemServiceInterface;
+import com.example.demo.servis.InvoiceServiceInterface;
+import com.example.demo.servis.PartnerServiceInteface;
+import com.example.demo.servis.ServicesServiceInterface;
 
 @RestController
 @RequestMapping(value="salesystem/invoice-items")
@@ -25,6 +33,18 @@ public class InvoiceItemController {
 
 	@Autowired
 	private InvoiceItemServiceInterface service;
+	
+	@Autowired
+	private ServicesServiceInterface servicesService;
+	
+	@Autowired
+	private InvoiceServiceInterface invoiceService;
+	
+	@Autowired
+	private EnterpriseServiceInterface enterpriseService;
+	
+	@Autowired
+	private PartnerServiceInteface partnerService;
 	
 	@GetMapping
 	public ResponseEntity<List<InvoiceItemDTO>> getInvoiceItems() {
@@ -46,8 +66,21 @@ public class InvoiceItemController {
 		return new ResponseEntity<InvoiceItemDTO>(itemDTO, HttpStatus.OK);
 	}
 	
+	@Transactional
 	@PostMapping(consumes="application/json")
 	public ResponseEntity<InvoiceItemDTO> saveItem(@RequestBody InvoiceItemDTO uDTO){
+		Invoice invoice = new Invoice();
+		invoice.setDate_currency(new java.util.Date());
+		invoice.setDate(new java.util.Date());
+		invoice.setNumber(500);
+		invoice.setStatus("status");
+		invoice.setTotal_amount(500.0);
+		invoice.setTotal_base(500.0);
+		invoice.setTotalPdv(50.0);
+		invoice.setEnterprise(enterpriseService.findOne(1));
+		invoice.setPartner(partnerService.findOne(1));
+		invoiceService.save(invoice);
+	//
 		InvoiceItem item = new InvoiceItem();
 		item.setDiscount(uDTO.getDiscount());
 		item.setPDVAmount(uDTO.getPDVAmount());
@@ -55,7 +88,8 @@ public class InvoiceItemController {
 		item.setQuantity(uDTO.getQuantity());
 		item.setTotalAmount(uDTO.getTotalAmount());
 		item.setUnitPrice(uDTO.getUnitPrice());
-		//item.setUsluga(uDTO.getUsluga());
+		item.setServices(servicesService.findOne(uDTO.getService_id()));
+		item.setInvoice(invoice); //set and add reference to invoice
 		service.save(item);
 		return new ResponseEntity<InvoiceItemDTO>(uDTO, HttpStatus.CREATED);	
 	}

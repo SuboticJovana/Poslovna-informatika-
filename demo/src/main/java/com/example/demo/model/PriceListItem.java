@@ -17,6 +17,7 @@ public class PriceListItem implements Serializable {
 	
 	private static final long serialVersionUID = -5652339993553733589L;
 
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="price_list_item_id", unique=true, nullable=false)

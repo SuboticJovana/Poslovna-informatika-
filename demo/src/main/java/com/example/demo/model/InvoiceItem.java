@@ -24,7 +24,7 @@ public class InvoiceItem {
 	@Column(name="discount", unique=false, nullable=false)
 	private  double discount;
 
-	@Column(name="unitPrice", unique=false, nullable=false)
+	@Column(name="unit_price", unique=false, nullable=false)
 	private  double unitPrice;
 
 	//pdv stopa veza ili atribut ? 
@@ -35,7 +35,7 @@ public class InvoiceItem {
 	@Column(name="PDVAmount", unique=false, nullable=false)
 	private  double PDVAmount;
 
-	@Column(name="totalAmount", unique=false, nullable=false)
+	@Column(name="total_amount", unique=false, nullable=false)
 	private  double totalAmount;
 
 	@ManyToOne 

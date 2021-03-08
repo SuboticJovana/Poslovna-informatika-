@@ -18,8 +18,8 @@ public class ServicesDTO implements Serializable {
 		this.description = description;
 		this.goods = goods;
 	}
-	public ServicesDTO(Services services) {
-		// TODO Auto-generated constructor stub
+	public ServicesDTO(Services s) {
+		this(s.getService_id(), s.getName(), s.getDescription(), s.getGoods());
 	}
 	public int getServices_id() {
 		return services_id;

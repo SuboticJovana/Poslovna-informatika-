@@ -14,8 +14,7 @@ public class EnterpriseService implements EnterpriseServiceInterface {
 
 	@Override
 	public Enterprise findOne(Integer enterprise_id) {
-		// TODO Auto-generated method stub
-		return null;
+		return enterpriseRepository.getOne(enterprise_id);
 	}
 
 	@Override

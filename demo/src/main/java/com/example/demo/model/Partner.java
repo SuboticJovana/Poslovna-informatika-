@@ -23,7 +23,6 @@ import javax.persistence.Table;
 public class Partner implements Serializable{
 	
 	private static final long serialVersionUID = -5652339993553733589L;
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="partner_id", unique=true, nullable=false)
@@ -35,7 +34,7 @@ public class Partner implements Serializable{
 	@Column(name="address", unique=false, nullable=false)
 	private String address;
 	
-	@Column(name="phoneNumber", unique=false, nullable=false)
+	@Column(name="phone_number", unique=false, nullable=false)
 	private String phoneNumber;
 	
 	@Column(name="fax", unique=false, nullable=false)
