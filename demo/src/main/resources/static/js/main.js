@@ -1,4 +1,6 @@
-    //fetch data for service info
+ $(document).ready(function() {  
+	 //fetch data for service info
+ 
     var serviceSelect = document.getElementById('service-dropdown');
     fetch("http://localhost:8080/salesystem/services")
     .then((resp) => resp.json())
@@ -9,13 +11,14 @@
             option.value = val.services_id;
             option.text = val.name;
             serviceSelect.appendChild(option);
+            
           }
       })
     .catch(function(error) {
         console.log(error);
     });
     //to add invoice 
-    document.getElementById("addInvoiceItem").addEventListener('click',function ()
+    document.getElementById("addInvoiceItem").addEventListener('click',function (event)
     {
         //total amount needs to be calculated
         var invoice = {
@@ -36,8 +39,13 @@
         body: JSON.stringify(invoice)
         }).then(res => res.json())
         .then(res => console.log(res));
+        event.preventDefault();
     }  ); 
     
-    document.getElementById('showInvoiceItemForm').addEventListener('click', function () {
-        document.getElementById('unosFakture').style.display="block"; 
-    })
+    document.getElementById('showInvoiceItemForm').addEventListener('click', function (event) {
+        document.getElementById('unosFakture').style.display="block";
+        event.preventDefault();
+    });
+    
+    
+});
