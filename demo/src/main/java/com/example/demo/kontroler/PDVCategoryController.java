@@ -23,7 +23,7 @@ import com.example.demo.servis.PDVCategoryServiceInterface;
 import com.example.demo.servis.UnitOfMeasureServiceInterface;
 
 @RestController
-@RequestMapping(value="salesystem/pdv-categories")
+@RequestMapping(value="salesystem/pdvCategories")
 public class PDVCategoryController {
 
 	@Autowired

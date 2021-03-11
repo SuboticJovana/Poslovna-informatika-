@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet"  type="text/css" href="css/main.css">
+		<script src="https://kit.fontawesome.com/9497a339e1.js" crossorigin="anonymous"></script>
+		<title>Pricelists</title>
+		<script>
+			$(document).ready(getCenovnici);
+		</script>
+	</head>
+	<body>
+		<div class="container">		
+			
+			<!-- Toolbar -->	
+			<div class="toolbar">
+				<button id="refresh" type="button" class="btn btn-outline-secondary"><i class="fas fa-sync-alt"></i></button>	
+				<button id="search" type="button" class="btn btn-outline-secondary">Pretraži</button>	
+				<button id="add" type="button" class="btn btn-outline-secondary">Dodaj</button>
+				<button id="edit" type="button" class="btn btn-outline-secondary">Izmeni</button>
+				<button id="delete" type="button" class="btn btn-outline-secondary">Obriši</button>
+				<button id="kopirajCenovnik" type="button" class="btn btn-outline-secondary">Kopiraj cenovnik</button>
+			</div>
+			<!-- Toolbar END-->
+			
+			
+			<!-- Table -->
+			<table id="dataTable" class="table">
+				<thead>
+					<tr>
+						<th>Datum pocetka vazenja</th>
+						<th>Preduzece</th>
+					</tr>
+				</thead>
+				<tbody id="dataTableBody">
+				</tbody>
+			</table>
+			<!-- Toolbar END-->
+			
+			
+			<!-- READ -->
+			<ul class="pagination justify-content-center bg-success" id="cenovnik-page"></ul>
+            <br>
+            <div class="form-group mx-auto w-25">
+                <label for="nmb-select">Odaberite broj entiteta za prikaz</label>
+                <select class="form-control" id="nmb-select">
+                	<option value="10">10</option>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                </select>
+            </div>
+			<!-- READ END-->
+	
+			
+		</div>
+		<script src="js/pricelists.js"></script>
+		<script src="js/functions.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+		<script src="bootstrap/jquery-3.3.1.min.js"></script>
+		<script src="bootstrap/bootstrap.js"></script>
+		
+	</body>
+</html>

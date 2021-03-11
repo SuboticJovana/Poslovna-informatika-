@@ -53,9 +53,10 @@ public class PricelistController {
 		//ispraviti
 		Pricelist pricelist = new Pricelist();
 		pricelist.setDateFrom(pDTO.getDate_from());
-		pricelist.setDateTo(pDTO.getDate_to());
-		pricelist.setPercentage(pDTO.getPercentage());
-		pricelist.setTotalPrice(pDTO.getTotal_price());
+//		pricelist.setDateTo(pDTO.getDate_to());
+//		pricelist.setPercentage(pDTO.getPercentage());
+//		pricelist.setTotalPrice(pDTO.getTotal_price());
+
 		
 		pricelistService.save(pricelist);
 		PricelistDTO pricelistDTO = new PricelistDTO(pricelist);
@@ -68,9 +69,9 @@ public class PricelistController {
 			return new ResponseEntity<PricelistDTO>(HttpStatus.BAD_REQUEST);
 		}			
 		pricelist.setDateFrom(pDTO.getDate_from());
-		pricelist.setDateTo(pDTO.getDate_to());
-		pricelist.setPercentage(pDTO.getPercentage());
-		pricelist.setTotalPrice(pDTO.getTotal_price());
+//		pricelist.setDateTo(pDTO.getDate_to());
+//		pricelist.setPercentage(pDTO.getPercentage());
+//		pricelist.setTotalPrice(pDTO.getTotal_price());
 		
 		 pricelistService.save(pricelist);
 		PricelistDTO pricelistDTO = new PricelistDTO(pricelist);

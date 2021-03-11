@@ -25,7 +25,7 @@ import com.example.demo.model.PriceListItem;
 import com.example.demo.servis.PriceListItemServiceInterface;
 
 @RestController
-@RequestMapping(value="salesystem/price-list-items")
+@RequestMapping(value="salesystem/priceListItems")
 public class PriceListItemController {
 	
 	@Autowired

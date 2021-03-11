@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -43,6 +45,9 @@ public class Pricelist implements Serializable {
 	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="pricelist")
 	private Set<PriceListItem> items = new HashSet<PriceListItem>();
 		
+	@ManyToOne
+	@JoinColumn(name="enterprise_id", referencedColumnName="enterprise_id", nullable=false)
+	private Enterprise enterprise;
 	
 	public Pricelist() {
 		
@@ -103,6 +108,12 @@ public class Pricelist implements Serializable {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public Enterprise getEnterprise() {
+		return enterprise;
+	}
+	public void setEnterprise(Enterprise enterprise) {
+		this.enterprise = enterprise;
 	}
 
 	

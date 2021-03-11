@@ -54,6 +54,9 @@ public class Enterprise implements Serializable {
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="enterprise")
 	private Set<Invoice> invoices = new HashSet<Invoice>();
+	
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="enterprise")
+	private Set<Pricelist> pricelists = new HashSet<Pricelist>();
 
 	public Enterprise(Integer enterprise_id, String nameEnterprise, String address, String phone, String fax, City city) {
 		super();
@@ -115,6 +118,15 @@ public class Enterprise implements Serializable {
 
 	public void setCity(City city) {
 		this.city = city;
+	}
+	
+
+	public Set<Pricelist> getPricelists() {
+		return pricelists;
+	}
+
+	public void setPricelists(Set<Pricelist> pricelists) {
+		this.pricelists = pricelists;
 	}
 
 	public Set<ServiceGroup> getGroups() {

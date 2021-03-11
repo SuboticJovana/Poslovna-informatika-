@@ -1,0 +1,32 @@
+body {
+	background-image: url("wavegreen.png");
+}
+.pagination{
+	float:right;
+}
+table {
+	margin-top: 50px;
+}
+
+table tr.highlighted{
+	color: #212529;
+  	background-color: rgba(0, 0, 0, 0.075);
+}
+
+table tr:not(.header){
+	cursor:pointer;
+}
+
+toolbar {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.toolbar > button {
+	margin-right: 3px;
+}
+
+
+

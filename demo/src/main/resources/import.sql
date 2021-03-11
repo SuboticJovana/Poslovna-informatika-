@@ -5,7 +5,7 @@ insert into invoices(id, number, date_invoice, date_currency, total_base, total_
 insert into invoice_items(id, quantity, discount, unit_price, PDVBase, PDVAmount, total_amount, invoice_id, service_id)  values(1, 1,10, 100, 100, 100, 10000, 1, 1)
 insert into pdv_categories(id, name)  values(1, "category1")
 insert into pdv_rates(pdv_rate_id, percentage, date_of, pdv_category_id)  values(1, 10, "2020-03-03", 1 )
-insert into pricelists(pricelist_id, date_from, date_to, percentage, total_price)  values(1, "2020-01-01", "2020-09-09", 10, 1000 )
+insert into pricelists(pricelist_id, date_from, date_to, percentage, total_price, enterprise_id)  values(1, "2020-01-01", "2020-09-09", 10, 1000, 1 )
 insert into service_groups(id, name, pdv_id, enterprise_id)  values(1,"service group1 ",1,1 )
 insert into unit_of_measures(id, name, short_name )  values(1,"kilogram","kg")
 insert into servicess(service_id, name, description, goods,groupserv_id,unitmea_id )  values(1,"servis 1","opis servisa 1",true, 1,1 )

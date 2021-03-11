@@ -26,7 +26,7 @@ import com.example.demo.model.PriceListItem;
 import com.example.demo.servis.PDVRateServiceInterface;
 
 @RestController
-@RequestMapping(value="salesystem/pdv-rates")
+@RequestMapping(value="salesystem/pdvRates")
 public class PDVRateContoller {
 	
 	@Autowired
