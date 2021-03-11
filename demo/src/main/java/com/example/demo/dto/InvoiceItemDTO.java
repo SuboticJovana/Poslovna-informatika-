@@ -14,9 +14,9 @@ public class InvoiceItemDTO implements Serializable{
 
 	private  double unitPrice;
 
-	private  double PDVBase;
+	private  double pdvBase;
 
-	private  double PDVAmount;
+	private  double pdvAmount;
 
 	private  double totalAmount;
 
@@ -28,34 +28,34 @@ public class InvoiceItemDTO implements Serializable{
 		super();
 	}
 
-	public InvoiceItemDTO(double quantity, double discount,double unit_price, double PDV_base,double PDV_amount,double total_amount,ServicesDTO service  ) {
+	public InvoiceItemDTO(double quantity, double discount,double unit_price, double pdvBase,double pdvAmount,double total_amount,ServicesDTO service  ) {
 		this.quantity=quantity;
 		this.discount=discount;
 		this.unitPrice=unit_price;
-		this.PDVBase=PDV_base;
-		this.PDVAmount=PDV_amount;
+		this.pdvBase=pdvBase;
+		this.pdvAmount=pdvAmount;
 		this.totalAmount=total_amount;
 		this.service=service;
 	}
-	public InvoiceItemDTO(double quantity, double discount,double unit_price, double PDV_base,double PDV_amount,double total_amount,Integer service_id  ) {
+	public InvoiceItemDTO(double quantity, double discount,double unit_price,double pdvBase,double pdvAmount,double total_amount,Integer service_id  ) {
 		this.quantity=quantity;
 		this.discount=discount;
 		this.unitPrice=unit_price;
-		this.PDVBase=PDV_base;
-		this.PDVAmount=PDV_amount;
+		this.pdvBase=pdvBase;
+		this.pdvAmount=pdvAmount;
 		this.totalAmount=total_amount;
 		this.service_id=service_id;
 	}
 
 	
-	public InvoiceItemDTO(Integer id, double quantity, double discount,double unit_price, double PDV_base,double PDV_amount,double total_amount,ServicesDTO service  ) {
+	public InvoiceItemDTO(Integer id, double quantity, double discount,double unit_price, double pdvBase,double pdvAmount,double total_amount,ServicesDTO service  ) {
 		super();
 		this.id = id;
 		this.quantity=quantity;
 		this.discount=discount;
 		this.unitPrice=unit_price;
-		this.PDVBase=PDV_base;
-		this.PDVAmount=PDV_amount;
+		this.pdvBase=pdvBase;
+		this.pdvAmount=pdvAmount;
 		this.totalAmount=total_amount;
 		this.service=service;
 	}
@@ -96,20 +96,20 @@ public class InvoiceItemDTO implements Serializable{
 		this.unitPrice = unitPrice;
 	}
 
-	public double getPDVBase() {
-		return PDVBase;
+	public double getPdvBase() {
+		return pdvBase;
 	}
 
-	public void setPDVBase(double pDVBase) {
-		PDVBase = pDVBase;
+	public void setPdvBase(double pdvBase) {
+		this.pdvBase = pdvBase;
 	}
 
-	public double getPDVAmount() {
-		return PDVAmount;
+	public double getPdvAmount() {
+		return pdvAmount;
 	}
 
-	public void setPDVAmount(double pDVAmount) {
-		PDVAmount = pDVAmount;
+	public void setPdvAmount(double pdvAmount) {
+		this.pdvAmount = pdvAmount;
 	}
 
 	public double getTotalAmount() {

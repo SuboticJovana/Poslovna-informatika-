@@ -68,7 +68,7 @@ public class InvoiceItemController {
 	
 	@Transactional
 	@PostMapping(consumes="application/json")
-	public ResponseEntity<InvoiceItemDTO> saveItem(@RequestBody InvoiceItemDTO uDTO){
+	public ResponseEntity<Boolean> saveItem(@RequestBody List<InvoiceItemDTO> invoiceItems){
 		Invoice invoice = new Invoice();
 		invoice.setDate_currency(new java.util.Date());
 		invoice.setDate(new java.util.Date());
@@ -81,17 +81,21 @@ public class InvoiceItemController {
 		invoice.setPartner(partnerService.findOne(1));
 		invoiceService.save(invoice);
 	//
-		InvoiceItem item = new InvoiceItem();
-		item.setDiscount(uDTO.getDiscount());
-		item.setPDVAmount(uDTO.getPDVAmount());
-		item.setPDVBase(uDTO.getPDVBase());
-		item.setQuantity(uDTO.getQuantity());
-		item.setTotalAmount(uDTO.getTotalAmount());
-		item.setUnitPrice(uDTO.getUnitPrice());
-		item.setServices(servicesService.findOne(uDTO.getService_id()));
-		item.setInvoice(invoice); //set and add reference to invoice
-		service.save(item);
-		return new ResponseEntity<InvoiceItemDTO>(uDTO, HttpStatus.CREATED);	
+		for(InvoiceItemDTO uDTO : invoiceItems) {
+			InvoiceItem item = new InvoiceItem();
+			item.setDiscount(uDTO.getDiscount());
+			item.setPDVAmount(uDTO.getPdvAmount());
+			item.setPDVBase(uDTO.getPdvBase());
+			item.setQuantity(uDTO.getQuantity());
+			item.setTotalAmount(uDTO.getTotalAmount());
+			item.setUnitPrice(uDTO.getUnitPrice());
+			item.setServices(servicesService.findOne(uDTO.getService_id()));
+			item.setInvoice(invoice); //set reference to invoice
+			InvoiceItem i = service.save(item);
+			System.out.println(i.getQuantity());
+		}
+		//add false if it fails
+		return new ResponseEntity<Boolean>(true, HttpStatus.CREATED);	
 	}
 	
 	@PutMapping(value="/{id}", consumes="application/json")
@@ -101,8 +105,8 @@ public class InvoiceItemController {
 			return new ResponseEntity<InvoiceItemDTO>(HttpStatus.BAD_REQUEST);
 		}				
 		item.setDiscount(uDTO.getDiscount());
-		item.setPDVAmount(uDTO.getPDVAmount());
-		item.setPDVBase(uDTO.getPDVBase());
+		item.setPDVAmount(uDTO.getPdvAmount());
+		item.setPDVBase(uDTO.getPdvBase());
 		item.setQuantity(uDTO.getQuantity());
 		item.setTotalAmount(uDTO.getTotalAmount());
 		item.setUnitPrice(uDTO.getUnitPrice());

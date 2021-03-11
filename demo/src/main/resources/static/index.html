@@ -50,8 +50,8 @@
     </header>
     <!-- Main Header END -->
     <button id="showInvoiceItemForm">Unos fakture</button>
-    <div class="container" id="unosFakture" style="display:none;">
-      <form>
+    <div class="container" id="invoiceBlock" style="display:none;">
+      <form id="formInvoice">
         <div class="row justify-content-md-center">
           <div class="col-sm-3">    
             <input type="number" class="form-control" id= "quantity" placeholder="Kolicina">
@@ -69,12 +69,12 @@
         </div>
         <div class="row justify-content-md-center">
           <div class="col-sm-3">    
-            <input type="number" class="form-control"  id= "PDVBase" placeholder="PDV baza">
+            <input type="number" class="form-control"  id= "pdvBase" placeholder="PDV baza">
           </div>
         </div>
         <div class="row justify-content-md-center">
           <div class="col-sm-3">    
-            <input type="number" class="form-control"  id= "PDVAmount" placeholder="Iznos PDV-a">
+            <input type="number" class="form-control"  id= "pdvAmount" placeholder="Iznos PDV-a">
           </div>
         </div>
         <div class="row justify-content-md-center">
@@ -89,8 +89,9 @@
             </div>
         </div>
         <div class="row justify-content-md-center">
-          <div class="col-sm-3">    
-            <button type="button" id="addInvoiceItem" class="btn btn-primary">Dodaj stavku fakture</button>
+          <div class="col-sm-3"> 
+            <button type="button" id="addInvoiceItem" class="btn btn-primary">Dodaj stavku fakture</button>   
+            <button type="button" id="saveInvoice" class="btn btn-primary">Sacuvaj fakturu</button>
           </div>
           </div>
         </div>
@@ -100,8 +101,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
     <script src="js/bootstrap.min.js"></script>
-    <script type="js/main.js"></script>
-    
-    
+    <script src="js/main.js"></script>
+    <script src="js/invoices.js"></script>
   </body>
 </html>
