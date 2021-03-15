@@ -6,17 +6,19 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet"  type="text/css" href="css/main.css">
 		<script src="https://kit.fontawesome.com/9497a339e1.js" crossorigin="anonymous"></script>
+		<script src="js/pricelists.js"></script>
+		<script src="js/functions.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+		<script src="bootstrap/jquery-3.3.1.min.js"></script>
+		<script src="bootstrap/bootstrap.js"></script>
 		<title>Pricelists</title>
-		<script>
-			$(document).ready(getCenovnici);
-		</script>
 	</head>
 	<body>
 		<div class="container">		
 			
 			<!-- Toolbar -->	
 			<div class="toolbar">
-				<button id="refresh" type="button" class="btn btn-outline-secondary"><i class="fas fa-sync-alt"></i></button>	
+				<button id="refresh" type="button" class="btn btn-outline-secondary">Osveži</button>	
 				<button id="search" type="button" class="btn btn-outline-secondary">Pretraži</button>	
 				<button id="add" type="button" class="btn btn-outline-secondary">Dodaj</button>
 				<button id="edit" type="button" class="btn btn-outline-secondary">Izmeni</button>
@@ -25,7 +27,7 @@
 			</div>
 			<!-- Toolbar END-->
 			
-			
+			<!-- READ -->
 			<!-- Table -->
 			<table id="dataTable" class="table">
 				<thead>
@@ -37,10 +39,8 @@
 				<tbody id="dataTableBody">
 				</tbody>
 			</table>
-			<!-- Toolbar END-->
+			<!-- Table END-->
 			
-			
-			<!-- READ -->
 			<ul class="pagination justify-content-center bg-success" id="cenovnik-page"></ul>
             <br>
             <div class="form-group mx-auto w-25">
@@ -55,14 +55,44 @@
                 </select>
             </div>
 			<!-- READ END-->
+			
+			<!-- ADD -->
+			<div class="modal fade" id="addModalScrollable" tabindex="-1" role="dialog" aria-labelledby="addModalScrollableTitle" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-scrollable" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="addModalScrollableTitle">Dodavanje cenovnika</h5>
+			        <button type="button" class="close addModalClose" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <form>
+					  <div class="form-group">
+					    <label for="datumInput">Datum pocetka vazenja</label>
+					    <input type="date" class="form-control" id="datumInput" aria-describedby="datumHelp" placeholder="Unesite datum pocetka vazenja cenovnika">
+					  </div>
+					  <div class="form-group">
+					    <label for="preduzeceSelect">Preduzece</label>
+					    <select class="form-control"  id="preduzeceSelect">
+					    
+					    </select>
+					  </div>
+					</form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary addModalClose" >Otkaži</button>
+			        <button type="button" id="doAdd" class="btn btn-primary">Sačuvaj</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- ADD END-->
+			
 	
 			
 		</div>
-		<script src="js/pricelists.js"></script>
-		<script src="js/functions.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
-		<script src="bootstrap/jquery-3.3.1.min.js"></script>
-		<script src="bootstrap/bootstrap.js"></script>
+
 		
 	</body>
 </html>

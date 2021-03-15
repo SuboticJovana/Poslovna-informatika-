@@ -19,11 +19,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
+
+
 @Entity
 @Table(name="pricelists")
 public class Pricelist implements Serializable {
 
-	private static final long serialVersionUID = -8368749296479586744L;
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=IDENTITY)
@@ -45,7 +48,7 @@ public class Pricelist implements Serializable {
 	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="pricelist")
 	private Set<PriceListItem> items = new HashSet<PriceListItem>();
 		
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="enterprise_id", referencedColumnName="enterprise_id", nullable=false)
 	private Enterprise enterprise;
 	
@@ -106,16 +109,18 @@ public class Pricelist implements Serializable {
 	public void setItems(Set<PriceListItem> items) {
 		this.items = items;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+
 	public Enterprise getEnterprise() {
 		return enterprise;
 	}
 	public void setEnterprise(Enterprise enterprise) {
 		this.enterprise = enterprise;
 	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
+	
 	
 
 	

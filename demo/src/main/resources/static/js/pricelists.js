@@ -1,6 +1,27 @@
 function getPricelists(){
 	readPricelists();
 	readEnterprices();
+	
+	$(document).on("click",'tr',function(event){
+		highlightRow(this);
+	});
+	
+	$(document).on("click", '#add', function(event){
+		$('#addModalScrollable').modal('show');
+	});
+	
+	$(document).on("click", '#doAdd', function(event){
+		addPricelist();
+		$('#addModalScrollable').modal('hide');				
+	});
+	
+	$(document).on("click", '.addModalClose', function(event){
+		$('#addModalScrollable').modal('hide');
+	});
+	
+	$(document).on("click",'#refresh',function(event){
+		readPricelists();
+	});
 		
 function readPricelists() {
 		var pageNo = 0; 
@@ -8,7 +29,7 @@ function readPricelists() {
 		var nmbSelect = $('#nmb-select');
 		var pageSize = nmbSelect.find(":selected").text();
 		$.ajax({
-			url : "http://localhost:8080/api/pricelists/p?pageNo=" + pageNo + "&pageSize=" + pageSize
+			url : "http://localhost:8080/salesystem/pricelists/p?pageNo=" + pageNo + "&pageSize=" + pageSize
 		}).then(
 				function(data, status, request) {
 					console.log(data);
@@ -30,7 +51,77 @@ function readPricelists() {
 						$("#dataTableBody").append(newRow);
 					}
 				});
-	}
-
-function readEnterprices() {}	
+		
+		$("#first").click(function(){
+			goFirst()
+		 });
+		
+		$("#next").click(function(){
+			goNext()
+		 });
+		
+		nmbSelecr.on('change',function (event){
+			event.preventDefault();
+			pageSize = $(this).val();
+			readPricelists();
+		});
+		pricelistPagination.on("click","a.page-link",function(event){
+			event.preventDefault();
+			pageNo = $(this).attr("pageno");
+			readPricelists();
+		});
 }
+
+function readEnterprices(){
+	$.ajax({
+		url : "http://localhost:8080/salesystem/enterprises/"
+	}).then(
+		function(data) {
+			$("#preduzeceSelect").empty();
+			$('#preduzeceSelect').append($('<option>', {
+			    value: 1,
+			    text: ''
+			}));
+			
+			$.each(data, function (i, item) {
+			    $('#preduzeceSelect').append($('<option>', { 
+			        value: item.enterprise_id,
+			        text : item.nameEnterprise
+			    }));
+			});	
+		}
+	);
+}
+
+function addPricelist(){
+	var datumInput = $('#datumInput');
+	var preduzeceSelect = $('#preduzeceSelect');
+	
+	$('#doAdd').on('click', function(event){
+		var datum_vazenja = datumInput.val();
+		var preduzece = preduzeceSelect.find(":selected").text();
+		
+		console.log('datum_vazenja: ' + datum_vazenja)
+		console.log('preduzece: ' + preduzece);
+		
+		if(datum_vazenja == null || preduzece == null){
+			alert('Niste uneli potrebne podatke')
+		}
+		
+		var params = {
+				'datum_vazenja': datum_vazenja,
+				'preduzece': preduzece
+		}
+		$.post("http://localhost/salesystem/pricelists/addPricelist", params, function(data){
+			console.log('...')
+			alert('Dodat je novi cenovnik')
+			readPricelists();
+			datumInput.val("");
+			preduzeceSelect.val("");
+		});
+		console.log('slanje poruke');
+		event.preventDefault();
+		return false;
+	});
+}
+
