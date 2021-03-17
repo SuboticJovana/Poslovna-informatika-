@@ -1,6 +1,7 @@
 function getPricelists(){
 	readPricelists();
-	readEnterprices();
+	readEnterprises();
+	readEnterprises2();
 	
 	$(document).on("click",'tr',function(event){
 		highlightRow(this);
@@ -19,17 +20,45 @@ function getPricelists(){
 		$('#addModalScrollable').modal('hide');
 	});
 	
-	$(document).on("click",'#refresh',function(event){
-		readPricelists();
+	$(document).on("click", '#edit', function(event){
+		console.log(getIdOfSelectedEntityPricelist());
+		$('#updateModalScrollable').modal('show');
 	});
-		
+	
+	$(document).on("click", "#doUpdate", function(event) {
+		updatePricelist();
+		$('#updateModalScrollable').modal('hide');
+	});
+	
+	$(document).on("click", '.updateModalClose', function(event) {
+		$('#updateModalScrollable').modal('hide');
+	});
+	
+	$(document).on("click", '#delete', function(event){
+		var name = getNameOfSelectedEntityCenovnik();
+		if(name!=null){
+			$('#deletePromptText').text("Obrisati cenovnik sa datumom: " + name);
+			$('#deletePromptModal').modal('show');
+		}
+	});
+	
+	$(document).on("click", '.deletePromptClose', function(event){
+		$('#deletePromptModal').modal('hide');
+	});
+	
+	$(document).on("click", '#doDelete', function(event){
+		deletePricelist();
+		$('#deletePromptModal').modal('hide');
+	});
+}
+
 function readPricelists() {
 		var pageNo = 0; 
 		var pricelistPagination = $('#cenovnik-page');
 		var nmbSelect = $('#nmb-select');
 		var pageSize = nmbSelect.find(":selected").text();
 		$.ajax({
-			url : "http://localhost:8080/salesystem/pricelists/p?pageNo=" + pageNo + "&pageSize=" + pageSize
+			url : "http://localhost:8080/salesystem/pricelists/all" 
 		}).then(
 				function(data, status, request) {
 					console.log(data);
@@ -60,7 +89,7 @@ function readPricelists() {
 			goNext()
 		 });
 		
-		nmbSelecr.on('change',function (event){
+		nmbSelect.on('change',function (event){
 			event.preventDefault();
 			pageSize = $(this).val();
 			readPricelists();
@@ -72,9 +101,9 @@ function readPricelists() {
 		});
 }
 
-function readEnterprices(){
+function readEnterprises(){
 	$.ajax({
-		url : "http://localhost:8080/salesystem/enterprises/"
+		url : "http://localhost:8080/salesystem/enterprises/all"
 	}).then(
 		function(data) {
 			$("#preduzeceSelect").empty();
@@ -85,6 +114,27 @@ function readEnterprices(){
 			
 			$.each(data, function (i, item) {
 			    $('#preduzeceSelect').append($('<option>', { 
+			        value: item.enterprise_id,
+			        text : item.nameEnterprise
+			    }));
+			});	
+		}
+	);
+}
+
+function readEnterprises2() {
+	$.ajax({
+		url : "http://localhost:8080/salesystem/enterprises/all"
+	}).then(
+		function(data) {
+			$("#preduzeceIzmeniSelect").empty();
+			$('#preduzeceIzmeniSelect').append($('<option>', {
+			    value: 1,
+			    text: ''
+			}));
+			
+			$.each(data, function (i, item) {
+			    $('#preduzeceIzmeniSelect').append($('<option>', { 
 			        value: item.enterprise_id,
 			        text : item.nameEnterprise
 			    }));
@@ -122,6 +172,56 @@ function addPricelist(){
 		console.log('slanje poruke');
 		event.preventDefault();
 		return false;
+	});
+}
+
+function updatePricelist() {
+	var id = getIdOfSelectedEntityPricelist();
+	console.log(id);
+	
+	var datumIzmeniInput = $('#datumIzmeniInput');
+	var preduzeceIzmeniSelect = $('#preduzeceIzmeniSelect');
+	
+	$("#doUpdate").on("click", function(event) {
+		var datum_vazenja = datumIzmeniInput.val();
+		var preduzece = preduzeceIzmeniSelect.find(":selected").text();
+		
+		console.log('datum_vazenja: ' + datum_vazenja)
+		console.log('preduzece: ' + preduzece);
+		
+		var params = {
+				'id': id,
+				'datum_vazenja': datum_vazenja,
+				'preduzece': preduzece
+				
+		}
+		$.post("http://localhost:8080/salesystem/pricelists/updatePricelist", params, function(data) {
+			console.log('ispis...')
+			console.log(data);
+			
+			alert('Izmena cenovnika');
+			
+			readPricelists();
+			datumIzmeniInput.val("");
+			preduzeceIzmeniSelect.val("");
+		});
+		console.log('slanje poruke');
+		event.preventDefault();
+		return false;
+		
+		
+	});
+}
+
+function deletePricelist(){
+	var id = getIdOfSelectedEntityPricelist();
+	console.log(id);
+	$.ajax({
+    	url: "http://localhost:8080/salesystem/pricelists/deletePricelist/" + id,
+    	type: "DELETE",
+    	success: function(){
+    		readPricelists();
+        }
 	});
 }
 

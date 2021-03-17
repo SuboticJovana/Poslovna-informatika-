@@ -2,6 +2,7 @@ package com.example.demo.kontroler;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +27,7 @@ import com.example.demo.dto.PricelistDTO;
 import com.example.demo.model.Enterprise;
 import com.example.demo.model.Pricelist;
 import com.example.demo.servis.EnterpriseServiceInterface;
+import com.example.demo.servis.PriceListItemServiceInterface;
 import com.example.demo.servis.PricelistServiceInterface;
 import com.sun.el.parser.ParseException;
 
@@ -39,29 +41,32 @@ public class PricelistController {
 	@Autowired
 	private EnterpriseServiceInterface enterpriseService;
 	
-//	@GetMapping
-//	public ResponseEntity<List<PricelistDTO>> getPricelist() {
-//	List<Pricelist> pricelists = pricelistService.findAll();
-//	List<PricelistDTO> pricelistDTO = new ArrayList<PricelistDTO>();
-//	for (Pricelist p : pricelists) {
-//		pricelistDTO.add(new PricelistDTO(p));
-//	}
-//	return new ResponseEntity<List<PricelistDTO>>(pricelistDTO, HttpStatus.OK);
-//
-//	}
+	@Autowired
+	private PriceListItemServiceInterface pricelistItemService;
 	
 	@GetMapping(value="/all")
-	public List<Pricelist> getAll() {
-		return pricelistService.findAll();
+	public ResponseEntity<List<PricelistDTO>> getPricelist() {
+	List<Pricelist> pricelists = pricelistService.findAll();
+	List<PricelistDTO> pricelistDTO = new ArrayList<PricelistDTO>();
+	for (Pricelist p : pricelists) {
+		pricelistDTO.add(new PricelistDTO(p));
+	}
+	return new ResponseEntity<List<PricelistDTO>>(pricelistDTO, HttpStatus.OK);
+
 	}
 	
-	@GetMapping(value="/p")
-	public ResponseEntity<List<Pricelist>> getAllPricelists(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
-		Page<Pricelist> pricelists = pricelistService.findAll(pageNo, pageSize);
-		HttpHeaders headers = new HttpHeaders();
-		headers.set("total", String.valueOf(pricelists.getTotalPages()));
-		return ResponseEntity.ok().headers(headers).body(pricelists.getContent());
-	}
+//	@GetMapping(value="/all")
+//	public List<Pricelist> getAll() {
+//		return pricelistService.findAll();
+//	}
+	
+//	@GetMapping(value="/p")
+//	public ResponseEntity<List<Pricelist>> getAllPricelists(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize){
+//		Page<Pricelist> pricelists = pricelistService.findAll(pageNo, pageSize);
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.set("total", String.valueOf(pricelists.getTotalPages()));
+//		return ResponseEntity.ok().headers(headers).body(pricelists.getContent());
+//	}
 	
 	@GetMapping(value="/{pricelist_id}")
 	public ResponseEntity<PricelistDTO> getPricelist(@PathVariable("pricelist_id") Integer pricelist_id){

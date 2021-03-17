@@ -3,6 +3,8 @@ package com.example.demo.servis;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Enterprise;
@@ -40,6 +42,14 @@ public class EnterpriseService implements EnterpriseServiceInterface {
 		// TODO Auto-generated method stub
 		return enterpriseRepository.findByNameEnterprise(nameEnterprise);
 	}
+
+	@Override
+	public Page<Enterprise> findAll(int pageNo, int pageSize) {
+		// TODO Auto-generated method stub
+		return enterpriseRepository.findAll(PageRequest.of(pageNo, pageSize));
+	}
+	
+	
 
 }
 

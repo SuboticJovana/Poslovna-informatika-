@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.EnterpriseDTO;
@@ -26,11 +29,26 @@ import com.example.demo.servis.PartnerServiceInteface;
 @RestController
 @RequestMapping(value="salesystem/enterprises")
 public class EnterpriseController {
+	
 	@Autowired 
 	private EnterpriseServiceInterface ent;
+	
+//	@GetMapping(value="/all")
+//	public List<Enterprise> getAll(){
+//		return ent.findAll();
+//	}
+	
+//	@GetMapping(value="/p")
+//	public ResponseEntity<List<Enterprise>> getAllEnterprices(
+//			@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize){
+//		Page<Enterprise> enterprices = ent.findAll(pageNo, pageSize);
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.set("total",String.valueOf(enterprices.getTotalPages()));
+//		return ResponseEntity.ok().headers(headers).body(enterprices.getContent());
+//	}
 
 	
-	@GetMapping
+	@GetMapping(value="/all")
 	public ResponseEntity<List<EnterpriseDTO>> getEnterprise() {
 		List<Enterprise> enterprises = ent.findAll();
 		List<EnterpriseDTO> entDTO = new ArrayList<EnterpriseDTO>();
