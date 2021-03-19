@@ -1,6 +1,7 @@
 package com.example.demo.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import com.example.demo.model.InvoiceItem;
 
@@ -22,20 +23,40 @@ public class InvoiceItemDTO implements Serializable{
 
 	private ServicesDTO service;
 	
+	private Date date_invoice;
+	
+	private Date date_currency;
+	
+	private Integer partner_id;
+
 	private Integer service_id;
 	
 	public InvoiceItemDTO() {
 		super();
 	}
 
-	public InvoiceItemDTO(double quantity, double discount,double unit_price, double pdvBase,double pdvAmount,double total_amount,ServicesDTO service  ) {
+	public Integer getPartner_id() {
+		return partner_id;
+	}
+
+	public void setPartner_id(Integer partner_id) {
+		this.partner_id = partner_id;
+	}
+
+	public InvoiceItemDTO(double quantity, double discount,double unit_price, 
+			double pdvBase,double pdvAmount,double total_amount,Integer service_id, Date date_invoice, Date date_currency,Integer partner_id  ) {
 		this.quantity=quantity;
 		this.discount=discount;
 		this.unitPrice=unit_price;
 		this.pdvBase=pdvBase;
 		this.pdvAmount=pdvAmount;
 		this.totalAmount=total_amount;
-		this.service=service;
+		this.service_id=service_id;
+		this.date_invoice=date_invoice;
+		this.date_currency=date_currency;
+		this.partner_id=partner_id;
+
+
 	}
 	public InvoiceItemDTO(double quantity, double discount,double unit_price,double pdvBase,double pdvAmount,double total_amount,Integer service_id  ) {
 		this.quantity=quantity;
@@ -134,6 +155,22 @@ public class InvoiceItemDTO implements Serializable{
 
 	public void setService_id(Integer service_id) {
 		this.service_id = service_id;
+	}
+
+	public Date getDate_invoice() {
+		return date_invoice;
+	}
+
+	public void setDate_invoice(Date date_invoice) {
+		this.date_invoice = date_invoice;
+	}
+
+	public Date getDate_currency() {
+		return date_currency;
+	}
+
+	public void setDate_currency(Date date_currency) {
+		this.date_currency = date_currency;
 	}
 
 	

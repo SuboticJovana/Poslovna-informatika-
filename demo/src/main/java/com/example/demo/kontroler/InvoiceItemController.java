@@ -70,15 +70,20 @@ public class InvoiceItemController {
 	@PostMapping(consumes="application/json")
 	public ResponseEntity<Boolean> saveItem(@RequestBody List<InvoiceItemDTO> invoiceItems){
 		Invoice invoice = new Invoice();
-		invoice.setDate_currency(new java.util.Date());
-		invoice.setDate(new java.util.Date());
-		invoice.setNumber(500);
-		invoice.setStatus("status");
-		invoice.setTotal_amount(500.0);
-		invoice.setTotal_base(500.0);
-		invoice.setTotalPdv(50.0);
-		invoice.setEnterprise(enterpriseService.findOne(1));
-		invoice.setPartner(partnerService.findOne(1));
+		//check buisness year
+		//Računanje iznosa za plaćanje i PDV-a za svaku stavku fakture kao i za fakturu u celini,
+		//prilikom unosa stavki fakture (koristiti cenovnik i iznos PDV-a koji je važeći u odnosu na datum fakture)
+		InvoiceItemDTO firstItem = invoiceItems.get(0);
+		System.out.println("this is first item"+ firstItem.getDiscount());
+		invoice.setDate_currency(firstItem.getDate_currency());
+		invoice.setDate(firstItem.getDate_invoice());
+		invoice.setNumber(500); //?
+		invoice.setStatus("reserved"); //status ?
+		invoice.setTotal_amount(500.0); //calculate total amount?
+		invoice.setTotal_base(500.0);//calculate total base?
+		invoice.setTotalPdv(50.0);//calculate total pdv?
+		invoice.setEnterprise(enterpriseService.findOne(1)); //after login function add enterprise
+		invoice.setPartner(partnerService.findOne(firstItem.getPartner_id()));
 		invoiceService.save(invoice);
 	//
 		for(InvoiceItemDTO uDTO : invoiceItems) {

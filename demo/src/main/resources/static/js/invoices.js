@@ -16,9 +16,48 @@ var invoiceItems = [];
     .catch(function(error) {
         console.log(error);
     });
+    //get partner for invoice
+    var partnerSelect = document.getElementById('partner-dropdown');
+
+    fetch("http://localhost:8080/salesystem/partners")
+    .then((resp) => resp.json())
+    .then(function(data) {
+        var values = data;
+        for (const val of values) {
+            var option = document.createElement("option");
+            option.value = val.partner_id;
+            option.text = val.partner_name;
+            partnerSelect.appendChild(option);
+          }
+      })
+    .catch(function(error) {
+        console.log(error);
+    });
+    
     // add invoice 
     document.getElementById("saveInvoice").addEventListener('click',function (event)
     {
+        if(invoiceItems.length==0){
+            alert("Morate dodati bar jednu stavku!");
+            return;
+        }
+        if(document.getElementById('quantity').value==0){
+            //less equal
+            alert("Kolicina mora biti veca od 0!");
+            return;
+        }
+        if(document.getElementById('discount').value==0){
+            alert("Popust ne sme biti negativan!");
+            return;
+        }
+        if(document.getElementById('unitPrice').value==0){
+            alert("Cena ne sme biti negativna!");
+            return;
+        }
+        if(document.getElementById('datumFakture').value < document.getElementById('datumValute').value){
+            alert("Datum valute ne sme biti manji od datuma fakture!");
+            return;
+        }
     	//on save show all items(can be edited) and than add to db
         var invoice = {
             quantity: document.getElementById('quantity').value,
@@ -28,6 +67,9 @@ var invoiceItems = [];
             pdvAmount: document.getElementById('pdvAmount').value,
             totalAmount: document.getElementById('totalAmount').value, //total amount needs to be calculated
             service_id: document.getElementById('service-dropdown').value,
+            partner_id: document.getElementById('partner-dropdown').value,
+            date_invoice: document.getElementById('datumFakture').value,
+            date_currency: document.getElementById('datumValute').value
             }
         invoiceItems = [...invoiceItems,invoice]
         console.log(invoiceItems);
@@ -49,6 +91,11 @@ var invoiceItems = [];
     //visible form
     document.getElementById('showInvoiceItemForm').addEventListener('click', function (event) {
         document.getElementById('invoiceBlock').style.display="block";
+        var datumFakture = document.getElementById('datumFakture');
+        datumFakture.max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
+        var datumValute = document.getElementById('datumValute');
+        datumValute.max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
+
         event.preventDefault();
     });
 
@@ -60,10 +107,13 @@ document.getElementById("addInvoiceItem").addEventListener('click',function (eve
             quantity: document.getElementById('quantity').value,
             discount: document.getElementById('discount').value,
             unitPrice: document.getElementById('unitPrice').value,
-            PDVBase: document.getElementById('pdvBase').value,
-            PDVAmount: document.getElementById('pdvAmount').value,
+            pdvBase: document.getElementById('pdvBase').value,
+            pdvAmount: document.getElementById('pdvAmount').value,
             totalAmount: document.getElementById('totalAmount').value, //total amount needs to be calculated
             service_id: document.getElementById('service-dropdown').value,
+            partner_id: document.getElementById('partner-dropdown').value,
+            date_invoice: document.getElementById('datumFakture').value,
+            date_currency: document.getElementById('datumValute').value
             }
         invoiceItems = [...invoiceItems,invoice]
         console.log(invoiceItems);
