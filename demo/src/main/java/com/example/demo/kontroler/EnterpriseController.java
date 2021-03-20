@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.converters.EnterpriseConverter;
 import com.example.demo.dto.EnterpriseDTO;
 import com.example.demo.dto.PartnerDTO;
 import com.example.demo.model.Enterprise;
@@ -33,70 +34,58 @@ public class EnterpriseController {
 	@Autowired 
 	private EnterpriseServiceInterface ent;
 	
-//	@GetMapping(value="/all")
-//	public List<Enterprise> getAll(){
-//		return ent.findAll();
-//	}
-	
-//	@GetMapping(value="/p")
-//	public ResponseEntity<List<Enterprise>> getAllEnterprices(
-//			@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize")Integer pageSize){
-//		Page<Enterprise> enterprices = ent.findAll(pageNo, pageSize);
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.set("total",String.valueOf(enterprices.getTotalPages()));
-//		return ResponseEntity.ok().headers(headers).body(enterprices.getContent());
-//	}
-
-	
+	@Autowired
+	EnterpriseConverter enterpriseConverter;
+		
 	@GetMapping(value="/all")
 	public ResponseEntity<List<EnterpriseDTO>> getEnterprise() {
 		List<Enterprise> enterprises = ent.findAll();
 		List<EnterpriseDTO> entDTO = new ArrayList<EnterpriseDTO>();
 		for (Enterprise e : enterprises) {
-			entDTO.add(new EnterpriseDTO(e));
+			entDTO.add(enterpriseConverter.toDTO(e));
 		}
 		return new ResponseEntity<List<EnterpriseDTO>>(entDTO, HttpStatus.OK);
 	}
 	
-	@GetMapping(value="/{enterprise_id}")
-	public ResponseEntity<EnterpriseDTO> getEnterprise(@PathVariable("enterprise_id") Integer enterprise_id){
-		Enterprise enterprise = ent.findOne(enterprise_id);
-		if(enterprise == null) {
-			return new ResponseEntity<EnterpriseDTO>(HttpStatus.NOT_FOUND);
-		}
-		EnterpriseDTO entDTO = new EnterpriseDTO(enterprise);
-		return new ResponseEntity<EnterpriseDTO>(entDTO, HttpStatus.OK);
-	}
+//	@GetMapping(value="/{enterprise_id}")
+//	public ResponseEntity<EnterpriseDTO> getEnterprise(@PathVariable("enterprise_id") Integer enterprise_id){
+//		Enterprise enterprise = ent.findOne(enterprise_id);
+//		if(enterprise == null) {
+//			return new ResponseEntity<EnterpriseDTO>(HttpStatus.NOT_FOUND);
+//		}
+//		EnterpriseDTO entDTO = new EnterpriseDTO(enterprise);
+//		return new ResponseEntity<EnterpriseDTO>(entDTO, HttpStatus.OK);
+//	}
 	
-	@PostMapping(consumes = "application/json")
-	public ResponseEntity<EnterpriseDTO> saveEnterprise(@RequestBody EnterpriseDTO eDTO){
-		Enterprise enterprise = new Enterprise();
-		enterprise.setEnterprise_id(eDTO.getEnteprise_id());
-		enterprise.setAddress(eDTO.getAddress());
-		enterprise.setFax(eDTO.getFax());
-		enterprise.setNameEnterprise(eDTO.getNameEnterprise());
-		enterprise.setPhone(eDTO.getPhone());
-		
-		
-		ent.save(enterprise);
-		return new ResponseEntity<EnterpriseDTO>(eDTO, HttpStatus.CREATED);
-	}
+//	@PostMapping(consumes = "application/json")
+//	public ResponseEntity<EnterpriseDTO> saveEnterprise(@RequestBody EnterpriseDTO eDTO){
+//		Enterprise enterprise = new Enterprise();
+//		enterprise.setEnterprise_id(eDTO.getEnteprise_id());
+//		enterprise.setAddress(eDTO.getAddress());
+//		enterprise.setFax(eDTO.getFax());
+//		enterprise.setNameEnterprise(eDTO.getNameEnterprise());
+//		enterprise.setPhone(eDTO.getPhone());
+//		
+//		
+//		ent.save(enterprise);
+//		return new ResponseEntity<EnterpriseDTO>(eDTO, HttpStatus.CREATED);
+//	}
 	
-	@PutMapping(value="/{enterprise_id}", consumes="appliction/json")
-	public ResponseEntity<EnterpriseDTO> updateEnterprise(@RequestBody EnterpriseDTO eDTO, @PathVariable("enterprise_id") Integer enterprise_id ){
-		Enterprise enterprise = ent.findOne(enterprise_id);
-		if (enterprise == null) {
-			return new ResponseEntity<EnterpriseDTO>(HttpStatus.BAD_REQUEST);
-		}
-		enterprise.setEnterprise_id(eDTO.getEnteprise_id());
-		enterprise.setAddress(eDTO.getAddress());
-		enterprise.setFax(eDTO.getFax());
-		enterprise.setNameEnterprise(eDTO.getNameEnterprise());
-		enterprise.setPhone(eDTO.getPhone());
-		ent.save(enterprise);
-		EnterpriseDTO entDTO = new EnterpriseDTO(enterprise);
-		return new ResponseEntity<EnterpriseDTO>(entDTO, HttpStatus.OK);
-	}
+//	@PutMapping(value="/{enterprise_id}", consumes="appliction/json")
+//	public ResponseEntity<EnterpriseDTO> updateEnterprise(@RequestBody EnterpriseDTO eDTO, @PathVariable("enterprise_id") Integer enterprise_id ){
+//		Enterprise enterprise = ent.findOne(enterprise_id);
+//		if (enterprise == null) {
+//			return new ResponseEntity<EnterpriseDTO>(HttpStatus.BAD_REQUEST);
+//		}
+//		enterprise.setEnterprise_id(eDTO.getEnteprise_id());
+//		enterprise.setAddress(eDTO.getAddress());
+//		enterprise.setFax(eDTO.getFax());
+//		enterprise.setNameEnterprise(eDTO.getNameEnterprise());
+//		enterprise.setPhone(eDTO.getPhone());
+//		ent.save(enterprise);
+//		EnterpriseDTO entDTO = new EnterpriseDTO(enterprise);
+//		return new ResponseEntity<EnterpriseDTO>(entDTO, HttpStatus.OK);
+//	}
 	
 	@DeleteMapping(value="/{enterprise_id}")
 	public ResponseEntity<Void> deletePartner(@PathVariable("enterprise_id") Integer enterprise_id){

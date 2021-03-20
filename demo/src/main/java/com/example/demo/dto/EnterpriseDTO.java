@@ -12,6 +12,7 @@ public class EnterpriseDTO implements Serializable {
 	private String address;
 	private String phone;
 	private String fax;
+	
 	public EnterpriseDTO(int enteprise_id, String nameEnterprise, String address, String phone, String fax) {
 		super();
 		this.enteprise_id = enteprise_id;
@@ -21,8 +22,13 @@ public class EnterpriseDTO implements Serializable {
 		this.fax = fax;
 	}
 	public EnterpriseDTO(Enterprise enterprise) {
-		this(enterprise.getEnterprise_id(),enterprise.getAddress(),enterprise.getFax(),enterprise.getNameEnterprise(),enterprise.getPhone());
+		this(enterprise.getEnterprise_id(),enterprise.getNameEnterprise(), enterprise.getAddress(),enterprise.getPhone(),enterprise.getFax());
 	}
+	
+	public EnterpriseDTO() {
+		
+	}
+	
 	public int getEnteprise_id() {
 		return enteprise_id;
 	}

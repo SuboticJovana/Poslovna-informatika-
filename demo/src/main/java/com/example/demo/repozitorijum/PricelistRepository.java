@@ -19,7 +19,7 @@ public interface PricelistRepository extends JpaRepository<Pricelist, Integer> {
 	
 //	Pricelist findByTotalPrice(int total_price);
 	
-	List<Pricelist> findAll();
+//	List<Pricelist> findAll();
 	
 	Page<Pricelist> findAllByDateFrom (Date dateFrom, Pageable pegeadble);
 }
