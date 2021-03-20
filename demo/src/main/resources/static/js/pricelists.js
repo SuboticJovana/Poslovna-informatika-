@@ -132,13 +132,21 @@ function addPricelist(){
 				'datum_vazenja': datum_vazenja,
 				'preduzece': preduzece
 		}
-		$.post("http://localhost/salesystem/pricelists/addPricelist", params, function(data){
-			console.log('...')
-			alert('Dodat je novi cenovnik')
-			readPricelists();
-			datumInput.val("");
-			preduzeceSelect.val("");
-		});
+		
+		$.ajax({
+			url : "http://localhost:8080/salesystem/pricelists/add",
+			type:"POST",
+			data: JSON.stringify(params),
+			contentType:"application/json; charset=utf-8",
+			dataType:"json",
+			success:function(data){
+				console.log('...')
+				alert('Dodat je novi cenovnik')
+				readPricelists();
+				datumInput.val("");
+				preduzeceSelect.val("");
+			}
+		})
 		console.log('slanje poruke');
 		event.preventDefault();
 		return false;

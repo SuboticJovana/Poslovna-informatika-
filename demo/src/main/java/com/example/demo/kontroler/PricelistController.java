@@ -1,37 +1,23 @@
 package com.example.demo.kontroler;
 
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import com.example.demo.converters.PricelistConverter;
 import com.example.demo.dto.PricelistDTO;
-import com.example.demo.model.Enterprise;
 import com.example.demo.model.Pricelist;
-import com.example.demo.servis.EnterpriseServiceInterface;
-import com.example.demo.servis.PriceListItemServiceInterface;
+//import com.example.demo.servis.EnterpriseServiceInterface;
+//import com.example.demo.servis.PriceListItemServiceInterface;
 import com.example.demo.servis.PricelistServiceInterface;
-import com.sun.el.parser.ParseException;
+
 
 @RestController
 @RequestMapping("salesystem/pricelists")
@@ -43,11 +29,11 @@ public class PricelistController {
 	@Autowired
 	PricelistConverter pricelistConverter;
 	
-	@Autowired
-	private EnterpriseServiceInterface enterpriseService;
-	
-	@Autowired
-	private PriceListItemServiceInterface pricelistItemService;
+//	@Autowired
+//	private EnterpriseServiceInterface enterpriseService;
+//	
+//	@Autowired
+//	private PriceListItemServiceInterface pricelistItemService;
 
 
 	@GetMapping(value="/all")
@@ -72,28 +58,14 @@ public class PricelistController {
 //		return new ResponseEntity<PricelistDTO>(pricelistDTO, HttpStatus.OK);
 //	}
 
-// POST
-	
-//	@PostMapping(value="/addPricelist")
-//	public ResponseEntity<Void> addPricelist(@Validated @RequestParam("date_from") String dateFrom,
-//			@RequestParam("enterprise") String nameEnterprise) throws ParseException, java.text.ParseException {
-//		String datum = dateFrom;
-//		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
-//		java.util.Date date = formater.parse(datum);
-//		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-//		
-//		Enterprise enterprise = enterpriseService.findByName(nameEnterprise);
-//		
-//		if(dateFrom == null || nameEnterprise == null) {
-//			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
-//		}
-//		Pricelist priselist = new Pricelist();
-//		priselist.setDateFrom(sqlDate);
-//		priselist.setEnterprise(enterprise);
-//		pricelistService.save(priselist);
-//		
-//		return null;
-//	}
+
+
+	@PostMapping(value="/add", consumes = "application/json")
+	public ResponseEntity<PricelistDTO> save(@RequestBody PricelistDTO pDTO){
+		Pricelist p = pricelistService.save(pricelistConverter.toPricelist(pDTO));
+		PricelistDTO pricelistDTO = pricelistConverter.toDTO(p);
+		return new ResponseEntity<PricelistDTO>(pricelistDTO, HttpStatus.CREATED);
+	}
 
 //PUT
 	
