@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.example.demo.model.Partner;
 
+@SuppressWarnings("serial")
 public class PartnerDTO implements Serializable{
 	
 	private Integer partner_id;

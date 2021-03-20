@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.example.demo.model.PDVRate;
 
+@SuppressWarnings("serial")
 public class PDVRateDTO implements Serializable{
 
 	private Integer pdv_rate_id;

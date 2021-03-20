@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.example.demo.model.PriceListItem;
 
+@SuppressWarnings("serial")
 public class PriceListItemDTO implements Serializable{
 
 	private Integer price_list_item_id;

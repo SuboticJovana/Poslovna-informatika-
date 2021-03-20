@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.InvoiceItem;
 
-import com.example.demo.model.Services;
 import com.example.demo.repozitorijum.InvoiceItemRepository;
 
 @Service

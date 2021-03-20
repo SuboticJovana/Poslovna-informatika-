@@ -6,9 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.PDVCategory;
-import com.example.demo.model.PDVRate;
-import com.example.demo.model.ServiceGroup;
-import com.example.demo.model.UnitOfMeasure;
 import com.example.demo.repozitorijum.PDVCategoryRepository;
 
 @Service

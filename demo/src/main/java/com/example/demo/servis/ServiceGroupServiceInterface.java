@@ -5,7 +5,6 @@ import java.util.List;
 import com.example.demo.model.Enterprise;
 import com.example.demo.model.PDVCategory;
 import com.example.demo.model.ServiceGroup;
-import com.example.demo.model.Services;
 
 public interface ServiceGroupServiceInterface {
 

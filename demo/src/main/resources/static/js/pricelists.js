@@ -35,7 +35,7 @@ function getPricelists(){
 	});
 	
 	$(document).on("click", '#delete', function(event){
-		var name = getNameOfSelectedEntityCenovnik();
+		var name = getNameOfSelectedEntityPricelist();
 		if(name!=null){
 			$('#deletePromptText').text("Obrisati cenovnik sa datumom: " + name);
 			$('#deletePromptModal').modal('show');
@@ -154,8 +154,8 @@ function addPricelist(){
 }
 
 function updatePricelist() {
-	var id = getIdOfSelectedEntityPricelist();
-	console.log(id);
+	var pricelist_id = getIdOfSelectedEntityPricelist();
+	console.log(pricelist_id);
 	
 	var datumIzmeniInput = $('#datumIzmeniInput');
 	var preduzeceIzmeniSelect = $('#preduzeceIzmeniSelect');
@@ -168,21 +168,26 @@ function updatePricelist() {
 		console.log('preduzece: ' + preduzece);
 		
 		var params = {
-				'id': id,
+				'pricelist_id': pricelist_id,
 				'datum_vazenja': datum_vazenja,
 				'preduzece': preduzece
 				
 		}
-		$.post("http://localhost:8080/salesystem/pricelists/updatePricelist", params, function(data) {
-			console.log('ispis...')
-			console.log(data);
-			
-			alert('Izmena cenovnika');
-			
-			readPricelists();
-			datumIzmeniInput.val("");
-			preduzeceIzmeniSelect.val("");
+		
+		$.ajax({
+			url:"http://localhost:8080/salesystem/pricelists/" + pricelist_id,
+			type:"PUT",
+			data: JSON.stringify(params),
+			contentType:"application/json; charset=utf-8",
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				alert('Izmena cenovnika');
+				datumIzmeniInput.val("");
+				preduzeceIzmeniSelect.val("");
+			}
 		});
+
 		console.log('slanje poruke');
 		event.preventDefault();
 		return false;
@@ -192,10 +197,10 @@ function updatePricelist() {
 }
 
 function deletePricelist(){
-	var id = getIdOfSelectedEntityPricelist();
-	console.log(id);
+	var pricelist_id = getIdOfSelectedEntityPricelist();
+	console.log(pricelist_id);
 	$.ajax({
-    	url: "http://localhost:8080/salesystem/pricelists/deletePricelist/" + id,
+    	url: "http://localhost:8080/salesystem/pricelists/" + pricelist_id,
     	type: "DELETE",
     	success: function(){
     		readPricelists();

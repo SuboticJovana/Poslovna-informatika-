@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.Services;
 import com.example.demo.model.UnitOfMeasure;
 import com.example.demo.repozitorijum.UnitOfMeasureRepository;
 

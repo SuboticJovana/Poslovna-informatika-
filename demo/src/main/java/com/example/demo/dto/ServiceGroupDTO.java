@@ -2,9 +2,10 @@ package com.example.demo.dto;
 
 import java.io.Serializable;
 
-import com.example.demo.model.PDVCategory;
+
 import com.example.demo.model.ServiceGroup;
 
+@SuppressWarnings("serial")
 public class ServiceGroupDTO implements Serializable{
 
 	private Integer id;

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.example.demo.model.Enterprise;
 
+@SuppressWarnings("serial")
 public class EnterpriseDTO implements Serializable {
 
 	

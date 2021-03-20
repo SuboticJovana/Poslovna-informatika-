@@ -16,11 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.PDVCategoryDTO;
-import com.example.demo.dto.UnitOfMeasureDTO;
 import com.example.demo.model.PDVCategory;
-import com.example.demo.model.UnitOfMeasure;
 import com.example.demo.servis.PDVCategoryServiceInterface;
-import com.example.demo.servis.UnitOfMeasureServiceInterface;
+
 
 @RestController
 @RequestMapping(value="salesystem/pdvCategories")

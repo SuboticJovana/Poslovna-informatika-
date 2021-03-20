@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
 import java.util.Date;
 
 import javax.persistence.Column;

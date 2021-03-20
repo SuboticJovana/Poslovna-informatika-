@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.PDVCategoryDTO;
 import com.example.demo.dto.ServiceGroupDTO;
-import com.example.demo.model.PDVCategory;
 import com.example.demo.model.ServiceGroup;
-import com.example.demo.servis.PDVCategoryServiceInterface;
 import com.example.demo.servis.ServiceGroupServiceInterface;
 
 @RestController

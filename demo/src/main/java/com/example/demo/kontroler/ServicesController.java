@@ -14,12 +14,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.demo.dto.PriceListItemDTO;
 import com.example.demo.dto.ServicesDTO;
-import com.example.demo.model.PriceListItem;
 import com.example.demo.model.Services;
-import com.example.demo.servis.PriceListItemServiceInterface;
 import com.example.demo.servis.ServicesServiceInterface;
 
 @RestController

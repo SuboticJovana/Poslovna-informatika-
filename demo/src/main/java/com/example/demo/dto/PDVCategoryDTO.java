@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.example.demo.model.PDVCategory;
 
+@SuppressWarnings("serial")
 public class PDVCategoryDTO implements Serializable{
 
 	private Integer id;

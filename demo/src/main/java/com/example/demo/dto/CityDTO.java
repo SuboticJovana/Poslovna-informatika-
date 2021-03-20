@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.example.demo.model.City;
 
+@SuppressWarnings("serial")
 public class CityDTO implements Serializable{
 
 	private Integer city_id;

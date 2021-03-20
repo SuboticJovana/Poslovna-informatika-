@@ -3,7 +3,6 @@ package com.example.demo.servis;
 import java.util.List;
 
 import com.example.demo.model.Invoice;
-import com.example.demo.model.Partner;
 
 public interface InvoiceServiceInterface {
 	

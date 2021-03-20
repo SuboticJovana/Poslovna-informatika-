@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.Enterprise;
 import com.example.demo.model.PDVCategory;
 import com.example.demo.model.ServiceGroup;
-import com.example.demo.model.Services;
 import com.example.demo.repozitorijum.ServiceGroupRepository;
 
 @Service

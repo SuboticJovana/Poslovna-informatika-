@@ -2,7 +2,7 @@ package com.example.demo.servis;
 
 import java.util.List;
 
-import com.example.demo.model.Services;
+
 import com.example.demo.model.UnitOfMeasure;
 
 public interface UnitOfMeasureServiceInterface {

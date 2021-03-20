@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.example.demo.model.InvoiceItem;
 
+@SuppressWarnings("serial")
 public class InvoiceItemDTO implements Serializable{
 
 	private Integer id;

@@ -1,4 +1,4 @@
-function highloghtRow(row){
+function highlightRow(row){
 	if(!$(row).hasClass("header")){
 		$(".highlighted").removeClass("highlighted");
 		$(row).addClass("highlighted");
@@ -14,5 +14,17 @@ function getIdOfSelectedEntityPricelist(){
     }
     else{
     	return id;
+    }  
+}
+
+function getNameOfSelectedEntityPricelist(){
+	var row = $(".highlighted");
+    var name = row.find(".date_from").html();
+    if(name==undefined){
+    	console.log("No entity selected!");
+    	return null;
+    }
+    else{
+    	return name;
     }  
 }
