@@ -14,7 +14,7 @@ public class PriceListItemService implements PriceListItemServiceInterface{
 	PriceListItemRepository priceListItemRepository;
 
 	@Override
-	public PriceListItem findOne(Integer price_list_item_id) {
+	public PriceListItem findOne(Long price_list_item_id) {
 		return priceListItemRepository.getOne(price_list_item_id);
 	}
 
@@ -24,13 +24,18 @@ public class PriceListItemService implements PriceListItemServiceInterface{
 	}
 
 	@Override
-	public void remove(Integer price_list_item_id) {
+	public void remove(Long price_list_item_id) {
 		priceListItemRepository.deleteById(price_list_item_id);
 	}
 
 	@Override
 	public List<PriceListItem> findAll() {
 		return priceListItemRepository.findAll();
+	}
+
+	@Override
+	public PriceListItem findByCena(Double price) {
+		return priceListItemRepository.findByPrice(price);
 	}
 	
 	

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.converters.PricelistItemConverter;
 import com.example.demo.dto.PriceListItemDTO;
 import com.example.demo.model.PriceListItem;
 import com.example.demo.servis.PriceListItemServiceInterface;
@@ -25,50 +27,49 @@ public class PriceListItemController {
 	@Autowired
 	private PriceListItemServiceInterface priceListItemServiceInterface;
 	
+	@Autowired
+	PricelistItemConverter pricelistItemConverter;
+	
 	@GetMapping
 	public ResponseEntity<List<PriceListItemDTO>> getItems(){
 		List<PriceListItem> items = priceListItemServiceInterface.findAll();
 		List<PriceListItemDTO> itemsDTO = new ArrayList<PriceListItemDTO>();
 		for (PriceListItem pi : items) {
-			itemsDTO.add(new PriceListItemDTO(pi));
+			itemsDTO.add(pricelistItemConverter.toDTO(pi));
 		}
 		return new ResponseEntity<List<PriceListItemDTO>>(itemsDTO, HttpStatus.OK);
 	}
 
 	@GetMapping(value="/{price_list_item_id}")
-	public ResponseEntity<PriceListItemDTO> getItem(@PathVariable("price_list_item_id") Integer price_list_item_id){
+	public ResponseEntity<PriceListItemDTO> getItem(@PathVariable("price_list_item_id") Long price_list_item_id){
 		PriceListItem item = priceListItemServiceInterface.findOne(price_list_item_id);
 		if(item == null) {
 			return new ResponseEntity<PriceListItemDTO>(HttpStatus.NOT_FOUND);
 		}
-		PriceListItemDTO itemDTO = new PriceListItemDTO(item);
+		PriceListItemDTO itemDTO = pricelistItemConverter.toDTO(item);
 		return new ResponseEntity<PriceListItemDTO>(itemDTO, HttpStatus.OK);
 	}
 	
 	@PostMapping(consumes="application/json")
 	public ResponseEntity<PriceListItemDTO> saveItem(@RequestBody PriceListItemDTO piDTO){
-		PriceListItem item = new PriceListItem();
-		item.setPrice_list_item_id(piDTO.getPrice_list_item_id());
-		item.setPrice(piDTO.getPrice());
-		priceListItemServiceInterface.save(item);
-		return new ResponseEntity<PriceListItemDTO>(piDTO, HttpStatus.CREATED);
+		PriceListItem p = priceListItemServiceInterface.save(pricelistItemConverter.toPriceListItem(piDTO));
+		PriceListItemDTO pDTO = pricelistItemConverter.toDTO(p);
+		return new ResponseEntity<PriceListItemDTO>(pDTO, HttpStatus.CREATED);
 	}
 	
 	@PutMapping(value="/{price_list_item_id}", consumes="application/json")
-	public ResponseEntity<PriceListItemDTO> updateItem(@RequestBody PriceListItemDTO piDTO, @PathVariable("price_list_item_id") Integer price_list_item_id){
+	public ResponseEntity<PriceListItemDTO> updateItem(@RequestBody PriceListItemDTO piDTO, @PathVariable("price_list_item_id") Long price_list_item_id){
 		PriceListItem item = priceListItemServiceInterface.findOne(price_list_item_id);
 		if (item == null) {
 			return new ResponseEntity<PriceListItemDTO>(HttpStatus.BAD_REQUEST);
 		}				
-		item.setPrice_list_item_id(piDTO.getPrice_list_item_id());
-		item.setPrice(piDTO.getPrice());
-		priceListItemServiceInterface.save(item);
-		PriceListItemDTO itemDTO = new PriceListItemDTO(item);
+		PriceListItem p = priceListItemServiceInterface.save(pricelistItemConverter.toPriceListItem(piDTO));
+		PriceListItemDTO itemDTO = pricelistItemConverter.toDTO(p);
 		return new ResponseEntity<PriceListItemDTO>(itemDTO, HttpStatus.OK);	
 	}
 	
 	@DeleteMapping(value="/{price_list_item_id}")
-	public ResponseEntity<Void> deleteItem(@PathVariable("price_list_item_id") Integer price_list_item_id){
+	public ResponseEntity<Void> deleteItem(@PathVariable("price_list_item_id") Long price_list_item_id){
 		PriceListItem item = priceListItemServiceInterface.findOne(price_list_item_id);
 		if (item != null){
 			priceListItemServiceInterface.remove(price_list_item_id);

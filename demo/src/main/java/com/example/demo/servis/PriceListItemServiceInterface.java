@@ -6,12 +6,14 @@ import com.example.demo.model.PriceListItem;
 
 public interface PriceListItemServiceInterface {
 	
-	PriceListItem findOne(Integer price_list_item_id);
+	PriceListItem findOne(Long price_list_item_id);
 	
 	PriceListItem save(PriceListItem priceListItem);
 	
-	void remove(Integer price_list_item_id);
+	void remove(Long price_list_item_id);
 	
 	List<PriceListItem> findAll();
+	
+	PriceListItem findByCena(Double price);
 
 }

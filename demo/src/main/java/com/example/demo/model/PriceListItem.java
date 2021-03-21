@@ -21,7 +21,7 @@ public class PriceListItem implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="price_list_item_id", unique=true, nullable=false)
-	private Integer price_list_item_id;
+	private Long price_list_item_id;
 	
 	@Column(name="price", unique=false, nullable=false)
 	private Double price;
@@ -38,11 +38,11 @@ public class PriceListItem implements Serializable {
 		
 	}
 
-	public Integer getPrice_list_item_id() {
+	public Long getPrice_list_item_id() {
 		return price_list_item_id;
 	}
 
-	public void setPrice_list_item_id(Integer price_list_item_id) {
+	public void setPrice_list_item_id(Long price_list_item_id) {
 		this.price_list_item_id = price_list_item_id;
 	}
 
@@ -64,6 +64,14 @@ public class PriceListItem implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Services getServices() {
+		return services;
+	}
+
+	public void setServices(Services services) {
+		this.services = services;
 	}
 	
 	

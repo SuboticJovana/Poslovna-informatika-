@@ -119,7 +119,7 @@ function addPricelist(){
 	
 	$('#doAdd').on('click', function(event){
 		var datum_vazenja = datumInput.val();
-		var preduzece = preduzeceSelect.find(":selected").text();
+		var preduzece = preduzeceSelect.find(":selected").value;
 		
 		console.log('datum_vazenja: ' + datum_vazenja)
 		console.log('preduzece: ' + preduzece);
@@ -162,7 +162,7 @@ function updatePricelist() {
 	
 	$("#doUpdate").on("click", function(event) {
 		var datum_vazenja = datumIzmeniInput.val();
-		var preduzece = preduzeceIzmeniSelect.find(":selected").text();
+		var preduzece = preduzeceIzmeniSelect.find(":selected").value;
 		
 		console.log('datum_vazenja: ' + datum_vazenja)
 		console.log('preduzece: ' + preduzece);
