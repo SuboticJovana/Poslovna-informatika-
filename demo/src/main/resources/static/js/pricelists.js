@@ -134,11 +134,11 @@ function addPricelist(){
 		}
 		
 		$.ajax({
-			url : "http://localhost:8080/salesystem/pricelists/add",
-			type:"POST",
+			url : 'http://localhost:8080/salesystem/pricelists/add',
+			type:'POST',
 			data: JSON.stringify(params),
-			contentType:"application/json; charset=utf-8",
-			dataType:"json",
+			contentType:'application/json; charset=utf-8',
+			dataType:'json',
 			success:function(data){
 				console.log('...')
 				alert('Dodat je novi cenovnik')

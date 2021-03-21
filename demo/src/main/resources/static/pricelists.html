@@ -31,6 +31,7 @@
 				<button id="edit" type="button" class="btn btn-outline-secondary">Izmeni</button>
 				<button id="delete" type="button" class="btn btn-outline-secondary">Obriši</button>
 				<button id="kopirajCenovnik" type="button" class="btn btn-outline-secondary">Kopiraj cenovnik</button>
+				<button id="readPricelistItem" type="button" class="btn btn-outline-secondary"><a href="pricelistItem.html">Prikaži stavke</a></button>
 			</div>
 			<!-- Toolbar END-->
 			
@@ -138,6 +139,28 @@
 			  </div>
 			</div>
 			<!-- DELETE END -->
+			
+			<!-- COPY END -->
+			<div class="modal fade" id="copyPromptModal" tabindex="-1" role="dialog" aria-labelledby="copyPromptLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="copyPromptLabel">Jeste li sigurni?</h5>
+			        <button type="button" class="close copyPromptClose" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <p id="copyPromptText"></p>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary copyPromptClose">Otkaži</button>
+			        <button type="button" id="doCopy" class="btn btn-primary">Kopiraj</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- COPY END -->
 			
 		</div>
 	</body>

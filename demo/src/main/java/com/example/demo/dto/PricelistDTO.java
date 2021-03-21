@@ -9,7 +9,7 @@ public class PricelistDTO implements Serializable {
 		
 		private static final long serialVersionUID = 4174362857862253015L;
 		
-		private int pricelist_id;
+		private Long pricelist_id;
 		private Date date_from;
 //		private int enterprise_id;
 		private EnterpriseDTO enterpriseDTO;
@@ -31,11 +31,11 @@ public class PricelistDTO implements Serializable {
 			this.enterpriseDTO = enterpriseDTO;
 		}
 
-		public int getPricelist_id() {
+		public Long getPricelist_id() {
 			return pricelist_id;
 		}
 
-		public void setPricelist_id(int pricelist_id) {
+		public void setPricelist_id(Long pricelist_id) {
 			this.pricelist_id = pricelist_id;
 		}
 

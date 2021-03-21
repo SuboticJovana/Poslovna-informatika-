@@ -23,7 +23,10 @@ public class EnterpriseConverter {
 	}	
 		public Enterprise toEnterprise(EnterpriseDTO enterpriseDTO) {
 			Enterprise e = new Enterprise();
-			e.setEnterprise_id(enterpriseDTO.getEnteprise_id());
+			if(enterpriseDTO.getEnteprise_id()!= null) {
+				e.setEnterprise_id(enterpriseDTO.getEnteprise_id());
+			}
+			//e.setEnterprise_id(enterpriseDTO.getEnteprise_id());
 			e.setNameEnterprise(enterpriseDTO.getNameEnterprise());
 			e.setAddress(enterpriseDTO.getNameEnterprise());
 			e.setPhone(enterpriseDTO.getPhone());

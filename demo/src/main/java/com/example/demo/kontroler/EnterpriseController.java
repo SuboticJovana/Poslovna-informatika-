@@ -40,7 +40,7 @@ public class EnterpriseController {
 	}
 	
 	@GetMapping(value="/{enterprise_id}")
-	public ResponseEntity<EnterpriseDTO> getEnterprise(@PathVariable("enterprise_id") Integer enterprise_id){
+	public ResponseEntity<EnterpriseDTO> getEnterprise(@PathVariable("enterprise_id") Long enterprise_id){
 		Enterprise enterprise = ent.findOne(enterprise_id);
 		if(enterprise == null) {
 			return new ResponseEntity<EnterpriseDTO>(HttpStatus.NOT_FOUND);
@@ -57,7 +57,7 @@ public class EnterpriseController {
 	}
 	
 	@PutMapping(value="/{enterprise_id}", consumes="appliction/json")
-	public ResponseEntity<EnterpriseDTO> updateEnterprise(@RequestBody EnterpriseDTO eDTO, @PathVariable("enterprise_id") Integer enterprise_id ){
+	public ResponseEntity<EnterpriseDTO> updateEnterprise(@RequestBody EnterpriseDTO eDTO, @PathVariable("enterprise_id") Long enterprise_id ){
 		Enterprise enterprise = ent.findOne(enterprise_id);
 		if (enterprise == null) {
 			return new ResponseEntity<EnterpriseDTO>(HttpStatus.BAD_REQUEST);
@@ -68,7 +68,7 @@ public class EnterpriseController {
 	}
 	
 	@DeleteMapping(value="/{enterprise_id}")
-	public ResponseEntity<Void> deletePartner(@PathVariable("enterprise_id") Integer enterprise_id){
+	public ResponseEntity<Void> deletePartner(@PathVariable("enterprise_id") Long enterprise_id){
 		Enterprise enterprise = ent.findOne(enterprise_id);
 		if (enterprise != null) {
 			ent.remove(enterprise_id);

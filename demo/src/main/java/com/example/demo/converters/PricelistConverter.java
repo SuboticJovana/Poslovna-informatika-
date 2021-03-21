@@ -28,9 +28,15 @@ public class PricelistConverter {
 	
 	public Pricelist toPricelist(PricelistDTO pricelistDTO) {
 		Pricelist p = new Pricelist();
-		p.setPricelist_id(pricelistDTO.getPricelist_id());
+		if(pricelistDTO.getPricelist_id() != null) {
+			p.setPricelist_id(pricelistDTO.getPricelist_id());
+		}
+//		p.setPricelist_id(pricelistDTO.getPricelist_id());
 		p.setDateFrom(pricelistDTO.getDate_from());
-		p.setEnterprise(enterpriseServiceInterface.findOne(pricelistDTO.getEnterpriseDTO().getEnteprise_id()));
+		
+		if(pricelistDTO.getEnterpriseDTO().getEnteprise_id()!=null) {
+			p.setEnterprise(enterpriseServiceInterface.findOne(pricelistDTO.getEnterpriseDTO().getEnteprise_id()));
+		}
 		return p;
 	}
 }

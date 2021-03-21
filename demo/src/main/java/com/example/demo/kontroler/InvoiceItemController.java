@@ -82,7 +82,7 @@ public class InvoiceItemController {
 		invoice.setTotal_amount(500.0); //calculate total amount?
 		invoice.setTotal_base(500.0);//calculate total base?
 		invoice.setTotalPdv(50.0);//calculate total pdv?
-		invoice.setEnterprise(enterpriseService.findOne(1)); //after login function add enterprise
+		invoice.setEnterprise(enterpriseService.findOne((long) 1)); //after login function add enterprise
 		invoice.setPartner(partnerService.findOne(firstItem.getPartner_id()));
 		invoiceService.save(invoice);
 	//

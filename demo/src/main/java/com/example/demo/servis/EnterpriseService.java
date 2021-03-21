@@ -15,7 +15,7 @@ public class EnterpriseService implements EnterpriseServiceInterface {
 	EnterpriseRepository enterpriseRepository;
 
 	@Override
-	public Enterprise findOne(Integer enterprise_id) {
+	public Enterprise findOne(Long enterprise_id) {
 		return enterpriseRepository.getOne(enterprise_id);
 	}
 
@@ -32,7 +32,7 @@ public class EnterpriseService implements EnterpriseServiceInterface {
 	}
 
 	@Override
-	public void remove(Integer enterprise_id) {
+	public void remove(Long enterprise_id) {
 		enterpriseRepository.deleteById(enterprise_id);
 		
 	}

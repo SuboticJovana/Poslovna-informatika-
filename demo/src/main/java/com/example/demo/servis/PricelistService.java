@@ -18,7 +18,7 @@ public class PricelistService implements PricelistServiceInterface {
 	PricelistRepository pricelistRepository;
 	
 	@Override
-	public Pricelist findOne(Integer pricelist_id) {
+	public Pricelist findOne(Long pricelist_id) {
 		return pricelistRepository.getOne(pricelist_id);
 	}
 
@@ -33,7 +33,7 @@ public class PricelistService implements PricelistServiceInterface {
 	}
 
 	@Override
-	public void remove(Integer pricelist_id) {
+	public void remove(Long pricelist_id) {
 		pricelistRepository.deleteById(pricelist_id);		
 	}
 

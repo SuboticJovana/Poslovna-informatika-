@@ -31,7 +31,7 @@ public class Pricelist implements Serializable {
 	@Id
 	@GeneratedValue(strategy=IDENTITY)
 	@Column(name="pricelist_id", unique=true, nullable=false)
-	private Integer pricelist_id;
+	private Long pricelist_id;
 	
 	@Column(name="date_from", unique=false, nullable=false)
 	private Date dateFrom;
@@ -55,7 +55,7 @@ public class Pricelist implements Serializable {
 	public Pricelist() {
 		
 	}
-	public Pricelist(Integer pricelist_id, Date date_from
+	public Pricelist(Long pricelist_id, Date date_from
 //			Date date_to,
 //			Integer percentage, Integer total_price
 			)
@@ -68,7 +68,7 @@ public class Pricelist implements Serializable {
 //		this.totalPrice = total_price;
 	}
 
-	public Pricelist(Integer pricelist_id, Date dateFrom, Enterprise enterprise ) {
+	public Pricelist(Long pricelist_id, Date dateFrom, Enterprise enterprise ) {
 		super();
 		this.pricelist_id = pricelist_id;
 		this.dateFrom = dateFrom;
@@ -76,11 +76,11 @@ public class Pricelist implements Serializable {
 	}
 	
 	
-	public Integer getPricelist_id() {
+	public Long getPricelist_id() {
 		return pricelist_id;
 	}
 
-	public Pricelist(Integer pricelist_id, Date dateFrom, Set<PriceListItem> items, Enterprise enterprise) {
+	public Pricelist(Long pricelist_id, Date dateFrom, Set<PriceListItem> items, Enterprise enterprise) {
 		super();
 		this.pricelist_id = pricelist_id;
 		this.dateFrom = dateFrom;
@@ -90,7 +90,7 @@ public class Pricelist implements Serializable {
 
 
 
-	public void setPricelist_id(Integer pricelist_id) {
+	public void setPricelist_id(Long pricelist_id) {
 		this.pricelist_id = pricelist_id;
 	}
 

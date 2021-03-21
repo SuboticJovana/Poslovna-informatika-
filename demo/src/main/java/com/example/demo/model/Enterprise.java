@@ -27,7 +27,7 @@ public class Enterprise implements Serializable {
 	@Id
 	@GeneratedValue(strategy=IDENTITY)
 	@Column(name="enterprise_id", unique=true, nullable=false)
-	private Integer enterprise_id;
+	private Long enterprise_id;
 	
 	@Column(name="name_enterprise",unique=false,nullable=false)
 	private String nameEnterprise;
@@ -58,7 +58,7 @@ public class Enterprise implements Serializable {
 	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="enterprise")
 	private Set<Pricelist> pricelists = new HashSet<Pricelist>();
 
-	public Enterprise(Integer enterprise_id, String nameEnterprise, String address, String phone, String fax, City city) {
+	public Enterprise(Long enterprise_id, String nameEnterprise, String address, String phone, String fax, City city) {
 		super();
 		this.enterprise_id = enterprise_id;
 		this.nameEnterprise = nameEnterprise;
@@ -72,11 +72,11 @@ public class Enterprise implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Integer getEnterprise_id() {
+	public Long getEnterprise_id() {
 		return enterprise_id;
 	}
 
-	public void setEnterprise_id(Integer enterprise_id) {
+	public void setEnterprise_id(Long enterprise_id) {
 		this.enterprise_id = enterprise_id;
 	}
 

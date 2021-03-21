@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.model.Pricelist;
 
-public interface PricelistRepository extends JpaRepository<Pricelist, Integer> {
+public interface PricelistRepository extends JpaRepository<Pricelist, Long> {
 
 	Pricelist findByDateFrom(Date date_from);
 	

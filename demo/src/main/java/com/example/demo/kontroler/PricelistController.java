@@ -43,7 +43,7 @@ public class PricelistController {
 	}
 	
 	@GetMapping(value="/{pricelist_id}")
-	public ResponseEntity<PricelistDTO> getPricelist(@PathVariable("pricelist_id") Integer pricelist_id){
+	public ResponseEntity<PricelistDTO> getPricelist(@PathVariable("pricelist_id") Long pricelist_id){
 		Pricelist pricelist = pricelistService.findOne(pricelist_id);
 		if(pricelist == null){
 			return new ResponseEntity<PricelistDTO>(HttpStatus.NOT_FOUND);
@@ -60,7 +60,7 @@ public class PricelistController {
 	}
 
 	@PutMapping(value="/{id}", consumes="application/json")
-	public ResponseEntity<PricelistDTO> updatePricelist(@RequestBody PricelistDTO pDTO, @PathVariable("id") Integer id){
+	public ResponseEntity<PricelistDTO> updatePricelist(@RequestBody PricelistDTO pDTO, @PathVariable("id") Long id){
 		Pricelist pricelist = pricelistService.findOne(id);
 		if (pricelist == null) {
 			return new ResponseEntity<PricelistDTO>(HttpStatus.NOT_FOUND);
@@ -71,7 +71,7 @@ public class PricelistController {
 	}
 	
 	@DeleteMapping(value="/{id}")
-	public ResponseEntity<Void> deletePricelist(@PathVariable("id") Integer id){
+	public ResponseEntity<Void> deletePricelist(@PathVariable("id") Long id){
 		Pricelist pricelist = pricelistService.findOne(id);
 		if (pricelist != null){
 			pricelistService.remove(id);

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.model.Enterprise;
 
-public interface EnterpriseRepository extends JpaRepository<Enterprise, Integer> {
+public interface EnterpriseRepository extends JpaRepository<Enterprise, Long> {
 	Enterprise findByNameEnterprise(String nameEnterprise);
 	Enterprise findByAddress(String address);
 	Enterprise findByPhone(String phone);
