@@ -21,7 +21,7 @@ function getPricelists(){
 	});
 	
 	$(document).on("click", '#edit', function(event){
-		console.log(getIdOfSelectedEntityPricelist());
+//		console.log(getIdOfSelectedEntityPricelist());
 		$('#updateModalScrollable').modal('show');
 	});
 	
@@ -77,15 +77,24 @@ function readEnterprises(){
 	}).then(
 		function(data) {
 			$("#preduzeceSelect").empty();
-			$('#preduzeceSelect').append($('<option>', {
-			    value: 1,
-			    text: ''
-			}));
+//			$('#preduzeceSelect').append($('<option>', {
+//			    value: 1,
+//			    text: ''
+//			}));
+			
+//			$.get('SviFilmoviServlet', function(data) {
+//				var sviFilmovi = data.sviFilmovi;
+//				for (item in data) {
+//					$('#preduzeceSelect').append(
+//						'<option value="'+item.enterprise_id+ '">' + item.nameEnterprise+ '</option>'
+//					)}
 			
 			$.each(data, function (i, item) {
+//		        console.log('enterprise_id' + item);
 			    $('#preduzeceSelect').append($('<option>', { 
 			        value: item.enterprise_id,
 			        text : item.nameEnterprise
+
 			    }));
 			});	
 		}
@@ -98,10 +107,10 @@ function readEnterprises2() {
 	}).then(
 		function(data) {
 			$("#preduzeceIzmeniSelect").empty();
-			$('#preduzeceIzmeniSelect').append($('<option>', {
-			    value: 1,
-			    text: ''
-			}));
+//			$('#preduzeceIzmeniSelect').append($('<option>', {
+//			    value: 1,
+//			    text: ''
+//			}));
 			
 			$.each(data, function (i, item) {
 			    $('#preduzeceIzmeniSelect').append($('<option>', { 
@@ -118,20 +127,25 @@ function addPricelist(){
 	var preduzeceSelect = $('#preduzeceSelect');
 	
 	$('#doAdd').on('click', function(event){
-		var datum_vazenja = datumInput.val();
-		var preduzece = preduzeceSelect.find(":selected").value;
+		var date_from = datumInput.val();
+		var enterpriseDTO = preduzeceSelect.val();
+//		var preduzece = preduzeceSelect.find(":selected").value;
 		
-		console.log('datum_vazenja: ' + datum_vazenja)
-		console.log('preduzece: ' + preduzece);
+		console.log('date_from: ' + date_from)
+		console.log('enterpriseDTO: ' + enterpriseDTO);
 		
-		if(datum_vazenja == null || preduzece == null){
+		if(date_from == null || enterpriseDTO == null){
 			alert('Niste uneli potrebne podatke')
 		}
 		
 		var params = {
-				'datum_vazenja': datum_vazenja,
-				'preduzece': preduzece
+				'date_from': date_from,
+				'enterpriseDTO': {
+					'enterprise_id' : enterpriseDTO
+				}
 		}
+		
+
 		
 		$.ajax({
 			url : 'http://localhost:8080/salesystem/pricelists/add',
@@ -153,24 +167,104 @@ function addPricelist(){
 	});
 }
 
+//var table = $('#myTable').DataTable();
+//
+//$('#myTable').on( 'click', 'tr', function () {
+//    var id = table.row( this ).id();
+// 
+//    alert( 'Clicked row id '+id );
+//} );
+
+
+//$('#tabelaProjekcija').on('click', '#izbrisiProjekciju', function(){
+//	$(this).closest ('tr').remove ();
+
+//$(".table > tbody > tr").each(function()
+//        console.log($(this).attr("id"));
+//);
+
+//$(function() {
+//    $('#userTable').on('click', 'tbody tr', function(event) {
+//      $(this).addClass('highlight').siblings().removeClass('highlight');
+//    });
+
+//var getHighlightRow = function() {
+//    return $('table > tbody > tr.highlight');
+//  }
+
+//var rows = getHighlightRow();
+//if (rows != undefined) {
+//  alert(rows.attr('id'));
+//}
+
+
+//$(function() {
+//    $('#userTable').on('click', 'tbody tr', function(event) {
+//      $(this).addClass('highlight').siblings().removeClass('highlight');
+//    });
+//
+//    $('#btnRowClick').click(function(e) {
+//      var rows = getHighlightRow();
+//      if (rows != undefined) {
+//        alert(rows.attr('id'));
+//      }
+//    });
+//
+//    var getHighlightRow = function() {
+//      return $('table > tbody > tr.highlight');
+//    }
+//
+//  });
+
 function updatePricelist() {
-	var pricelist_id = getIdOfSelectedEntityPricelist();
-	console.log(pricelist_id);
+		
+	$(function(){
+		$('#dataTableBody').on('click','tbody tr', function(event){
+			$(this).addClass('highlight').siblings().removeClass('highlight');
+		});
+		
+		$('#doUpdate').click(function(e){
+			var rows = getHighlightRow();
+
+		});
+		var getHighlightRow = function(){
+			return $('table > tbody > tr.highlight');
+		}
+	});
 	
+//	var table = $('#dataTableBody').DataTable();
+	
+//	$(".table > tbody > tr").each(function()
+////			console.log('kliknuto');
+//	        console.log($(this).attr("enterprise_id"));
+//	);
+	
+//	$('#dataTableBody').on('click', 'tr', function(){
+//		var id = table.row(this).enterprise_id;
+//		console.log("kliknuto" );
+//	})
+	
+//	var pricelist_id = getIdOfSelectedEntityPricelist();
+//	console.log("izabrani id:" + pricelist_id);
+//	
 	var datumIzmeniInput = $('#datumIzmeniInput');
 	var preduzeceIzmeniSelect = $('#preduzeceIzmeniSelect');
 	
+//	setovanje
+	
 	$("#doUpdate").on("click", function(event) {
 		var datum_vazenja = datumIzmeniInput.val();
-		var preduzece = preduzeceIzmeniSelect.find(":selected").value;
+		var preduzece = preduzeceIzmeniSelect.val();
 		
 		console.log('datum_vazenja: ' + datum_vazenja)
 		console.log('preduzece: ' + preduzece);
 		
 		var params = {
 				'pricelist_id': pricelist_id,
-				'datum_vazenja': datum_vazenja,
-				'preduzece': preduzece
+				'date_from': datum_vazenja,
+				'enterpriseDTO': {
+					'enterprise_id' : preduzece
+				}
 				
 		}
 		

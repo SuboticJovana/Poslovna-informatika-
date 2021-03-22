@@ -8,15 +8,15 @@ import com.example.demo.model.Enterprise;
 public class EnterpriseDTO implements Serializable {
 
 	
-	private Long enteprise_id;
+	private Long enterprise_id;
 	private String nameEnterprise;
 	private String address;
 	private String phone;
 	private String fax;
 	
-	public EnterpriseDTO(Long enteprise_id, String nameEnterprise, String address, String phone, String fax) {
+	public EnterpriseDTO(Long enterprise_id, String nameEnterprise, String address, String phone, String fax) {
 		super();
-		this.enteprise_id = enteprise_id;
+		this.enterprise_id = enterprise_id;
 		this.nameEnterprise = nameEnterprise;
 		this.address = address;
 		this.phone = phone;
@@ -30,11 +30,11 @@ public class EnterpriseDTO implements Serializable {
 		
 	}
 	
-	public Long getEnteprise_id() {
-		return enteprise_id;
+	public Long getEnterprise_id() {
+		return enterprise_id;
 	}
-	public void setEnteprise_id(Long enteprise_id) {
-		this.enteprise_id = enteprise_id;
+	public void setEnterprise_id(Long enterprise_id) {
+		this.enterprise_id = enterprise_id;
 	}
 	public String getNameEnterprise() {
 		return nameEnterprise;
