@@ -50,7 +50,7 @@ public class PriceListItemController {
 		return new ResponseEntity<PriceListItemDTO>(itemDTO, HttpStatus.OK);
 	}
 	
-	@PostMapping(consumes="application/json")
+	@PostMapping(value="/add",consumes="application/json")
 	public ResponseEntity<PriceListItemDTO> saveItem(@RequestBody PriceListItemDTO piDTO){
 		PriceListItem p = priceListItemServiceInterface.save(pricelistItemConverter.toPriceListItem(piDTO));
 		PriceListItemDTO pDTO = pricelistItemConverter.toDTO(p);

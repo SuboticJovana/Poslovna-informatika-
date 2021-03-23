@@ -14,23 +14,30 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.converters.ServicesConverter;
 import com.example.demo.dto.ServicesDTO;
 import com.example.demo.model.Services;
 import com.example.demo.servis.ServicesServiceInterface;
 
 @RestController
-@RequestMapping(value="salesystem/servicess")
+@RequestMapping(value="salesystem/services")
 public class ServicesController {
 	
 	@Autowired
 	private ServicesServiceInterface serviceServiceInterface;
 	
-	@GetMapping
+	@Autowired
+	ServicesConverter servicesConverter;
+	
+//	http://localhost:8080/salesystem/services/all
+	
+	@GetMapping(value="all")
 	public ResponseEntity<List<ServicesDTO>> getServices(){
 		List<Services> services = serviceServiceInterface.findAll();
 		List<ServicesDTO> servicesDTO = new ArrayList<ServicesDTO>();
 		for(Services s : services) {
-			servicesDTO.add(new ServicesDTO(s));
+			servicesDTO.add(servicesConverter.toDTO(s));
 	}
 		return new ResponseEntity<List<ServicesDTO>>(servicesDTO, HttpStatus.OK);
 

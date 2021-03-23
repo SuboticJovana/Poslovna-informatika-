@@ -25,9 +25,7 @@
 	<div class="containter">
 		
 		<div class="toolbar">
-			<button id="add" type="button" class="btn btn-outline-secondary">Dodaj</button>
-			<button id="edit" type="button" class="btn btn-outline-secondary">Izmeni</button>
-			<button id="delete" type="button" class="btn btn-outline-secondary">Obriši</button>	
+			<button id="add" type="button" class="btn btn-outline-secondary">Dodaj stavku</button>
 		</div>
 		
 		<table id="dataTable" class="table">
@@ -41,6 +39,46 @@
 			<tbody id="dataTableBody">
 			</tbody>
 		</table>
+		
+		
+			<!-- ADD -->
+			<div class="modal fade" id="addModalScrollable" tabindex="-1" role="dialog" aria-labelledby="addModalScrollableTitle" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-scrollable" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="addModalScrollableTitle">Dodavanje stavke cenovnika</h5>
+			        <button type="button" class="close addModalClose" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <form>
+					  <div class="form-group">
+					    <label for="cenaInput">Cena stavke</label>
+					    <input type="text" class="form-control" id="cenaInput" aria-describedby="cenaHelp" placeholder="Unesite cenu stavke">
+					  </div>
+					  <div class="form-group">
+					    <label for="cenovnikSelect">Cenovnik</label>
+					    <select class="form-control"  id="cenovnikSelect">
+					    
+					    </select>
+					  </div>
+					  <div class="form-group">
+					    <label for="robaSelect">Roba</label>
+					    <select class="form-control"  id="robaSelect">
+					    
+					    </select>
+					  </div>
+					</form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary addModalClose" >Otkaži</button>
+			        <button type="button" id="doAdd" class="btn btn-primary">Sačuvaj</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- ADD END-->
 	
 	</div>
 	
