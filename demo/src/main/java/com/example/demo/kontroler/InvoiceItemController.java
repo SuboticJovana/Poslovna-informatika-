@@ -70,34 +70,37 @@ public class InvoiceItemController {
 	@PostMapping(consumes="application/json")
 	public ResponseEntity<Boolean> saveItem(@RequestBody List<InvoiceItemDTO> invoiceItems){
 		Invoice invoice = new Invoice();
-		//check buisness year
-		//Računanje iznosa za plaćanje i PDV-a za svaku stavku fakture kao i za fakturu u celini,
-		//prilikom unosa stavki fakture (koristiti cenovnik i iznos PDV-a koji je važeći u odnosu na datum fakture)
+		Double total_amount = 0.0;
+		Double total_base = 0.0;
+		Double total_pdv = 0.0;
 		InvoiceItemDTO firstItem = invoiceItems.get(0);
-		System.out.println("this is first item"+ firstItem.getDiscount());
 		invoice.setDate_currency(firstItem.getDate_currency());
 		invoice.setDate(firstItem.getDate_invoice());
-		invoice.setNumber(500); //?
-		invoice.setStatus("reserved"); //status ?
-		invoice.setTotal_amount(500.0); //calculate total amount?
-		invoice.setTotal_base(500.0);//calculate total base?
-		invoice.setTotalPdv(50.0);//calculate total pdv?
+		invoice.setNumber((int) Math.random());
+		invoice.setStatus("reserved"); 
 		invoice.setEnterprise(enterpriseService.findOne((long) 1)); //after login function add enterprise
 		invoice.setPartner(partnerService.findOne(firstItem.getPartner_id()));
+		for(InvoiceItemDTO uDTO : invoiceItems) {
+			total_amount += uDTO.getQuantity() * uDTO.getUnitPrice();
+			total_base += uDTO.getPdvBase();
+			total_pdv +=20.0;
+		}
+		invoice.setTotal_amount(total_amount); 
+		invoice.setTotal_base(total_base);
+		invoice.setTotalPdv(total_pdv);
 		invoiceService.save(invoice);
-	//
+	
 		for(InvoiceItemDTO uDTO : invoiceItems) {
 			InvoiceItem item = new InvoiceItem();
 			item.setDiscount(uDTO.getDiscount());
-			item.setPDVAmount(uDTO.getPdvAmount());
-			item.setPDVBase(uDTO.getPdvBase());
 			item.setQuantity(uDTO.getQuantity());
-			item.setTotalAmount(uDTO.getTotalAmount());
 			item.setUnitPrice(uDTO.getUnitPrice());
+			item.setPDVBase(uDTO.getUnitPrice() - uDTO.getDiscount());
+			item.setPDVAmount(20.0); //opsta stopa?
+			item.setTotalAmount(uDTO.getQuantity() * uDTO.getUnitPrice()); 
 			item.setServices(servicesService.findOne(uDTO.getService_id()));
-			item.setInvoice(invoice); //set reference to invoice
-			InvoiceItem i = service.save(item);
-			System.out.println(i.getQuantity());
+			item.setInvoice(invoice); 
+			service.save(item);
 		}
 		//add false if it fails
 		return new ResponseEntity<Boolean>(true, HttpStatus.CREATED);	

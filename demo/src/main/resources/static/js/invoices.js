@@ -2,10 +2,11 @@
 var serviceSelect = document.getElementById('service-dropdown');
 var invoiceItems = [];
 
-    fetch("http://localhost:8080/salesystem/servicess")
+    fetch("http://localhost:8080/salesystem/services/all")
     .then((resp) => resp.json())
     .then(function(data) {
         var values = data;
+        console.log(data);
         for (const val of values) {
             var option = document.createElement("option");
             option.value = val.services_id;
@@ -34,27 +35,33 @@ var invoiceItems = [];
         console.log(error);
     });
     
+    var datumFakture = document.getElementById('datumFakture');
+datumFakture.max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
+var datumValute = document.getElementById('datumValute');
+datumValute.max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
+
     // add invoice 
     document.getElementById("saveInvoice").addEventListener('click',function (event)
     {
+        
         if(invoiceItems.length==0){
             alert("Morate dodati bar jednu stavku!");
             return;
         }
-        if(document.getElementById('quantity').value==0){
+        if(document.getElementById('quantity').value<=0){
             //less equal
             alert("Kolicina mora biti veca od 0!");
             return;
         }
-        if(document.getElementById('discount').value==0){
+        if(document.getElementById('discount').value<=0){
             alert("Popust ne sme biti negativan!");
             return;
         }
-        if(document.getElementById('unitPrice').value==0){
+        if(document.getElementById('unitPrice').value<=0){
             alert("Cena ne sme biti negativna!");
             return;
         }
-        if(document.getElementById('datumFakture').value < document.getElementById('datumValute').value){
+        if(document.getElementById('datumFakture').value > document.getElementById('datumValute').value){
             alert("Datum valute ne sme biti manji od datuma fakture!");
             return;
         }
@@ -64,8 +71,8 @@ var invoiceItems = [];
             discount: document.getElementById('discount').value,
             unitPrice: document.getElementById('unitPrice').value,
             pdvBase: document.getElementById('pdvBase').value,
-            pdvAmount: document.getElementById('pdvAmount').value,
-            totalAmount: document.getElementById('totalAmount').value, //total amount needs to be calculated
+           // pdvAmount: document.getElementById('pdvAmount').value,
+            //totalAmount: document.getElementById('totalAmount').value, //total amount needs to be calculated
             service_id: document.getElementById('service-dropdown').value,
             partner_id: document.getElementById('partner-dropdown').value,
             date_invoice: document.getElementById('datumFakture').value,
@@ -73,8 +80,6 @@ var invoiceItems = [];
             }
         invoiceItems = [...invoiceItems,invoice]
         console.log(invoiceItems);
-        document.getElementById('invoiceBlock').style.display="none";
-        console.log('added!');
         fetch('http://localhost:8080/salesystem/invoiceItems', {
         method: 'post',
         headers: {
@@ -83,23 +88,11 @@ var invoiceItems = [];
         },
         body: JSON.stringify(invoiceItems)
         }).then(res => res.json())
-        .then(res => console.log(res));
+        .then(res => 
+            window.location.replace("http://localhost:8080/index.html")
+        );
         event.preventDefault();
     }  ); 
-
-
-    //visible form
-    document.getElementById('showInvoiceItemForm').addEventListener('click', function (event) {
-        document.getElementById('invoiceBlock').style.display="block";
-        var datumFakture = document.getElementById('datumFakture');
-        datumFakture.max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
-        var datumValute = document.getElementById('datumValute');
-        datumValute.max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
-
-        event.preventDefault();
-    });
-
-    //add another one 
 
 document.getElementById("addInvoiceItem").addEventListener('click',function (event)
     {
@@ -108,8 +101,8 @@ document.getElementById("addInvoiceItem").addEventListener('click',function (eve
             discount: document.getElementById('discount').value,
             unitPrice: document.getElementById('unitPrice').value,
             pdvBase: document.getElementById('pdvBase').value,
-            pdvAmount: document.getElementById('pdvAmount').value,
-            totalAmount: document.getElementById('totalAmount').value, //total amount needs to be calculated
+            // pdvAmount: document.getElementById('pdvAmount').value,
+            // totalAmount: document.getElementById('totalAmount').value, //total amount needs to be calculated
             service_id: document.getElementById('service-dropdown').value,
             partner_id: document.getElementById('partner-dropdown').value,
             date_invoice: document.getElementById('datumFakture').value,
@@ -121,6 +114,6 @@ document.getElementById("addInvoiceItem").addEventListener('click',function (eve
          document.getElementById('discount').value=0;
          document.getElementById('unitPrice').value=0;
          document.getElementById('pdvBase').value=0;
-         document.getElementById('pdvAmount').value=0;
-         document.getElementById('totalAmount').value=0;//total amount needs to be calculated
+        //  document.getElementById('pdvAmount').value=0;
+        //  document.getElementById('totalAmount').value=0;//total amount needs to be calculated
     }  ); 
