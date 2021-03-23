@@ -37,7 +37,9 @@ public class PricelistItemConverter {
 	
 	public PriceListItem toPriceListItem(PriceListItemDTO priceListItemDTO) {
 		PriceListItem p = new PriceListItem();
+		if(priceListItemDTO.getPrice_list_item_id()!=null) {
 		p.setPrice_list_item_id(priceListItemDTO.getPrice_list_item_id());
+		}
 		p.setPrice(priceListItemDTO.getPrice());
 		p.setServices(serviceInterface.findOne(priceListItemDTO.getServices().getServices_id()));
 		p.setPricelist(pricelistService.findOne(priceListItemDTO.getPricelist().getPricelist_id()));

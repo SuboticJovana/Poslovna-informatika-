@@ -52,6 +52,7 @@ public class PriceListItemController {
 	
 	@PostMapping(value="/add",consumes="application/json")
 	public ResponseEntity<PriceListItemDTO> saveItem(@RequestBody PriceListItemDTO piDTO){
+		System.out.println(piDTO.getServices().getServices_id());
 		PriceListItem p = priceListItemServiceInterface.save(pricelistItemConverter.toPriceListItem(piDTO));
 		PriceListItemDTO pDTO = pricelistItemConverter.toDTO(p);
 		return new ResponseEntity<PriceListItemDTO>(pDTO, HttpStatus.CREATED);

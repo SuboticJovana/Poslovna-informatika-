@@ -60,22 +60,17 @@ function readServices(){
 		$("#robaSelect").empty();
 		$.each(data, function(i,item){
 			$('#robaSelect').append($('<option>',{
-				value : item.service_id,
+				value : item.services_id,
 				text : item.name
 			}));
 		});
 	});
 }
-
-function addPricelistItem(){
-	var cenaInput = ('#cenaInput');
-	var cenovnikSelect = ('#cenovnikSelect')
-	var robaSelect = ('#robaSelect')
-	
+	function addPricelistItem(){
 	$('#doAdd').on('click',function(event){
-		var price = cenaInput.value;
-		var pricelist = cenovnikSelect.value;
-		var services = robaSelect.value;
+		var price = $('#cenaInput').val();
+		var pricelist = $('#cenovnikSelect').val();
+		var services =  $('#robaSelect').val();
 		
 		console.log('price' + price);
 		console.log('pricelist' + pricelist);
@@ -91,10 +86,10 @@ function addPricelistItem(){
 					'pricelist_id' : pricelist
 				},
 				'services' : {
-					'service_id' : services
+					'services_id' : services
 				}
 		}
-		
+		console.log(params);
 		$.ajax({
 			url : 'http://localhost:8080/salesystem/priceListItems/add',
 			type : 'POST',
@@ -104,15 +99,14 @@ function addPricelistItem(){
 			success:function(data){
 				alert('Dodata je nova stavka cenovnika')
 				readItems();
-				cenaInput.val("");
-				cenovnikSelect.val("");
-				robaSelect.val("");
+				$('#cenaInput').val("");
+				$('#cenovnikSelect').val("");
+				$('#robaSelect').val("");
 			}
 		})
 		console.log('slanje poruke');
 		event.preventDefault();
 		return false;
-		
 	});
 	
 }

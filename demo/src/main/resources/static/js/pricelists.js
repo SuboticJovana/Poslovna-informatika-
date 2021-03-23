@@ -2,7 +2,6 @@ function getPricelists(){
 	readPricelists();
 	readEnterprises();
 	readEnterprises2();
-	
 	//var selectedRow;
 	var pricelist = [];
 
