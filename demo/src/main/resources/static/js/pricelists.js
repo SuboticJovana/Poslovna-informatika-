@@ -63,22 +63,35 @@ function getPricelists(){
 		$('#deletePromptModal').modal('hide');
 	});
 	
-	$(document).on("click", '#kopirajCenovnik', function(event){
-		var name = getNameOfSelectedEntityPricelist();
-		if(name!=null){
-			$('#copyPromptText').text("Kopiraj cenovnik sa datumom: " + name);
-			$('#copyPromptModal').modal('show');
-		}
-	});
-	
-	$(document).on("click", '.copyPromptClose', function(event){
-		$('#copyPromptModal').modal('hide');
+	$(document).on("click", '#copy', function(event){
+		$('#copyModalScrollable').modal('show');
 	});
 	
 	$(document).on("click", '#doCopy', function(event){
 		copyPricelist();
-		$('#copyPromptModal').modal('hide');
+		$('#copyModalScrollable').modal('hide');
 	});
+	
+	$(document).on("click", '.copyModalClose', function(event){
+		$('#copyModalScrollable').modal('hide');
+	});
+	
+//	$(document).on("click", '#kopirajCenovnik', function(event){
+//		var name = getNameOfSelectedEntityPricelist();
+//		if(name!=null){
+//			$('#copyPromptText').text("Kopiraj cenovnik sa datumom: " + name);
+//			$('#copyPromptModal').modal('show');
+//		}
+//	});
+//	
+//	$(document).on("click", '.copyPromptClose', function(event){
+//		$('#copyPromptModal').modal('hide');
+//	});
+//	
+//	$(document).on("click", '#doCopy', function(event){
+//		copyPricelist();
+//		$('#copyPromptModal').modal('hide');
+//	});
 }
 
 function readPricelists() {
@@ -98,6 +111,24 @@ function readPricelists() {
 						$("#dataTableBody").append(newRow);
 					}
 				});
+}
+
+function readPricelists2(){
+	$.ajax({
+		url : "http://localhost:8080/salesystem/pricelists/all"
+	}).then(
+			function(data){
+				$("#cenovnikSelect").empty();
+				
+				$.each(data, function(i, item){
+					$('#cenovnikSelect').append($('<option>', {
+					value : item.pricelist_id,
+					text : item.date_from
+				}));
+				
+			});
+		}	
+	);
 }
 
 function readEnterprises(){
@@ -182,18 +213,24 @@ function addPricelist(){
 }
 
 function copyPricelist(){
-	var id = getIdOfSelectedEntityPricelist();
-	console.log(id);
-	var date_from = getNameOfSelectedEntityPricelist();
+	var cenovnikSelect = $('#cenovnikSelect');
 	
-	$('#doCopy').on('click',function(event){
-		console.log('date_from' + date_from);
+	$('#doCopy').on('click', function(event){
+		var pricelists = cenovnikSelect.val();
 		
-		var params = {
-				'pricelist_id' : pricelist_id,
-				'date_from' : 'date_from'
+		console.log('pricelists' + pricelists);
+		
+		if(pricelists == null){
+			alert('Morate izabrati cenovnik')
 		}
 		
+		var params = {
+				'pricelists' : {
+					'pricelist_id' : pricelists
+				}
+		}
+		
+		console.log(params);
 		$.ajax({
 			url : 'http://localhost:8080/salesystem/pricelists/copy',
 			type : 'POST',
@@ -202,13 +239,14 @@ function copyPricelist(){
 			dataType:'json',
 			success : function(data){
 				alert('Cenovnik je kopiran')
+				readPricelists2();
+				cenovnikSelect.val("");
 			}
 		})
 		console.log('slanje poruke');
 		event.preventDefault();
 		return false;
-	})
-	
+	});	
 }
 
 
