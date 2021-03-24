@@ -62,6 +62,23 @@ function getPricelists(){
 		deletePricelist();
 		$('#deletePromptModal').modal('hide');
 	});
+	
+	$(document).on("click", '#kopirajCenovnik', function(event){
+		var name = getNameOfSelectedEntityPricelist();
+		if(name!=null){
+			$('#copyPromptText').text("Kopiraj cenovnik sa datumom: " + name);
+			$('#copyPromptModal').modal('show');
+		}
+	});
+	
+	$(document).on("click", '.copyPromptClose', function(event){
+		$('#copyPromptModal').modal('hide');
+	});
+	
+	$(document).on("click", '#doCopy', function(event){
+		copyPricelist();
+		$('#copyPromptModal').modal('hide');
+	});
 }
 
 function readPricelists() {
@@ -164,7 +181,35 @@ function addPricelist(){
 	});
 }
 
-
+function copyPricelist(){
+	var id = getIdOfSelectedEntityPricelist();
+	console.log(id);
+	var date_from = getNameOfSelectedEntityPricelist();
+	
+	$('#doCopy').on('click',function(event){
+		console.log('date_from' + date_from);
+		
+		var params = {
+				'pricelist_id' : pricelist_id,
+				'date_from' : 'date_from'
+		}
+		
+		$.ajax({
+			url : 'http://localhost:8080/salesystem/pricelists/copy',
+			type : 'POST',
+			data: JSON.stringify(params),
+			contentType:'application/json; charset=utf-8',
+			dataType:'json',
+			success : function(data){
+				alert('Cenovnik je kopiran')
+			}
+		})
+		console.log('slanje poruke');
+		event.preventDefault();
+		return false;
+	})
+	
+}
 
 
 function updatePricelist() {
