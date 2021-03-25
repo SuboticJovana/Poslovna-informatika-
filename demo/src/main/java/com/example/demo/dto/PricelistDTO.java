@@ -11,6 +11,8 @@ public class PricelistDTO implements Serializable {
 		
 		private Long pricelist_id;
 		private Date date_from;
+		private Integer percentage;
+		private Double totalPrice;
 //		private int enterprise_id;
 		private EnterpriseDTO enterpriseDTO;
 		
@@ -45,6 +47,22 @@ public class PricelistDTO implements Serializable {
 
 		public void setDate_from(Date date_from) {
 			this.date_from = date_from;
+		}
+
+		public Integer getPercentage() {
+			return percentage;
+		}
+
+		public void setPercentage(Integer percentage) {
+			this.percentage = percentage;
+		}
+
+		public Double getTotalPrice() {
+			return totalPrice;
+		}
+
+		public void setTotalPrice(Double totalPrice) {
+			this.totalPrice = totalPrice;
 		}
 
 //		public int getEnterprise_id() {

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.PriceListItem;
+import com.example.demo.model.Pricelist;
 import com.example.demo.repozitorijum.PriceListItemRepository;
 @Service
 public class PriceListItemService implements PriceListItemServiceInterface{
@@ -36,6 +37,11 @@ public class PriceListItemService implements PriceListItemServiceInterface{
 	@Override
 	public PriceListItem findByCena(Double price) {
 		return priceListItemRepository.findByPrice(price);
+	}
+
+	@Override
+	public List<PriceListItem> findByPricelist(Pricelist pricelist) {
+		return priceListItemRepository.findByPricelist(pricelist);
 	}
 	
 	

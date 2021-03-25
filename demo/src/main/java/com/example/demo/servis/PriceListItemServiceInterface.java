@@ -3,6 +3,7 @@ package com.example.demo.servis;
 import java.util.List;
 
 import com.example.demo.model.PriceListItem;
+import com.example.demo.model.Pricelist;
 
 public interface PriceListItemServiceInterface {
 	
@@ -15,5 +16,7 @@ public interface PriceListItemServiceInterface {
 	List<PriceListItem> findAll();
 	
 	PriceListItem findByCena(Double price);
+	
+	List<PriceListItem> findByPricelist(Pricelist pricelist);
 
 }

@@ -36,14 +36,11 @@ public class Pricelist implements Serializable {
 	@Column(name="date_from", unique=false, nullable=false)
 	private Date dateFrom;
 	
-//	@Column(name="date_to", unique=false, nullable=false)
-//	private Date dateTo;
+	@Column(name="percentage", unique=false, nullable=true)
+	private Integer percentage;
 	
-//	@Column(name="percentage", unique=false, nullable=false)
-//	private Integer percentage;
-	
-//	@Column(name="total_price", unique=false, nullable=false)
-//	private Integer totalPrice;
+	@Column(name="total_price", unique=false, nullable=true)
+	private Double totalPrice;
 
 	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="pricelist")
 	private Set<PriceListItem> items = new HashSet<PriceListItem>();
@@ -55,17 +52,17 @@ public class Pricelist implements Serializable {
 	public Pricelist() {
 		
 	}
-	public Pricelist(Long pricelist_id, Date date_from
+	public Pricelist(Long pricelist_id, Date date_from,
 //			Date date_to,
-//			Integer percentage, Integer total_price
+			Integer percentage, Double total_price
 			)
 	{
 		super();
 		this.pricelist_id = pricelist_id;
 		this.dateFrom = date_from;
 //		this.dateTo = date_to;
-//		this.percentage = percentage;
-//		this.totalPrice = total_price;
+		this.percentage = percentage;
+		this.totalPrice = total_price;
 	}
 
 	public Pricelist(Long pricelist_id, Date dateFrom, Enterprise enterprise ) {
@@ -102,29 +99,22 @@ public class Pricelist implements Serializable {
 		this.dateFrom = dateFrom;
 	}
 
-//	public Date getDateTo() {
-//		return dateTo;
-//	}
-//
-//	public void setDateTo(Date dateTo) {
-//		this.dateTo = dateTo;
-//	}
 
-//	public Integer getPercentage() {
-//		return percentage;
-//	}
-//
-//	public void setPercentage(Integer percentage) {
-//		this.percentage = percentage;
-//	}
-//
-//	public Integer getTotalPrice() {
-//		return totalPrice;
-//	}
-//
-//	public void setTotalPrice(Integer totalPrice) {
-//		this.totalPrice = totalPrice;
-//	}
+	public Integer getPercentage() {
+		return percentage;
+	}
+
+	public void setPercentage(Integer percentage) {
+		this.percentage = percentage;
+	}
+
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 	public Set<PriceListItem> getItems() {
 		return items;
 	}

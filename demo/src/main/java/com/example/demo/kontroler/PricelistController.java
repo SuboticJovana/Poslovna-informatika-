@@ -1,26 +1,28 @@
 package com.example.demo.kontroler;
 
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.example.demo.converters.PricelistConverter;
 import com.example.demo.dto.PricelistDTO;
 import com.example.demo.model.PriceListItem;
 import com.example.demo.model.Pricelist;
+import com.example.demo.servis.PriceListItemServiceInterface;
 //import com.example.demo.servis.EnterpriseServiceInterface;
 //import com.example.demo.servis.PriceListItemServiceInterface;
 import com.example.demo.servis.PricelistServiceInterface;
@@ -35,6 +37,9 @@ public class PricelistController {
 	
 	@Autowired
 	PricelistConverter pricelistConverter;
+	
+	@Autowired
+	private PriceListItemServiceInterface pricelistItemService;
 	
 	@GetMapping(value="/all")
 	public ResponseEntity<List<PricelistDTO>> getPricelist() {
@@ -58,23 +63,37 @@ public class PricelistController {
 
 	@PostMapping(value="/add", consumes = "application/json")
 	public ResponseEntity<PricelistDTO> save(@RequestBody PricelistDTO pDTO){
-		Pricelist p = pricelistService.save(pricelistConverter.toPricelist(pDTO));
+		Pricelist pr = pricelistConverter.toPricelist(pDTO);
+		pr.setTotalPrice(0.0);
+		Pricelist p = pricelistService.save(pr);
 		PricelistDTO pricelistDTO = pricelistConverter.toDTO(p);
 		return new ResponseEntity<PricelistDTO>(pricelistDTO, HttpStatus.CREATED);
 	}
 	
-//	@PostMapping(value="/copy", consumes = "application/json")	
-//	public ResponseEntity<Void> copy(@RequestParam("date_from") java.util.Date date_from){
-//		Date dateSql = new Date(date_from.getTime());
-//		Pricelist p = pricelistService.findByDateFrom(dateSql);
-//		Pricelist pricelist = pricelistService.findOne(p.getPricelist_id());
-//		if (pricelist != null) {
-//			Pricelist pCopy = new Pricelist();
-//			pCopy.setDateFrom(pricelist.getDateFrom());
-//			pCopy.setEnterprise(pricelist.getEnterprise());
-//			List<PriceListItem> items = pricelist.get
-//		}
-//	}
+	@Transactional
+	@PostMapping(value="/copy/{pricelist_id}/{percentage}", consumes = "application/json")
+	public ResponseEntity<PricelistDTO> copy(@PathVariable("percentage") Integer percentage, @PathVariable("pricelist_id") Long pricelist_id){
+		Pricelist pricelist = pricelistService.findOne(pricelist_id);
+		Double unitPrice = pricelist.getTotalPrice()/100;
+		Double decount = unitPrice * percentage;
+		Double newTotalPrice = pricelist.getTotalPrice() - decount;
+		List<PriceListItem> items = pricelistItemService.findByPricelist(pricelist);
+		Pricelist copyPricelist = new Pricelist();
+		copyPricelist.setDateFrom(pricelist.getDateFrom());
+		copyPricelist.setEnterprise(pricelist.getEnterprise());
+		copyPricelist.setTotalPrice(newTotalPrice);
+		copyPricelist.setPercentage(percentage);
+		Pricelist savedPricelist = pricelistService.save(copyPricelist);
+		for(PriceListItem item : items) {
+			PriceListItem copyItem = new PriceListItem();
+			copyItem.setPrice(item.getPrice());
+			copyItem.setPricelist(savedPricelist);
+			copyItem.setServices(item.getServices());
+			pricelistItemService.save(copyItem);
+		}
+		return new ResponseEntity<PricelistDTO>(pricelistConverter.toDTO(savedPricelist), HttpStatus.CREATED);
+	}
+	
 
 	@PutMapping(value="/{id}", consumes="application/json")
 	public ResponseEntity<PricelistDTO> updatePricelist(@RequestBody PricelistDTO pDTO, @PathVariable("id") Long id){

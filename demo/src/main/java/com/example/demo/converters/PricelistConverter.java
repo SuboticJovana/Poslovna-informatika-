@@ -24,6 +24,8 @@ public class PricelistConverter {
 		PricelistDTO dto = new PricelistDTO();
 		dto.setPricelist_id(pricelist.getPricelist_id());
 		dto.setDate_from(pricelist.getDateFrom());
+		dto.setPercentage(pricelist.getPercentage());
+		dto.setTotalPrice(pricelist.getTotalPrice());
 		dto.setEnterpriseDTO(enterpriseConverter.toDTO(pricelist.getEnterprise()));
 		return dto;
 	}
@@ -36,6 +38,14 @@ public class PricelistConverter {
 		
 		p.setPricelist_id(pricelistDTO.getPricelist_id());
 		p.setDateFrom(pricelistDTO.getDate_from());
+		if (pricelistDTO.getPercentage() == null || pricelistDTO.getPercentage().toString() == "") {
+			p.setPercentage(0);
+		}
+		p.setPercentage(pricelistDTO.getPercentage());
+		if(pricelistDTO.getTotalPrice() == null || pricelistDTO.getTotalPrice().toString() == "") {
+			p.setTotalPrice(0.0);
+		}
+		p.setTotalPrice(pricelistDTO.getTotalPrice());
 		p.setEnterprise(enterpriseServiceInterface.findOne(pricelistDTO.getEnterpriseDTO().getEnterprise_id()));
 		
 		

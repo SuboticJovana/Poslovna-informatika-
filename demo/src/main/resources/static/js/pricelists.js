@@ -2,6 +2,7 @@ function getPricelists(){
 	readPricelists();
 	readEnterprises();
 	readEnterprises2();
+	readPricelists2();
 	//var selectedRow;
 	var pricelist = [];
 
@@ -114,10 +115,12 @@ function readPricelists() {
 }
 
 function readPricelists2(){
+	console.log('test');
 	$.ajax({
 		url : "http://localhost:8080/salesystem/pricelists/all"
 	}).then(
 			function(data){
+				console.log('Data' + data);
 				$("#cenovnikSelect").empty();
 				
 				$.each(data, function(i, item){
@@ -170,14 +173,17 @@ function readEnterprises2() {
 function addPricelist(){
 	var datumInput = $('#datumInput');
 	var preduzeceSelect = $('#preduzeceSelect');
+	var procenatCenovnikInput = $('#procenatCenovnikInput');
 	
 	$('#doAdd').on('click', function(event){
 		var date_from = datumInput.val();
 		var enterpriseDTO = preduzeceSelect.val();
+		var percentage = procenatCenovnikInput.val();
 
 		
-		console.log('date_from: ' + date_from)
+		console.log('date_from: ' + date_from);
 		console.log('enterpriseDTO: ' + enterpriseDTO);
+		console.log('percentage' + percentage);
 		
 		if(date_from == null || enterpriseDTO == null){
 			alert('Niste uneli potrebne podatke')
@@ -185,6 +191,7 @@ function addPricelist(){
 		
 		var params = {
 				'date_from': date_from,
+				'percentage' : percentage,
 				'enterpriseDTO': {
 					'enterprise_id' : enterpriseDTO
 				}
@@ -214,32 +221,34 @@ function addPricelist(){
 
 function copyPricelist(){
 	var cenovnikSelect = $('#cenovnikSelect');
+	var procenatInput =$('#procenatInput')
 	
 	$('#doCopy').on('click', function(event){
-		var pricelists = cenovnikSelect.val();
+		var pricelist_id = cenovnikSelect.val();
+		var percentage = procenatInput.val();
+		console.log('pricelist_id' + pricelist_id);
 		
-		console.log('pricelists' + pricelists);
-		
-		if(pricelists == null){
+		if(pricelist_id == null || percentage == null){
 			alert('Morate izabrati cenovnik')
 		}
 		
 		var params = {
 				'pricelists' : {
-					'pricelist_id' : pricelists
+					'pricelist_id' : pricelist_id,
+					'percentage' : percentage
 				}
+				
 		}
 		
 		console.log(params);
 		$.ajax({
-			url : 'http://localhost:8080/salesystem/pricelists/copy',
+			url : 'http://localhost:8080/salesystem/pricelists/copy/' + pricelist_id + '/' + percentage,
 			type : 'POST',
 			data: JSON.stringify(params),
 			contentType:'application/json; charset=utf-8',
 			dataType:'json',
 			success : function(data){
 				alert('Cenovnik je kopiran')
-				readPricelists2();
 				cenovnikSelect.val("");
 			}
 		})

@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.converters.PricelistItemConverter;
 import com.example.demo.dto.PriceListItemDTO;
 import com.example.demo.model.PriceListItem;
+import com.example.demo.model.Pricelist;
 import com.example.demo.servis.PriceListItemServiceInterface;
+import com.example.demo.servis.PricelistServiceInterface;
 
 @RestController
 @RequestMapping(value="salesystem/priceListItems")
@@ -29,6 +31,9 @@ public class PriceListItemController {
 	
 	@Autowired
 	PricelistItemConverter pricelistItemConverter;
+	
+	@Autowired
+	private PricelistServiceInterface pricelistService;
 	
 	@GetMapping
 	public ResponseEntity<List<PriceListItemDTO>> getItems(){
@@ -54,6 +59,13 @@ public class PriceListItemController {
 	public ResponseEntity<PriceListItemDTO> saveItem(@RequestBody PriceListItemDTO piDTO){
 		System.out.println(piDTO.getServices().getServices_id());
 		PriceListItem p = priceListItemServiceInterface.save(pricelistItemConverter.toPriceListItem(piDTO));
+		Pricelist pricelist = pricelistService.findOne(piDTO.getPricelist().getPricelist_id());
+		Double newTotalPrice = pricelist.getTotalPrice() + piDTO.getPrice();
+		Double unitPrice = newTotalPrice/100;
+		Double decount = unitPrice * pricelist.getPercentage();
+		Double newPrice = newTotalPrice - decount;
+		pricelist.setTotalPrice(newPrice);
+		pricelistService.save(pricelist);
 		PriceListItemDTO pDTO = pricelistItemConverter.toDTO(p);
 		return new ResponseEntity<PriceListItemDTO>(pDTO, HttpStatus.CREATED);
 	}
