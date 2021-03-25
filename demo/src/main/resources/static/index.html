@@ -17,13 +17,15 @@
             <div class="container">
                 <a href="#" class="phone-info">+381 11 111 11 111</a>
                 <a href="IzvestajFaktureStavke.html" class="report">Izvestaj</a>
+                  <button id="logout">Log out </button>
             </div>
         </div>
         <!-- Top Bar END -->
-
+        
         <!-- Navbar -->
         <div class="navbar">
             <div class="container">
+              <div id="menu" style="display:none;">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation"
                     aria-expanded="false">
@@ -44,6 +46,40 @@
                         </ul>
                     </nav>
                 </div>
+              </div> 
+              <!--login form -->
+              <div id="loginForm">
+           <!-- script-check local storage in browser, if user is logged in, hide login form and show menu-->
+                <!-- <script>  
+                  const user = localStorage.getItem("salesystem-user");
+                  if(user!=null || user!=""){
+                    document.getElementById('menu').style.display="block";
+                    document.getElementById('logout').style.visibility = 'visible';
+                    document.getElementById('loginForm').style.display="none";
+                  }else{
+                    document.getElementById('logout').style.visibility = 'hidden';
+                  }
+              </script> -->
+
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <form>
+                        <div class="form-group">
+                          <label for="username">Korisnicko ime</label>
+                          <input type="text" class="form-control"  id= "username" placeholder="">
+                        </div>
+                        <div class="form-group">
+                          <label for="password">Lozinka</label>
+                          <input type="password" class="form-control"  id= "password" placeholder="">
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" id="login" class="btn btn-primary">Log in</button>   
+                    </div>
+                  </div>
+                </div>
             </div>
         </div>
         <!-- Navbar END -->
@@ -52,6 +88,7 @@
     <!-- Main Header END -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/login.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>

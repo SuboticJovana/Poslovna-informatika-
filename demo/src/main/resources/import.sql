@@ -19,3 +19,7 @@ insert into service_groups(id, name, pdv_id, enterprise_id)  values(1,"service g
 insert into unit_of_measures(id, name, short_name )  values(1,"kilogram","kg")
 insert into servicess(service_id, name, description, goods,groupserv_id,unitmea_id )  values(1,"servis 1","opis servisa 1",true, 1,1 )
 insert into price_list_items(price_list_item_id, price, pricelist_id, service_id)  values(1,100,1,1 )
+
+insert into users(user_id, username, password)values(1, "a", "a")
+
+
