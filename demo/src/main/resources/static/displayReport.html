@@ -6,7 +6,7 @@
 	
 		<script src="js/jquery-3.3.1.min.js"></script>
 		<script src="js/bootstrap.js"></script>
-		<script src="js/reportInvoice.js"></script>
+		<script src="js/displayreport.js"></script>
 		<script src="js/functions.js"></script>
 		
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -14,40 +14,20 @@
 		
 		<script src="https://kit.fontawesome.com/9497a339e1.js" crossorigin="anonymous"></script>
 		
-		<title>Izvestaj</title>
+		<title>Prikaz pojedinacnog izvestaja</title>
 		
 		<script>
-			$(document).ready(getInvoiceItem);
+			$(document).ready(getDisplayID);
 		</script>
 	</head>
 	<body>
-	
-	<div class="containter">
-		
-		
-		
-		<table id="dataTable" class="table">
-			<thead>
-				<tr>
-					<th>Kolicina</th>
-					<th>Popust</th>
-					<th>Jedinicna cena</th>
-					<th>Osnovica pdv</th>
-					<th>Iznos pdv-a</th>
-					<th>Ukupan iznos</th>
-				</tr>
-			</thead>
-			<tbody id="dataTableBody">
-			</tbody>
-		</table>
-
- 
-		
-		
-	
-	</div>
-	  <!-- Prikaz jednog izvestaja -->
-      <div id="reportTables" style="display: none; margin: 5%;">
+	         <div class="row justify-content-md-center">
+          	<div class="col-md-5 mb-5">
+			  	<table class="table table-striped table-dark" id="tabelaIzvestaj"  style="cursor: pointer;">
+	 
+				</table>
+			</div>
+	<!--	<div id="reportTables" style=" margin: 5%;">
         <div class="form-group">
           <label><h1>Izvestaj:</h1></label>
         </div>
@@ -84,7 +64,9 @@
             <input type="text" class="form-control" id="ukupaniznos" readonly>
           </div>
          
-          </div>
+          </div>-->
+				
+
 
 	</body>
 </html>

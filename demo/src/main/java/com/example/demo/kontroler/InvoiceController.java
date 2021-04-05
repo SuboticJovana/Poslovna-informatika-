@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.converters.InvoiceConverter;
 import com.example.demo.dto.InvoiceDTO;
 import com.example.demo.model.Invoice;
 import com.example.demo.servis.InvoiceServiceInterface;
@@ -23,17 +24,17 @@ import com.example.demo.servis.InvoiceServiceInterface;
 @RequestMapping(value="salesystem/invoices")
 public class InvoiceController {
 
-
-
 	@Autowired
 	private InvoiceServiceInterface service;
+	@Autowired
+	private InvoiceConverter invo;
 	
 	@GetMapping
 	public ResponseEntity<List<InvoiceDTO>> getInvoice() {
 	List<Invoice> items = service.findAll();
 	List<InvoiceDTO> itemsDTO = new ArrayList<InvoiceDTO>();
 	for (Invoice u : items) {
-		itemsDTO.add(new InvoiceDTO(u));
+		itemsDTO.add(invo.toDTO(u));
 	}
 	return new ResponseEntity<List<InvoiceDTO>>(itemsDTO, HttpStatus.OK);
 
@@ -44,7 +45,7 @@ public class InvoiceController {
 		if(item == null){
 			return new ResponseEntity<InvoiceDTO>(HttpStatus.NOT_FOUND);
 		}
-		InvoiceDTO itemDTO = new InvoiceDTO(item);
+		InvoiceDTO itemDTO = invo.toDTO(item);
 		return new ResponseEntity<InvoiceDTO>(itemDTO, HttpStatus.OK);
 	}
 	
@@ -80,7 +81,7 @@ public class InvoiceController {
 		item.setTotal_base(uDTO.getTotal_base());
 		item.setTotalPdv(uDTO.getTotal_pdv());
 		service.save(item);
-		InvoiceDTO itemDTO = new InvoiceDTO(item);
+		InvoiceDTO itemDTO = invo.toDTO(item);
 		return new ResponseEntity<InvoiceDTO>(itemDTO, HttpStatus.OK);	
 	}
 	

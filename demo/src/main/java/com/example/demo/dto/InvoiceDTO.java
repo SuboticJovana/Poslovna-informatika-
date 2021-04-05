@@ -14,8 +14,9 @@ public class InvoiceDTO {
 	private Double total_amount;
 	private Double total_pdv;
 	private String status;
-	
-	public InvoiceDTO() {
+	private EnterpriseDTO enterpriseDTO;
+
+	/*public InvoiceDTO() {
 		
 	}
 	public InvoiceDTO(Integer id, Integer invoice_number, Date date_invoice, Date date_currency, Double total_base,
@@ -32,7 +33,7 @@ public class InvoiceDTO {
 	}
 	public InvoiceDTO(Invoice item) {
 		// TODO Auto-generated constructor stub
-	}
+	}*/
 	public Integer getId() {
 		return id;
 	}
@@ -80,6 +81,12 @@ public class InvoiceDTO {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public EnterpriseDTO getEnterpriseDTO() {
+		return enterpriseDTO;
+	}
+	public void setEnterpriseDTO(EnterpriseDTO enterpriseDTO) {
+		this.enterpriseDTO = enterpriseDTO;
 	}
 	
 	
