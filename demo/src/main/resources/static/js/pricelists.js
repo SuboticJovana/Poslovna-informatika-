@@ -175,7 +175,7 @@ function addPricelist(){
 	var preduzeceSelect = $('#preduzeceSelect');
 	var procenatCenovnikInput = $('#procenatCenovnikInput');
 	
-	$('#doAdd').on('click', function(event){
+	// $('#doAdd').on('click', function(event){
 		var date_from = datumInput.val();
 		var enterpriseDTO = preduzeceSelect.val();
 		var percentage = procenatCenovnikInput.val();
@@ -216,14 +216,14 @@ function addPricelist(){
 		console.log('slanje poruke');
 		event.preventDefault();
 		return false;
-	});
+	// });
 }
 
 function copyPricelist(){
 	var cenovnikSelect = $('#cenovnikSelect');
 	var procenatInput =$('#procenatInput')
 	
-	$('#doCopy').on('click', function(event){
+	// $('#doCopy').on('click', function(event){
 		var pricelist_id = cenovnikSelect.val();
 		var percentage = procenatInput.val();
 		console.log('pricelist_id' + pricelist_id);
@@ -255,7 +255,7 @@ function copyPricelist(){
 		console.log('slanje poruke');
 		event.preventDefault();
 		return false;
-	});	
+	// });	
 }
 
 
@@ -281,7 +281,7 @@ function updatePricelist() {
 	var preduzeceIzmeniSelect = $('#preduzeceIzmeniSelect');
 	
 	
-	$("#doUpdate").on("click", function(event) {
+	// $("#doUpdate").on("click", function(event) {
 		var datum_vazenja = datumIzmeniInput.val();
 		var preduzece = preduzeceIzmeniSelect.val();
 		
@@ -317,7 +317,7 @@ function updatePricelist() {
 		return false;
 		
 		
-	});
+	// });
 }
 
 function deletePricelist(){

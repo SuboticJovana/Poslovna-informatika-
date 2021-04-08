@@ -67,7 +67,7 @@ function readServices(){
 	});
 }
 	function addPricelistItem(){
-	$('#doAdd').on('click',function(event){
+	// $('#doAdd').on('click',function(event){
 		var price = $('#cenaInput').val();
 		var pricelist = $('#cenovnikSelect').val();
 		var services =  $('#robaSelect').val();
@@ -107,6 +107,6 @@ function readServices(){
 		console.log('slanje poruke');
 		event.preventDefault();
 		return false;
-	});
+	// });
 	
 }
