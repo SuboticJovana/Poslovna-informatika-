@@ -2,6 +2,8 @@ package com.example.demo.servis;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+
 import com.example.demo.model.InvoiceItem;
 
 public interface InvoiceItemServiceInterface {
@@ -27,5 +29,5 @@ public interface InvoiceItemServiceInterface {
 //	InvoiceItem findByService(Services service);
 	
 	List<InvoiceItem> findAll();
-
+	 ResponseEntity report(Integer id);
 }

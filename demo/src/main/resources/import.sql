@@ -6,6 +6,8 @@ insert into enterprises(enterprise_id, name_enterprise, address, phone, fax,city
 insert into partners(partner_id, name, address, phone_number, fax, email, type_of_partner, city_id, enterprise_id)  values(1, "partner 1", "Laze Nancica 1", "11111", "", "partner@gmail.com", 0, 1, 1)
 insert into invoices(id, number, date_invoice, date_currency, total_base, total_pdv, total_amount, status, enterprise_id, partner_id)  values(1, 1,"2020-02-02", "2020-02-02",1,1,1,"waiting?", 1,1)
 insert into invoice_items(id, quantity, discount, unit_price, PDVBase, PDVAmount, total_amount, invoice_id, service_id)  values(1, 1,10, 100, 100, 100, 10000, 1, 1)
+insert into invoice_items(id, quantity, discount, unit_price, PDVBase, PDVAmount, total_amount, invoice_id, service_id)  values(2, 1,10, 100, 100, 100, 10000, 1, 1)
+insert into invoice_items(id, quantity, discount, unit_price, PDVBase, PDVAmount, total_amount, invoice_id, service_id)  values(3, 1,10, 100, 100, 100, 10000, 1, 1)
 insert into pdv_categories(id, name)  values(1, "category1")
 insert into pdv_rates(pdv_rate_id, percentage, date_of, pdv_category_id)  values(1, 10, "2020-03-03", 1 )
 

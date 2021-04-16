@@ -1,7 +1,6 @@
 function getInvoiceItem(){
 	readInvoice();
 
-
 $(document).on("click", '#add', function(event){
 	$('#addModalScrollable').modal('show');
 });
@@ -38,6 +37,12 @@ function readInvoice() {
 				}
 			});
 }
+function fakturaIzvestaj(){
+    var quantity = $('#inputKolicina').val();
+    window.open('http://localhost:8080/salesystem/invoiceItems/report/'+quantity);
+    location.reload();
+}
+
 function prikaziOdredjenIzvestaj(id){
 
 	

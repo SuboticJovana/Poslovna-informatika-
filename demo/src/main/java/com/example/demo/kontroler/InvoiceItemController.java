@@ -133,5 +133,10 @@ public class InvoiceItemController {
 		}		
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
-	
+	@GetMapping(value = "/reportInvoiceItem/{id}")
+	public ResponseEntity getReport(@PathVariable("id") Integer id){
+		
+		
+		return service.report(id);
+	}
 }

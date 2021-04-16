@@ -1,13 +1,34 @@
 package com.example.demo.servis;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.model.InvoiceItem;
 
 import com.example.demo.repozitorijum.InvoiceItemRepository;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 @Service
 public class InvoiceItemService implements InvoiceItemServiceInterface{
@@ -69,7 +90,41 @@ public class InvoiceItemService implements InvoiceItemServiceInterface{
 	public List<InvoiceItem> findAll() {
 		return repository.findAll();
 	}
-	
+
+	@Override
+	public ResponseEntity report(Integer id) {
+	String connectionUrl = "jdbc:mysql://localhost:3306/salesystem?serverTimezone=UTC";
+		
+		JasperPrint jp;
+		ByteArrayInputStream bis;
+		try {
+			File file = new File("src\\main\\resources\\IzvestajFaktura.jasper");
+			InputStream is = new FileInputStream(file);
+			Map<String, Object> param = new HashMap();
+			param.put("id", id);
+			Connection conn = DriverManager.getConnection(connectionUrl , "root", "osaroot");
+			//JasperPrint jp = JasperFillManager.fillReport(getClass().getResource("src\\main\\resources\\IzvestajFaktura.jasper").openStream(),
+		//			null, conn);
+			jp = JasperFillManager.fillReport(is,null, conn);
+			bis = new ByteArrayInputStream(JasperExportManager.exportReportToPdf(jp));
+			 
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Content-Disposition", "inline; filename=izvestaj_"+id +".pdf");
+
+			return ResponseEntity
+		       		.ok()
+		       		.headers(headers)
+		       		.contentType(MediaType.APPLICATION_PDF)
+		       		.body(new InputStreamResource(bis));
+		} catch (JRException | IOException | SQLException e) {
+			e.printStackTrace();
+			throw new ResponseStatusException(
+			          HttpStatus.NOT_FOUND, "Greska", e);
+		}
+	}
+	}
+
 	
 
-}
+
+

@@ -6,6 +6,11 @@ function readID(){
 	var id = window.location.search.slice(1).split('&')[0].split('=')[1];
 	console.log(id);
 }
+function fakturaIzvestaj(){
+	var id = window.location.search.slice(1).split('&')[0].split('=')[1];
+    window.location.replace("http://localhost:8080/salesystem/invoiceItems/reportInvoiceItem/"+id);
+    //location.reload();
+}
 function readDInvoice() {
 	var id = window.location.search.slice(1).split('&')[0].split('=')[1];
 	console.log(id);
@@ -52,14 +57,14 @@ function readDInvoice() {
 										'</td>'+
 							    	  '</tr>'	   
 								);
-		            idI.val(data.id);
+		          /*  idI.val(data.id);
 		            kolicinaI.val(data.quantity);
 		            popustI.val(data.discount);
 		            cenaI.val(data.unitPrice);
 		            osnovicaI.val(data.pdvBase);
 		            pdvI.val(data.pdvAmount);
 		            ukI.val(data.totalAmount);
-		           
+		           */
 				
 			
 			});
