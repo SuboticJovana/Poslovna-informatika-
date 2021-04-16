@@ -89,7 +89,7 @@ datumValute.max = new Date(new Date().getTime() - new Date().getTimezoneOffset()
         body: JSON.stringify(invoiceItems)
         }).then(res => res.json())
         .then(res => 
-            window.location.replace("http://localhost:8080/index.html")
+            window.location.replace("http://localhost:8080/ReportInvoiceItem.html")
         );
         event.preventDefault();
     }  ); 

@@ -101,8 +101,8 @@ public class InvoiceItemService implements InvoiceItemServiceInterface{
 			File file = new File("src\\main\\resources\\IzvestajFaktura.jasper");
 			InputStream is = new FileInputStream(file);
 			Map<String, Object> param = new HashMap();
-			param.put("id", id);
-			Connection conn = DriverManager.getConnection(connectionUrl , "root", "osaroot");
+			param.put("Param", id);
+			Connection conn = DriverManager.getConnection(connectionUrl , "root", "root");
 			//JasperPrint jp = JasperFillManager.fillReport(getClass().getResource("src\\main\\resources\\IzvestajFaktura.jasper").openStream(),
 		//			null, conn);
 			jp = JasperFillManager.fillReport(is,null, conn);

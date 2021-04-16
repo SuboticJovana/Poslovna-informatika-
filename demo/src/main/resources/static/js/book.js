@@ -28,10 +28,11 @@ function readBook() {
 					console.log(data[i].id)
 					//ovde za local var 
 					var datum= data[i].date_currency;
+					var datum2= data[i].date_invoice;
 					newRow = 
 						"<tr>" 
 							+ "<td class=\"id\">" + data[i].id + "</td>"
-							+ "<td class=\"date\">" + data[i].date_invoice + "</td>"
+							+ "<td class=\"date\">" + new Date(datum2).toLocaleDateString() + "</td>"
 							+ "<td class=\"enterprises\">" + data[i].enterpriseDTO.nameEnterprise + "</td>"
 							+ "<td class=\"enterprises\">" + new Date(datum).toLocaleDateString() + "</td>"
 							+ "<td class=\"date\">" + data[i].invoice_number + "</td>" +
