@@ -9,6 +9,7 @@ public class PoslovnaInformatikaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PoslovnaInformatikaApplication.class, args);
+		
 	}
 
 }
