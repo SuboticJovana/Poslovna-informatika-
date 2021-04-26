@@ -26,6 +26,7 @@ public class CityController {
 	@Autowired
 	private CityServiceInteface cityServiceInteface;
 	
+	
 	@GetMapping
 	public ResponseEntity<List<CityDTO>> getCities(){
 		List<City> cities = cityServiceInteface.findAll();
