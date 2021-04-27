@@ -13,24 +13,24 @@ public class CityDTO implements Serializable{
 	
 	private String city_name;
 	
-	public CityDTO() {
-		super();
-	}
-	
-	public CityDTO(String city_name) {
-		this.city_name=city_name;
-	}
-	
-	public CityDTO(int city_id, int ptt, String city_name) {
-		super();
-		this.city_id = city_id;
-		this.ptt = ptt;
-		this.city_name = city_name;
-	}
-	
-	public CityDTO(City c) {
-		this(c.getCity_id(), c.getPtt(), c.getName());
-	}
+//	public CityDTO() {
+//		super();
+//	}
+//	
+//	public CityDTO(String city_name) {
+//		this.city_name=city_name;
+//	}
+//	
+//	public CityDTO(int city_id, int ptt, String city_name) {
+//		super();
+//		this.city_id = city_id;
+//		this.ptt = ptt;
+//		this.city_name = city_name;
+//	}
+//	
+//	public CityDTO(City c) {
+//		this(c.getCity_id(), c.getPtt(), c.getName());
+//	}
 
 	public Integer getCity_id() {
 		return city_id;

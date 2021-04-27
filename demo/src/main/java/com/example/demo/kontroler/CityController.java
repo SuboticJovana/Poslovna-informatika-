@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.converters.CityConverter;
 import com.example.demo.dto.CityDTO;
 import com.example.demo.model.City;
 import com.example.demo.servis.CityServiceInteface;
@@ -26,13 +27,16 @@ public class CityController {
 	@Autowired
 	private CityServiceInteface cityServiceInteface;
 	
+	@Autowired
+	CityConverter cityConverter;
 	
-	@GetMapping
+	
+	@GetMapping(value="/all")
 	public ResponseEntity<List<CityDTO>> getCities(){
 		List<City> cities = cityServiceInteface.findAll();
 		List<CityDTO> citiesDTO = new ArrayList<CityDTO>();
 		for (City c : cities) {
-			citiesDTO.add(new CityDTO(c));
+			citiesDTO.add(cityConverter.toDTO(c));
 		}
 		return new ResponseEntity<List<CityDTO>>(citiesDTO, HttpStatus.OK);
 	}
@@ -43,18 +47,15 @@ public class CityController {
 		if(city == null) {
 			return new ResponseEntity<CityDTO>(HttpStatus.NOT_FOUND);
 		}
-		CityDTO cityDTO = new CityDTO(city);
+		CityDTO cityDTO = cityConverter.toDTO(city);
 		return new ResponseEntity<CityDTO>(cityDTO, HttpStatus.OK);
 	}
 	
-	@PostMapping(consumes="application/json")
+	@PostMapping(consumes="application/json", value="/add")
 	public ResponseEntity<CityDTO> saveCity(@RequestBody CityDTO cDTO){
 		City city = new City();
-		city.setCity_id(cDTO.getCity_id());
-		city.setPtt(cDTO.getPtt());
-		city.setName(cDTO.getCity_name());
-		cityServiceInteface.save(city);
-		return new ResponseEntity<CityDTO>(cDTO, HttpStatus.CREATED);
+		CityDTO cityDTO = cityConverter.toDTO(city);
+		return new ResponseEntity<CityDTO>(cityDTO, HttpStatus.CREATED);
 	}
 	
 	@PutMapping(value="/{city_id}",consumes="application/json")
@@ -63,11 +64,8 @@ public class CityController {
 		if (city == null) {
 			return new ResponseEntity<CityDTO>(HttpStatus.BAD_REQUEST);
 		}
-		city.setCity_id(cDTO.getCity_id());
-		city.setPtt(cDTO.getPtt());
-		city.setName(cDTO.getCity_name());
-		cityServiceInteface.save(city);
-		CityDTO cityDTO = new CityDTO(city);
+		City c = cityServiceInteface.save(cityConverter.toCity(cDTO));
+		CityDTO cityDTO = cityConverter.toDTO(c);
 		return new ResponseEntity<CityDTO>(cityDTO, HttpStatus.OK);
 	}
 	

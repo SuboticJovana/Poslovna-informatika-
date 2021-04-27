@@ -13,5 +13,6 @@ public interface PartnerServiceInteface {
 	void remove(Integer partner_id);
 	
 	List<Partner> findAll();
+
 	
 }

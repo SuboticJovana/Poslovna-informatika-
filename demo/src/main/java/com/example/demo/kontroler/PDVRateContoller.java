@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.converters.PDVRateConverter;
 import com.example.demo.dto.PDVRateDTO;
 import com.example.demo.model.PDVRate;
 import com.example.demo.servis.PDVRateServiceInterface;
@@ -25,12 +27,15 @@ public class PDVRateContoller {
 	@Autowired
 	private PDVRateServiceInterface pdvRateServiceInterface;
 	
-	@GetMapping
+	@Autowired
+	PDVRateConverter pdvRateConverter;
+	
+	@GetMapping(value="/all")
 	public ResponseEntity<List<PDVRateDTO>> getRates() {
 		List<PDVRate> rates = pdvRateServiceInterface.findAll();
 		List<PDVRateDTO> ratesDTO = new ArrayList<PDVRateDTO>();
 		for (PDVRate r : rates) {
-			ratesDTO.add(new PDVRateDTO(r));
+			ratesDTO.add(pdvRateConverter.toDTO(r));
 		}
 		return new ResponseEntity<List<PDVRateDTO>>(ratesDTO, HttpStatus.OK);
 		
@@ -42,32 +47,26 @@ public class PDVRateContoller {
 		if(rate == null) {
 			return new ResponseEntity<PDVRateDTO>(HttpStatus.NOT_FOUND);
 		}
-		PDVRateDTO rateDTO = new PDVRateDTO(rate);
+		PDVRateDTO rateDTO = pdvRateConverter.toDTO(rate);
 		return new ResponseEntity<PDVRateDTO>(rateDTO, HttpStatus.OK);
 	}
 	
-	@PostMapping(consumes="application/json")
+	@PostMapping(consumes="application/json", value="/add")
 	public ResponseEntity<PDVRateDTO> saveRate(@RequestBody PDVRateDTO rDTO){
-		PDVRate rate = new PDVRate();
-		rate.setPdv_rate_id(rDTO.getPdv_rate_id());
-		rate.setPercentage(rDTO.getPercentage());
-		rate.setDateOf(rDTO.getDate());
-		pdvRateServiceInterface.save(rate);
-		return new ResponseEntity<PDVRateDTO>(rDTO, HttpStatus.CREATED);
+		PDVRate r = pdvRateConverter.toPdvRate(rDTO);
+		PDVRateDTO pdvRateDTO = pdvRateConverter.toDTO(r);
+		return new ResponseEntity<PDVRateDTO>(pdvRateDTO , HttpStatus.CREATED);
 	}
 
-	@PutMapping(value="/{drv_rate_id}", consumes="application/json")
+	@PutMapping(value="/{pdv_rate_id}", consumes="application/json")
 	public ResponseEntity<PDVRateDTO> updateRate(@RequestBody PDVRateDTO rDTO, @PathVariable("pdv_rate_id") Integer pdv_rate_id){
 		PDVRate rate = pdvRateServiceInterface.findOne(pdv_rate_id);
 		if (rate == null) {
 			return new ResponseEntity<PDVRateDTO>(HttpStatus.BAD_REQUEST);
 		}				
-		rate.setPdv_rate_id(rDTO.getPdv_rate_id());
-		rate.setPercentage(rDTO.getPercentage());
-		rate.setDateOf(rDTO.getDate());
-		pdvRateServiceInterface.save(rate);
-		PDVRateDTO rateDTO = new PDVRateDTO(rate);
-		return new ResponseEntity<PDVRateDTO>(rateDTO, HttpStatus.OK);	
+		PDVRate r = pdvRateServiceInterface.save(pdvRateConverter.toPdvRate(rDTO));
+		PDVRateDTO pdvRateDTO = pdvRateConverter.toDTO(r);
+		return new ResponseEntity<PDVRateDTO>(pdvRateDTO, HttpStatus.OK);	
 	}
 	
 	@DeleteMapping(value="/{pdv_rate_id}")

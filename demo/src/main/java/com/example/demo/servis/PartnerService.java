@@ -32,6 +32,10 @@ public class PartnerService implements PartnerServiceInteface{
 	public List<Partner> findAll() {
 		return partnerRepository.findAll();
 	}
+
+
+	
+	
 	
 	
 }

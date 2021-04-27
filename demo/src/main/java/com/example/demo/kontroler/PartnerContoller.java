@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.converters.PartnerConverter;
 import com.example.demo.dto.PartnerDTO;
 import com.example.demo.model.Partner;
 import com.example.demo.servis.PartnerServiceInteface;
@@ -26,12 +27,15 @@ public class PartnerContoller {
 	@Autowired
 	private PartnerServiceInteface partnerServiceInteface;
 	
-	@GetMapping
+	@Autowired
+	PartnerConverter partnerConverter;
+	
+	@GetMapping(value="/all")
 	public ResponseEntity<List<PartnerDTO>> getPartners() {
 		List<Partner> partners = partnerServiceInteface.findAll();
 		List<PartnerDTO> partnersDTO = new ArrayList<PartnerDTO>();
 		for (Partner p : partners) {
-			partnersDTO.add(new PartnerDTO(p));
+			partnersDTO.add(partnerConverter.toDTO(p));
 		}
 		return new ResponseEntity<List<PartnerDTO>>(partnersDTO, HttpStatus.OK);
 	}
@@ -42,21 +46,15 @@ public class PartnerContoller {
 		if(partner == null) {
 			return new ResponseEntity<PartnerDTO>(HttpStatus.NOT_FOUND);
 		}
-		PartnerDTO partnerDTO = new PartnerDTO(partner);
+		PartnerDTO partnerDTO = partnerConverter.toDTO(partner);
 		return new ResponseEntity<PartnerDTO>(partnerDTO, HttpStatus.OK);
 	}
 	
-	@PostMapping(consumes = "application/json")
+	@PostMapping(consumes = "application/json", value="/add")
 	public ResponseEntity<PartnerDTO> savePartner(@RequestBody PartnerDTO pDTO){
-		Partner partner = new Partner();
-		partner.setPartner_id(pDTO.getPartner_id());
-		partner.setName(pDTO.getPartner_name());
-		partner.setAddress(pDTO.getAddress());
-		partner.setPhoneNumber(pDTO.getPhone_number());
-		partner.setFax(pDTO.getFax());
-		partner.setEmail(pDTO.getEmail());
-		partnerServiceInteface.save(partner);
-		return new ResponseEntity<PartnerDTO>(pDTO, HttpStatus.CREATED);
+		Partner p = partnerConverter.toPartner(pDTO);
+		PartnerDTO partnerDTO = partnerConverter.toDTO(p);
+		return new ResponseEntity<PartnerDTO>(partnerDTO, HttpStatus.CREATED);
 	}
 	
 	@PutMapping(value="/{partner_id}", consumes="appliction/json")
@@ -65,15 +63,9 @@ public class PartnerContoller {
 		if (partner == null) {
 			return new ResponseEntity<PartnerDTO>(HttpStatus.BAD_REQUEST);
 		}
-		partner.setPartner_id(pDTO.getPartner_id());
-		partner.setName(pDTO.getPartner_name());
-		partner.setAddress(pDTO.getAddress());
-		partner.setPhoneNumber(pDTO.getPhone_number());
-		partner.setFax(pDTO.getFax());
-		partner.setEmail(pDTO.getEmail());
-		partnerServiceInteface.save(partner);
-		PartnerDTO partnerDTO = new PartnerDTO(partner);
-		return new ResponseEntity<PartnerDTO>(partnerDTO, HttpStatus.OK);
+		Partner p = partnerServiceInteface.save(partnerConverter.toPartner(pDTO));
+		PartnerDTO partnerDTO = partnerConverter.toDTO(p);
+		return new ResponseEntity<PartnerDTO>(partnerDTO, HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping(value="/{partner_id}")

@@ -19,27 +19,31 @@ public class PartnerDTO implements Serializable{
 	
 	private String email;
 	
+	private CityDTO cityDTO;
+	
+	private EnterpriseDTO enterpriseDTO;
+	
 	public PartnerDTO(){
 		super();
 	}
 	
-	public PartnerDTO(String partner_name) {
-		this.partner_name=partner_name;
-	}
-	
-	public PartnerDTO(int partner_id, String partner_name, String address, String phone_number, String fax, String email) {
-		super();
-		this.partner_id = partner_id;
-		this.partner_name = partner_name;
-		this.address = address;
-		this.phone_number = phone_number;
-		this.fax = fax;
-		this.email = email;
-	}
-	
-	public PartnerDTO(Partner p) {
-		this(p.getPartner_id(), p.getName(), p.getAddress(), p.getPhoneNumber(), p.getFax(), p.getEmail());
-	}
+//	public PartnerDTO(String partner_name) {
+//		this.partner_name=partner_name;
+//	}
+//	
+//	public PartnerDTO(int partner_id, String partner_name, String address, String phone_number, String fax, String email) {
+//		super();
+//		this.partner_id = partner_id;
+//		this.partner_name = partner_name;
+//		this.address = address;
+//		this.phone_number = phone_number;
+//		this.fax = fax;
+//		this.email = email;
+//	}
+//	
+//	public PartnerDTO(Partner p) {
+//		this(p.getPartner_id(), p.getName(), p.getAddress(), p.getPhoneNumber(), p.getFax(), p.getEmail());
+//	}
 
 	public Integer getPartner_id() {
 		return partner_id;
@@ -88,6 +92,23 @@ public class PartnerDTO implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public CityDTO getCityDTO() {
+		return cityDTO;
+	}
+
+	public void setCityDTO(CityDTO cityDTO) {
+		this.cityDTO = cityDTO;
+	}
+
+	public EnterpriseDTO getEnterpriseDTO() {
+		return enterpriseDTO;
+	}
+
+	public void setEnterpriseDTO(EnterpriseDTO enterpriseDTO) {
+		this.enterpriseDTO = enterpriseDTO;
+	}
+	
 	
 	
 }

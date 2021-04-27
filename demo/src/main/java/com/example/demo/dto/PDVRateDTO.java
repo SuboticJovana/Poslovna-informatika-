@@ -14,6 +14,8 @@ public class PDVRateDTO implements Serializable{
 	
 	private Date date;
 	
+	private PDVCategoryDTO pdvCategoryDTO;
+	
 	public PDVRateDTO() {
 		super();
 	}
@@ -51,6 +53,14 @@ public class PDVRateDTO implements Serializable{
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public PDVCategoryDTO getPdvCategoryDTO() {
+		return pdvCategoryDTO;
+	}
+
+	public void setPdvCategoryDTO(PDVCategoryDTO pdvCategoryDTO) {
+		this.pdvCategoryDTO = pdvCategoryDTO;
 	}
 	
 	
