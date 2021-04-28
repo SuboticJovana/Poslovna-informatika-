@@ -7,8 +7,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -43,9 +41,9 @@ public class Partner implements Serializable{
 	@Column(name="email", unique=false, nullable=false)
 	private String email;
 	
-	@Column(name="type_of_partner", unique=false, nullable=false )
-	@Enumerated(EnumType.ORDINAL)
-	private TypeOfPartner type_of_partner;
+//	@Column(name="type_of_partner", unique=false, nullable=false )
+//	@Enumerated(EnumType.ORDINAL)
+//	private TypeOfPartner type_of_partner;
 	
 	@ManyToOne
 	@JoinColumn(name="city_id", referencedColumnName="city_id", nullable=false)
@@ -110,13 +108,13 @@ public class Partner implements Serializable{
 		this.email = email;
 	}
 
-	public TypeOfPartner getType_of_partner() {
-		return type_of_partner;
-	}
-
-	public void setType_of_partner(TypeOfPartner type_of_partner) {
-		this.type_of_partner = type_of_partner;
-	}
+//	public TypeOfPartner getType_of_partner() {
+//		return type_of_partner;
+//	}
+//
+//	public void setType_of_partner(TypeOfPartner type_of_partner) {
+//		this.type_of_partner = type_of_partner;
+//	}
 
 	
 	public Enterprise getEnterprise() {
@@ -139,6 +137,6 @@ public class Partner implements Serializable{
 		this.city = city;
 	}
 	
-	
+//    <h1 class="logo"><a href="index.html" alt="Logo"></a>Salesystem NAJ</h1>
 	
 }

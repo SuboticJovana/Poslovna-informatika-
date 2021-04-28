@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+		<script src="js/cities.js"></script>
+		<script src="js/functions.js"></script>
+		
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet"  type="text/css" href="css/main.css">
+		
+		<script src="https://kit.fontawesome.com/9497a339e1.js" crossorigin="anonymous"></script>
+		
+		<title>Cities</title>
+		
+		<script>
+			$(document).ready(getCities);
+		</script>		
+	</head>
+	
+	<body>
+	
+	<div class="container">	
+	
+			<!-- Toolbar -->	
+			<div class="toolbar">	
+				<button id="add" type="button" class="btn btn-outline-secondary">Dodaj</button>
+				<button id="edit" type="button" class="btn btn-outline-secondary">Izmeni</button>
+				<button id="delete" type="button" class="btn btn-outline-secondary">Obriši</button>
+			</div>
+			<!-- Toolbar END-->
+			
+			<!-- READ -->
+			<!-- Table -->
+			<table id="dataTable" class="table">
+				<thead>
+					<tr>
+						<th>Postanski broj</th>
+						<th>Naziv</th>
+					</tr>
+				</thead>
+				<tbody id="dataTableBody">
+				</tbody>
+			</table>
+			<!-- Table END-->
+			
+
+			<!-- READ END-->
+	
+	</div>
+	
+	</body>
+			
+</html>

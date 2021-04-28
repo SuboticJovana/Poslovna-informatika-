@@ -3,7 +3,7 @@ insert into enterprises(enterprise_id, name_enterprise, address, phone, fax,city
 insert into enterprises(enterprise_id, name_enterprise, address, phone, fax,city_id)  values(2, "Auto delovi DOO", "Glavna 55", "+381674995888", "zzz",1)
 insert into enterprises(enterprise_id, name_enterprise, address, phone, fax,city_id)  values(3, "Soft DOO", "Novosadska 55", "+381674995888", "zzz",1)
 
-insert into partners(partner_id, name, address, phone_number, fax, email, type_of_partner, city_id, enterprise_id)  values(1, "partner 1", "Laze Nancica 1", "11111", "", "partner@gmail.com", 0, 1, 1)
+insert into partners(partner_id, name, address, phone_number, fax, email,city_id, enterprise_id)  values(1, "partner 1", "Laze Nancica 1", "11111", "111", "partner@gmail.com", 1, 1)
 insert into invoices(id, number, date_invoice, date_currency, total_base, total_pdv, total_amount, status, enterprise_id, partner_id)  values(1, 1,"2020-02-02", "2020-02-02",1,1,1,"waiting?", 1,1)
 insert into invoice_items(id, quantity, discount, unit_price, PDVBase, PDVAmount, total_amount, invoice_id, service_id)  values(1, 1,10, 100, 100, 100, 10000, 1, 1)
 insert into invoice_items(id, quantity, discount, unit_price, PDVBase, PDVAmount, total_amount, invoice_id, service_id)  values(2, 1,10, 100, 100, 100, 10000, 1, 1)
