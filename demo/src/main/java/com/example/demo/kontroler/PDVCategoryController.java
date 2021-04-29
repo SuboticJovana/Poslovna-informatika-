@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.converters.PDVCategoryConverter;
 import com.example.demo.dto.PDVCategoryDTO;
 import com.example.demo.model.PDVCategory;
 import com.example.demo.servis.PDVCategoryServiceInterface;
@@ -27,12 +28,15 @@ public class PDVCategoryController {
 	@Autowired
 	private PDVCategoryServiceInterface service;
 	
-	@GetMapping
+	@Autowired
+	PDVCategoryConverter pdvCategoryConverter;
+	
+	@GetMapping(value="/all")
 	public ResponseEntity<List<PDVCategoryDTO>> getPDVCategories() {
 	List<PDVCategory> units = service.findAll();
 	List<PDVCategoryDTO> unitsDTO = new ArrayList<PDVCategoryDTO>();
 	for (PDVCategory u : units) {
-		unitsDTO.add(new PDVCategoryDTO(u));
+		unitsDTO.add(pdvCategoryConverter.toDTO(u));
 	}
 	return new ResponseEntity<List<PDVCategoryDTO>>(unitsDTO, HttpStatus.OK);
 

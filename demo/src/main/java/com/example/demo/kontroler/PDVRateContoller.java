@@ -54,7 +54,8 @@ public class PDVRateContoller {
 	@PostMapping(consumes="application/json", value="/add")
 	public ResponseEntity<PDVRateDTO> saveRate(@RequestBody PDVRateDTO rDTO){
 		PDVRate r = pdvRateConverter.toPdvRate(rDTO);
-		PDVRateDTO pdvRateDTO = pdvRateConverter.toDTO(r);
+		PDVRate pr = pdvRateServiceInterface.save(r);
+		PDVRateDTO pdvRateDTO = pdvRateConverter.toDTO(pr);
 		return new ResponseEntity<PDVRateDTO>(pdvRateDTO , HttpStatus.CREATED);
 	}
 

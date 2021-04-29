@@ -50,6 +50,43 @@
 			
 
 			<!-- READ END-->
+			
+			
+			<!-- ADD -->
+			<div class="modal fade" id="addModalScrollable" tabindex="-1" role="dialog" aria-labelledby="addModalScrollableTitle" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-scrollable" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="addModalScrollableTitle">Dodavanje stope pdv-a</h5>
+			        <button type="button" class="close addModalClose" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <form>
+					  <div class="form-group">
+					    <label for="procenatInput">Procenat stope</label>
+					    <input type="text" class="form-control" id="procenatInput" aria-describedby="procenatHelp" placeholder="Unesite procenat">
+					  </div>
+					  <div class="form-group">
+					    <label for="datumInput">Datum</label>
+					    <input type="date" class="form-control" id="datumInput" aria-describedby="datumHelp" placeholder="Unesite datum">
+					  </div>
+					  <div class="form-group">
+					    <label for="kategorijaSelect">PDV kategorija</label>
+					    <select class="form-control"  id="kategorijaSelect">					    
+					    </select>
+					  </div>
+					</form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary addModalClose" >Otkaži</button>
+			        <button type="button" id="doAdd" class="btn btn-primary">Sačuvaj</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- ADD END-->
 	
 	</div>
 	

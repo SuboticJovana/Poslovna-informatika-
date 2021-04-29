@@ -53,8 +53,9 @@ public class CityController {
 	
 	@PostMapping(consumes="application/json", value="/add")
 	public ResponseEntity<CityDTO> saveCity(@RequestBody CityDTO cDTO){
-		City city = new City();
-		CityDTO cityDTO = cityConverter.toDTO(city);
+		City c = cityConverter.toCity(cDTO);
+		City cy = cityServiceInteface.save(c);
+		CityDTO cityDTO = cityConverter.toDTO(cy);
 		return new ResponseEntity<CityDTO>(cityDTO, HttpStatus.CREATED);
 	}
 	

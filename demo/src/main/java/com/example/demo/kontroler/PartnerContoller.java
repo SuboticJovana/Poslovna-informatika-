@@ -53,7 +53,8 @@ public class PartnerContoller {
 	@PostMapping(consumes = "application/json", value="/add")
 	public ResponseEntity<PartnerDTO> savePartner(@RequestBody PartnerDTO pDTO){
 		Partner p = partnerConverter.toPartner(pDTO);
-		PartnerDTO partnerDTO = partnerConverter.toDTO(p);
+		Partner pa = partnerServiceInteface.save(p);
+		PartnerDTO partnerDTO = partnerConverter.toDTO(pa);
 		return new ResponseEntity<PartnerDTO>(partnerDTO, HttpStatus.CREATED);
 	}
 	
