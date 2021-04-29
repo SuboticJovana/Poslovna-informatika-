@@ -24,9 +24,9 @@ public class User {
 	@Column(name="password", unique=false, nullable=false)
 	private String password;
 	
-//	@ManyToOne
-//	@JoinColumn(name="enterprise_id", referencedColumnName="enterprise_id", nullable=false)
-//	 private Enterprise enterprise;
+	@ManyToOne
+	@JoinColumn(name="enterprise_id", referencedColumnName="enterprise_id", nullable=false)
+	 private Enterprise enterprise;
 
 	public Integer getUser_id() {
 		return user_id;
@@ -52,13 +52,13 @@ public class User {
 		this.password = password;
 	}
 
-//	public Enterprise getEnterprise() {
-//		return enterprise;
-//	}
-//
-//	public void setEnterprise(Enterprise enterprise) {
-//		this.enterprise = enterprise;
-//	}
-//	
+	public Enterprise getEnterprise() {
+		return enterprise;
+	}
+
+	public void setEnterprise(Enterprise enterprise) {
+		this.enterprise = enterprise;
+	}
+	
 	
 }

@@ -45,6 +45,9 @@ public class Enterprise implements Serializable {
 	@JoinColumn(name="city_id", referencedColumnName="city_id", nullable=false)
 	 private City city;
 	
+	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="enterprise")
+	private Set<User> users = new HashSet<User>();
+
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="enterprise")
 	private Set<ServiceGroup> groups = new HashSet<ServiceGroup>();

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+			<script src="js/bootstrap.js"></script>
+		<script src="js/services.js"></script>
+		
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet"  type="text/css" href="css/main.css">
+		
+		<script src="https://kit.fontawesome.com/9497a339e1.js" crossorigin="anonymous"></script>
+		
+		<title>Services</title>
+				
+	</head>
+	<body>
+		<div class="container">		
+			
+			<!-- Toolbar -->	
+			<div class="toolbar">
+				<button id="add-service" type="button" class="btn btn-outline-secondary">Dodaj robu</button>
+				<button id="edit-service" type="button" class="btn btn-outline-secondary">Izmeni robu</button>
+				<button id="delete-service" type="button" class="btn btn-outline-secondary">Obriši robu</button>
+			</div>
+			<!-- Toolbar END-->
+			
+			<!-- READ -->
+			<!-- Table -->
+			<table id="services-table" class="table">
+				<thead>
+					<tr>
+						<th>Naziv</th>
+						<th>Opis</th>
+                        <th>Dobra</th>
+						<th>Grupa robe</th>
+                        <th>Jedinica mere</th>
+					</tr>
+				</thead>
+				<tbody id="services-table-body">
+				</tbody>
+			</table>
+			
+			<!-- ADD SERVICE -->
+			<div id="add-service-window" hidden>
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="addModalScrollableTitle">Dodavanje servica</h5>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="form-group">
+                            <label for="name">Naziv</label>
+                            <input type="text" class="form-control" id= "name" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Opis</label>
+                            <input type="text" class="form-control" id= "description" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="goods">Dobra</label>
+                            <input type="text" class="form-control" id= "goods" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="service-group-dropdown">Izaberite grupu robe</label>
+                            <select class="form-select" id="service-group-dropdown" aria-label="">
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="unit-dropdown">Izaberite jedinicu mere</label>
+                            <select class="form-select" id="unit-dropdown" aria-label="">
+                            </select>
+                          </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" id="add-service-button" class="btn btn-primary">Dodaj robu</button>   
+                      <button type="button" id="cancel" class="btn btn-primary">
+                          <a href="index.html">Nazad</a>
+                      </button>
+                  </div>
+                  </div>
+                </div>
+                </div>
+
+			<!-- EDIT SERVICE-->
+
+      <!-- DELETE SERVICE-->
+
+      <div id="delete-service-window" hidden>
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addModalScrollableTitle">Brisanje</h5>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                    <label for="delete-service-dropdown">Izaberite robu</label>
+                    <select class="form-select" id="delete-service-dropdown" aria-label="">
+                    </select>
+                  </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="delete-service-button" class="btn btn-primary">Izbrisi</button>   
+              <button type="button" id="cancel" class="btn btn-primary">
+                  <a href="index.html">Nazad</a>
+              </button>
+          </div>
+          </div>
+        </div>
+        </div>		
+
+		</div>
+	
+	</body>
+	
+			
+</html>

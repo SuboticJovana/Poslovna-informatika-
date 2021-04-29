@@ -1,3 +1,13 @@
+const user = localStorage.getItem("salesystem-user");
+if(user!=null || user!=""){
+  document.getElementById('menu').style.display="block";
+  document.getElementById('logout').style.visibility = 'visible';
+  document.getElementById('loginForm').style.display="none";
+}else{
+   document.getElementById('loginForm').style.display="visible";
+  document.getElementById('logout').style.visibility = 'hidden';
+}
+
 document.getElementById("login").addEventListener('click',function (event)
 {
     if(document.getElementById('username').value == "" || document.getElementById('password').value ==""){
@@ -18,10 +28,11 @@ document.getElementById("login").addEventListener('click',function (event)
     }).then(res => res.json())
     .then(res => 
         {
-            if(res==true){
+            if(res!=null){
                 document.getElementById('loginForm').style.display="none";
                 document.getElementById('menu').style.display="block";
-               // localStorage.setItem("salesystem-user", document.getElementById('username').value);
+                localStorage.setItem("salesystem-user", document.getElementById('username').value);
+                localStorage.setItem("salesystem-enterprise", res.enterprise_id);
             }else{
                 alert("Podaci nisu ispravni, pokusajte ponovo!");
             }
@@ -31,8 +42,10 @@ document.getElementById("login").addEventListener('click',function (event)
 }  ); 
 
 document.getElementById("logout").addEventListener('click',function (event){
-    // localStorage.removeItem("salesystem-user");
+    localStorage.removeItem("salesystem-user");
+    localStorage.removeItem("salesystem-enterprise");
     document.getElementById('menu').style.display="none";
-   // document.getElementById('logout').style.visibility = 'hidden';
-    document.getElementById('loginForm').style.display="block";      
+    document.getElementById('logout').style.visibility = 'hidden';
+    document.getElementById('loginForm').style.display="block"; 
+    event.preventDefault();     
 })

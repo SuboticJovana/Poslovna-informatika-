@@ -1,15 +1,19 @@
 package com.example.demo.dto;
 
+import java.io.Serializable;
+
 import com.example.demo.model.City;
 import com.example.demo.model.User;
 
-public class UserDTO {
+public class UserDTO implements Serializable{
 	
 	private Integer user_id;
 	
 	private String username;
 	
 	private String password;
+	
+	private Long enterprise_id;
 	
 	public UserDTO() {
 		super();
@@ -21,6 +25,13 @@ public class UserDTO {
 
 	}
 	
+	public UserDTO(Integer user_id, String username,String password,Long enterprise_id) {
+		super();
+		this.user_id = user_id;
+		this.username = username;
+		this.password = password;
+		this.enterprise_id = enterprise_id;
+	}
 	public UserDTO(Integer user_id, String username,String password) {
 		super();
 		this.user_id = user_id;
@@ -54,6 +65,14 @@ public class UserDTO {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Long getEnterprise_id() {
+		return enterprise_id;
+	}
+
+	public void setEnterprise_id(Long long1) {
+		this.enterprise_id = long1;
 	}
 
 	

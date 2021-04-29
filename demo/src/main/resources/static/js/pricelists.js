@@ -1,8 +1,10 @@
 function getPricelists(){
 	readPricelists();
-	readEnterprises();
-	readEnterprises2();
-	readPricelists2();
+//	readEnterprises();
+	//readEnterprises2();
+	//readPricelists2();
+	addPricelistToSelect();
+	addPricelistToSelect2();
 	//var selectedRow;
 	var pricelist = [];
 
@@ -22,6 +24,7 @@ function getPricelists(){
 	
 	
 	$(document).on("click", '#add', function(event){
+		readEnterprises();
 		$('#addModalScrollable').modal('show');
 	});
 	
@@ -35,6 +38,7 @@ function getPricelists(){
 	});
 	
 	$(document).on("click", '#edit', function(event){
+		readEnterprises2();
 		$('#updateModalScrollable').modal('show');
 	});
 	
@@ -48,11 +52,7 @@ function getPricelists(){
 	});
 	
 	$(document).on("click", '#delete', function(event){
-		var name = getNameOfSelectedEntityPricelist();
-		if(name!=null){
-			$('#deletePromptText').text("Obrisati cenovnik sa datumom: " + name);
-			$('#deletePromptModal').modal('show');
-		}
+		$('#deletePromptModal').modal('show');
 	});
 	
 	$(document).on("click", '.deletePromptClose', function(event){
@@ -65,6 +65,7 @@ function getPricelists(){
 	});
 	
 	$(document).on("click", '#copy', function(event){
+		addPricelistToSelectCopy();
 		$('#copyModalScrollable').modal('show');
 	});
 	
@@ -114,7 +115,7 @@ function readPricelists() {
 				});
 }
 
-function readPricelists2(){
+function addPricelistToSelectCopy(){
 	console.log('test');
 	$.ajax({
 		url : "http://localhost:8080/salesystem/pricelists/all"
@@ -140,8 +141,6 @@ function readEnterprises(){
 	}).then(
 		function(data) {
 			$("#preduzeceSelect").empty();
-
-				
 			$.each(data, function (i, item) {
 			    $('#preduzeceSelect').append($('<option>', { 
 			        value: item.enterprise_id,
@@ -152,6 +151,41 @@ function readEnterprises(){
 		}
 	);
 }
+
+
+//add to combobox pricelists
+
+function addPricelistToSelect(){
+	$.ajax({
+		url : "http://localhost:8080/salesystem/pricelists/all"
+	}).then(
+		function(data) {
+			$("#cenovnikEditSelect").empty();
+			$.each(data, function (i, item) {
+			    $('#cenovnikEditSelect').append($('<option>', { 
+			        value: item.pricelist_id,
+			        text : item.date_from
+			    }));
+			});	
+		}
+	);
+}
+function addPricelistToSelect2(){
+	$.ajax({
+		url : "http://localhost:8080/salesystem/pricelists/all"
+	}).then(
+		function(data) {
+			$("#cenovnikDeleteSelect").empty();
+			$.each(data, function (i, item) {
+			    $('#cenovnikDeleteSelect').append($('<option>', { 
+			        value: item.pricelist_id,
+			        text : item.date_from
+			    }));
+			});	
+		}
+	);
+}
+
 
 function readEnterprises2() {
 	$.ajax({
@@ -223,7 +257,6 @@ function copyPricelist(){
 	var cenovnikSelect = $('#cenovnikSelect');
 	var procenatInput =$('#procenatInput')
 	
-	// $('#doCopy').on('click', function(event){
 		var pricelist_id = cenovnikSelect.val();
 		var percentage = procenatInput.val();
 		console.log('pricelist_id' + pricelist_id);
@@ -248,8 +281,9 @@ function copyPricelist(){
 			contentType:'application/json; charset=utf-8',
 			dataType:'json',
 			success : function(data){
-				alert('Cenovnik je kopiran')
+				alert('Cenovnik je kopiran');
 				cenovnikSelect.val("");
+				readPricelists();
 			}
 		})
 		console.log('slanje poruke');
@@ -260,53 +294,34 @@ function copyPricelist(){
 
 
 function updatePricelist() {
-	
-	var pricelist = [];
-
-	$(document).on("click",'tr',function(event){
-		highlightRow(this);
-		$('#dataTable').on('click','tr', function(event){ //ili izbrisati ovu liniju
-			pricelist.length = 0;
-			var selectedRow = $(this);
-			var td = selectedRow.children('td');
-			for (var i = 0; i < td.length; ++i) {
-				pricelist.push(td.eq(i).text());
-				
-			}
-		}); //i ovu
-		console.log(pricelist);
-	});
-	
-	var datumIzmeniInput = $('#datumIzmeniInput');
-	var preduzeceIzmeniSelect = $('#preduzeceIzmeniSelect');
-	
-	
-	// $("#doUpdate").on("click", function(event) {
+		var datumIzmeniInput = $('#datumIzmeniInput');
+		var izaberiCenovnik = $('#cenovnikEditSelect');
+		var preduzeceIzmeniSelect = $('#preduzeceIzmeniSelect');
 		var datum_vazenja = datumIzmeniInput.val();
 		var preduzece = preduzeceIzmeniSelect.val();
-		
+		var izabranCenovnik = izaberiCenovnik.val();
 
 		console.log('datum_vazenja: ' + datum_vazenja);
+		console.log('izabran cenovnik: ' + izabranCenovnik);
 		console.log('preduzece: ' + preduzece);
 			
 		var params = {
-//				'pricelist_id': pricelist_id,
+				'pricelist_id': izabranCenovnik,
 				'date_from': datum_vazenja,
 				'enterpriseDTO': {
 					'enterprise_id' : preduzece
 				}
-				
 		}
 		
 		$.ajax({
-			url:"http://localhost:8080/salesystem/pricelists/" + pricelist.pricelist_id,
+			url:"http://localhost:8080/salesystem/pricelists/" + izabranCenovnik,
 			type:"PUT",
 			data: JSON.stringify(params),
 			contentType:"application/json; charset=utf-8",
 			dataType:"json",
 			success:function(data){
 				console.log(data);
-				alert('Izmena cenovnika');
+				readPricelists();
 				datumIzmeniInput.val("");
 				preduzeceIzmeniSelect.val("");
 			}
@@ -321,12 +336,13 @@ function updatePricelist() {
 }
 
 function deletePricelist(){
-	var pricelist_id = getIdOfSelectedEntityPricelist();
-	console.log(pricelist_id);
+	var izaberiCenovnik = $('#cenovnikDeleteSelect');
+	var izabranCenovnik = izaberiCenovnik.val();
 	$.ajax({
-    	url: "http://localhost:8080/salesystem/pricelists/" + pricelist.pricelist_id,
+    	url: "http://localhost:8080/salesystem/pricelists/" + izabranCenovnik,
     	type: "DELETE",
     	success: function(){
+    		alert('Izbrisali ste cenovnik!');
     		readPricelists();
         }
 	});

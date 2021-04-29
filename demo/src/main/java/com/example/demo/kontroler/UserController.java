@@ -25,12 +25,14 @@ public class UserController {
 	private UserServiceInterface service;
 	
 	@PostMapping(consumes="application/json")
-	public ResponseEntity<Boolean> login(@RequestBody UserDTO userDTO){
-		User u = service.findByUsernameAndPassword(userDTO.getUsername(),  userDTO.getPassword());
+	public ResponseEntity<UserDTO> login(@RequestBody UserDTO userDTO){
+		User u = service.findByUsernameAndPassword(userDTO.getUsername(),userDTO.getPassword());
 		if (u==null) {
-			return new ResponseEntity<Boolean>(false, HttpStatus.OK); 
+			return new ResponseEntity<UserDTO>(HttpStatus.NOT_FOUND); 
 		}else {
-			return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+			UserDTO uDTO = new UserDTO();
+			uDTO.setEnterprise_id(u.getEnterprise().getEnterprise_id());
+			return new ResponseEntity<UserDTO>(uDTO, HttpStatus.OK);
 		}
 	}
 }
