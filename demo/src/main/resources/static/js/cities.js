@@ -1,5 +1,61 @@
 function getCities(){
 	readCities();
+	addCityToSelect();
+	addCityToSelect2();
+	var city = [];
+	
+	$(document).on("click",'tr',function(event){
+		highlightRow(this);
+		$('#dataTable').on('click','tr', function(event){ //ili izbrisati ovu liniju
+			pricelist.length = 0;
+			var selectedRow = $(this);
+			var td = selectedRow.children('td');
+			for (var i = 0; i < td.length; ++i) {
+				city.push(td.eq(i).text());
+				
+			}
+		}); //i ovu
+		console.log(city);
+	});
+	
+	$(document).on("click", '#add', function(event){
+		$('#addModalScrollable').modal('show');
+	});
+	
+	$(document).on("click", '#doAdd', function(event){
+		addCity();
+		$('#addModalScrollable').modal('hide');				
+	});
+	
+	$(document).on("click", '.addModalClose', function(event){
+		$('#addModalScrollable').modal('hide');
+	});
+	
+	$(document).on("click", '#edit', function(event){
+		$('#updateModalScrollable').modal('show');
+	});
+	
+	$(document).on("click", "#doUpdate", function(event) {
+		updateCity();
+		$('#updateModalScrollable').modal('hide');
+	});
+	
+	$(document).on("click", '.updateModalClose', function(event) {
+		$('#updateModalScrollable').modal('hide');
+	});
+	
+	$(document).on("click", '#delete', function(event){
+		$('#deletePromptModal').modal('show');
+	});
+	
+	$(document).on("click", '.deletePromptClose', function(event){
+		$('#deletePromptModal').modal('hide');
+	});
+	
+	$(document).on("click", '#doDelete', function(event){
+		deleteCity();
+		$('#deletePromptModal').modal('hide');
+	});
 }
 
 function readCities() {
@@ -20,18 +76,7 @@ function readCities() {
 				}
 			});
 	
-	$(document).on("click", '#add', function(event){
-		$('#addModalScrollable').modal('show');
-	});
-	
-	$(document).on("click", '#doAdd', function(event){
-		addCity();
-		$('#addModalScrollable').modal('hide');				
-	});
-	
-	$(document).on("click", '.addModalClose', function(event){
-		$('#addModalScrollable').modal('hide');
-	});
+
 }
 
 function addCity(){
@@ -72,4 +117,90 @@ function addCity(){
 		console.log('slanje poruke');
 		event.preventDefault();
 		return false;
+}
+
+function addCityToSelect(){
+	$.ajax({
+		url : "http://localhost:8080/salesystem/cities/all"
+	}).then(
+		function(data) {
+			$("#gradEditSelect").empty();
+			$.each(data, function (i, item) {
+			    $('#gradEditSelect').append($('<option>', { 
+			        value: item.city_id,
+			        text : item.city_name
+			    }));
+			});	
+		}
+	);
+}
+
+function addCityToSelect2(){
+	$.ajax({
+		url : "http://localhost:8080/salesystem/cities/all"
+	}).then(
+		function(data) {
+			$("#gradDeleteSelect").empty();
+			$.each(data, function (i, item) {
+			    $('#gradDeleteSelect').append($('<option>', { 
+			        value: item.city_id,
+			        text : item.city_name
+			    }));
+			});	
+		}
+	);
+}
+
+function updateCity() {
+	var pttIzmeniInput = $('#pttIzmeniInput');
+	var nazivIzmeniInput = $('#nazivIzmeniInput');
+	var izaberiGrad = $('#gradEditSelect');
+
+	var ptt = pttIzmeniInput.val();
+	var city_name = nazivIzmeniInput.val();
+	var izabranGrad = izaberiGrad.val();
+
+	console.log('ptt: ' + ptt);
+	console.log('city_name: ' + city_name);
+	console.log('izabranGrad: ' + izabranGrad);
+		
+	var params = {
+			'city_id': izabranGrad,
+			'ptt': ptt,
+			'city_name': city_name
+	}
+	
+	$.ajax({
+		url:"http://localhost:8080/salesystem/cities/" + izabranGrad,
+		type:"PUT",
+		data: JSON.stringify(params),
+		contentType:"application/json; charset=utf-8",
+		dataType:"json",
+		success:function(data){
+			console.log(data);
+			readCities();
+			pttIzmeniInput.val("");
+			nazivIzmeniInput.val("");
+		}
+	});
+
+	console.log('slanje poruke');
+	event.preventDefault();
+	return false;
+	
+	
+// });
+}
+
+function deleteCity(){
+	var izaberiGrad = $('#gradDeleteSelect');
+	var izabranGrad = izaberiGrad.val();
+	$.ajax({
+    	url: "http://localhost:8080/salesystem/cities/" + izabranGrad,
+    	type: "DELETE",
+    	success: function(){
+    		alert('Izbrisali ste grad!');
+    		readCities();
+        }
+	});
 }

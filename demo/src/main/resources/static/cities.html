@@ -80,6 +80,70 @@
 			  </div>
 			</div>
 			<!-- ADD END-->
+			
+			<!-- EDIT -->
+			<div class="modal fade" id="updateModalScrollable" tabindex="-1" role="dialog" aria-labelledby="updateModalScrollableTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-scrollable" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="updateModalScrollableTitle">Izmena grada</h5>
+							<button type="button" class="close updateModalClose" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form>
+							<div class="form-group">
+							    <label for="gradEditSelect">Izaberite grad</label>
+							    <select class="form-control"  id="gradEditSelect">					    
+							    </select>
+							  </div>
+					  			<div class="form-group">
+					    			<label for="pttIzmeniInput">Postanski broj</label>
+					    			<input type="text" class="form-control" id="pttIzmeniInput" aria-describedby="pttIzmeniHelp" placeholder="Unesite postanski brok">
+					  			</div>
+					  			<div class="form-group">
+					    			<label for="nazivIzmeniInput">Naziv</label>
+					    			<input type="text" class="form-control" id="nazivIzmeniInput" aria-describedby="nazivIzmeniHelp" placeholder="Unesite naziv">
+					  			</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary updateModalClose">Otkaži</button>
+							<button type="button" id="doUpdate" class="btn btn-primary">Sačuvaj</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- EDIT END-->
+			
+			<!-- DELETE  -->
+			<div class="modal fade" id="deletePromptModal" tabindex="-1" role="dialog" aria-labelledby="deletePromptLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="deletePromptLabel">Jeste li sigurni?</h5>
+			        <button type="button" class="close deletePromptClose" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <p id="deletePromptText"></p>
+			      </div>
+			      <div class="form-group">
+					 <label for="gradDeleteSelect">Izaberite grad</label>
+					 <select class="form-control"  id="gradDeleteSelect">					    
+					 </select>
+					</div>
+			      
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary deletePromptClose">Otkaži</button>
+			        <button type="button" id="doDelete" class="btn btn-primary">Obriši</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- DELETE END -->
 	
 	</div>
 	
