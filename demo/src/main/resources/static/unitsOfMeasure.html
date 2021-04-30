@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<script src="js/jquery-3.3.1.min.js"></script>
 		<script src="js/bootstrap.js"></script>
-		<script src="js/unitsOfMeasure.js"></script>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet"  type="text/css" href="css/main.css">
 		<script src="https://kit.fontawesome.com/9497a339e1.js" crossorigin="anonymous"></script>
@@ -15,8 +15,8 @@
 			
 			<!-- Toolbar -->	
 			<div class="toolbar">
-                <button id="add-unit" type="button" class="btn btn-outline-secondary">Dodaj jedinicu mere</button>
-				<button id="edit-units" type="button" class="btn btn-outline-secondary">Izmeni jedinicu mere`</button>
+        <button id="add-unit" type="button" class="btn btn-outline-secondary">Dodaj jedinicu mere</button>
+				<button id="edit-unit" type="button" class="btn btn-outline-secondary">Izmeni jedinicu mere</button>
 				<button id="delete-unit" type="button" class="btn btn-outline-secondary">Obriši jedinicu mere</button>
 			</div>
 			<!-- Toolbar END-->
@@ -33,15 +33,14 @@
 				<tbody id="units-table-body">
 				</tbody>
 			</table>
-			
 		  
             <!--ADD UNIT OF MEASURE-->
 
-            <div id="add-unit-window" hidden>
+            <div id="add-unit-window">
                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="addModalScrollableTitle">Dodavanje jedinice mere</h5>
+                      <h5 class="modal-title">Dodavanje jedinice mere</h5>
                     </div>
                     <div class="modal-body">
                       <form>
@@ -57,8 +56,8 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" id="add-unit-button" class="btn btn-primary">Dodaj jedinicu mere</button>   
-                      <button type="button" id="cancel" class="btn btn-primary">
-                          <a href="index.html">Nazad</a>
+                      <button type="button" id="cancel-add" class="btn btn-primary">
+                          Nazad
                       </button>
                   </div>
                   </div>
@@ -66,17 +65,49 @@
                 </div>		
 
             <!-- EDIT UNIT OG MEASURE-->
-
+            <div id="edit-unit-window">
+              <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Izmena jedinice mere</h5>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="edit-unit-dropdown">Izaberite jedinicu mere</label>
+                        <select class="form-select" id="edit-unit-dropdown" aria-label="">
+                        </select>
+                      </div>
+                      <div class="form-group">
+                          <label for="edit-name">Naziv</label>
+                          <input type="text" class="form-control" id= "edit-name" placeholder="">
+                      </div>
+                      <div class="form-group">
+                          <label for="edit-short-name">Skracen naziv</label>
+                          <input type="text" class="form-control" id= "edit-short-name" placeholder="">
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" id="edit-unit-button" class="btn btn-primary">Dodaj jedinicu mere</button>   
+                    <button type="button" id="cancel-edit" class="btn btn-primary">
+                      Nazad
+                    </button>
+                </div>
+                </div>
+              </div>
+              </div>	
+              
             <!-- DELETE UNIT-->
-			<div id="delete-unit-window" hidden>
+			      <div id="delete-unit-window">
                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="addModalScrollableTitle">Brisanje</h5>
+                      <h5 class="modal-title">Brisanje</h5>
                     </div>
                     <div class="modal-body">
                       <form>
-						          <div class="form-group">
+						              <div class="form-group">
                             <label for="delete-unit-dropdown">Izaberite jedinicu mere</label>
                             <select class="form-select" id="delete-unit-dropdown" aria-label="">
                             </select>
@@ -85,15 +116,14 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" id="delete-unit-button" class="btn btn-primary">Izbrisi</button>   
-                      <button type="button" id="cancel" class="btn btn-primary">
-                          <a href="index.html">Nazad</a>
+                      <button type="button" id="cancel-delete" class="btn btn-primary">Nazad
                       </button>
-                  </div>
+                    </div>
                   </div>
                 </div>
                 </div>							
 		</div>
-	
+    <script src="js/unitsOfMeasure.js"></script>
 	</body>
 	
 			

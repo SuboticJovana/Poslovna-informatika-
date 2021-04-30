@@ -32,7 +32,7 @@ public class ServicesController {
 	
 //	http://localhost:8080/salesystem/services/all
 	
-	@GetMapping(value="all")
+	@GetMapping
 	public ResponseEntity<List<ServicesDTO>> getServices(){
 		List<Services> services = serviceServiceInterface.findAll();
 		List<ServicesDTO> servicesDTO = new ArrayList<ServicesDTO>();

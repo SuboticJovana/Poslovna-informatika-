@@ -32,8 +32,7 @@ public class ServiceGroupController {
 	List<ServiceGroup> groups = service.findAll();
 	List<ServiceGroupDTO> groupsDTO = new ArrayList<ServiceGroupDTO>();
 	for (ServiceGroup u : groups) {
-		//{u}
-		groupsDTO.add(new ServiceGroupDTO());
+		groupsDTO.add(new ServiceGroupDTO(u));
 	}
 	return new ResponseEntity<List<ServiceGroupDTO>>(groupsDTO, HttpStatus.OK);
 

@@ -13,3 +13,32 @@
 #service-dropdown{
     width:265px;
 }
+
+#add-service-group-window{
+    visibility: hidden;
+}
+
+#delete-service-group-window{
+    visibility: hidden;
+}
+#edit-service-group-window{
+    visibility: hidden;
+}
+#add-service-window{
+    visibility: hidden;
+}
+#delete-service-window{
+    visibility: hidden;
+}
+#edit-service-window{
+    visibility: hidden;
+}
+#add-unit-window{
+    visibility: hidden;
+}
+#edit-unit-window{
+    visibility: hidden;
+}
+#delete-unit-window{
+    visibility: hidden;
+}
