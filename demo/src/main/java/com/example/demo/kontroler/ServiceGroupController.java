@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.PDVCategoryDTO;
 import com.example.demo.dto.ServiceGroupDTO;
 import com.example.demo.model.ServiceGroup;
+import com.example.demo.servis.EnterpriseServiceInterface;
+import com.example.demo.servis.PDVCategoryServiceInterface;
 import com.example.demo.servis.ServiceGroupServiceInterface;
 
 @RestController
@@ -26,6 +28,12 @@ public class ServiceGroupController {
 
 	@Autowired
 	private ServiceGroupServiceInterface service;
+	
+	@Autowired
+	private PDVCategoryServiceInterface pdvCategoryService;
+	
+	@Autowired
+	private EnterpriseServiceInterface enterpriseService;
 	
 	@GetMapping
 	public ResponseEntity<List<ServiceGroupDTO>> getGroups() {
@@ -52,20 +60,23 @@ public class ServiceGroupController {
 	public ResponseEntity<ServiceGroupDTO> saveGroup(@RequestBody ServiceGroupDTO uDTO){
 		ServiceGroup group = new ServiceGroup();
 		group.setName(uDTO.getName());
+		//System.out.println(uDTO.getPDVCategory().getId());
+		group.setEnterprise(enterpriseService.findOne(uDTO.getFirm().getEnterprise_id()));
+		group.setPDVCategory(pdvCategoryService.findOne(uDTO.getPDVCategory().getId()));
 		service.save(group);
 		return new ResponseEntity<ServiceGroupDTO>(uDTO, HttpStatus.CREATED);	
 	}
 	
 	@PutMapping(value="/{id}", consumes="application/json")
-	public ResponseEntity<ServiceGroupDTO> updateGroup(@RequestBody PDVCategoryDTO uDTO, @PathVariable("id") Integer id){
+	public ResponseEntity<ServiceGroupDTO> updateGroup(@RequestBody ServiceGroupDTO uDTO, @PathVariable("id") Integer id){
 		ServiceGroup group = service.findOne(id);
 		if (group == null) {
 			return new ResponseEntity<ServiceGroupDTO>(HttpStatus.BAD_REQUEST);
 		}				
 		group.setName(uDTO.getName());
-		//
+		group.setPDVCategory(pdvCategoryService.findOne(uDTO.getPDVCategory().getId()));
 		service.save(group);
-		//(pdv)
+		
 		ServiceGroupDTO pdvDTO = new ServiceGroupDTO();
 		return new ResponseEntity<ServiceGroupDTO>(pdvDTO, HttpStatus.OK);	
 	}

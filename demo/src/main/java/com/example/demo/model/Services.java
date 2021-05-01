@@ -99,7 +99,7 @@ public class Services implements Serializable {
 		return serviceGroup;
 	}
 
-	public void setFirm(ServiceGroup serviceGroup) {
+	public void setServiceGroup(ServiceGroup serviceGroup) {
 		this.serviceGroup = serviceGroup;
 	}
 

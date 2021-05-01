@@ -11,7 +11,7 @@ fetch("http://localhost:8080/salesystem/serviceGroups")
         var td2 = document.createElement("td");
         var td3 = document.createElement("td");
         td1.innerText= val.name;
-        td2.innerText = val.PDVCategory.name;
+        td2.innerText = val.pdvcategory.name;
         td3.innerText = val.firm.nameEnterprise;
         newRow.appendChild(td1);
         newRow.appendChild(td2);
@@ -22,7 +22,26 @@ fetch("http://localhost:8080/salesystem/serviceGroups")
 .catch(function(error) {
     console.log(error);
 });
-
+var addPdvCategorySelect = document.getElementById('pdv-category-dropdown');
+var editPdvCategorySelect = document.getElementById('edit-pdv-category-dropdown');
+fetch("http://localhost:8080/salesystem/pdvCategories/all")
+.then((resp) => resp.json())
+.then(function(data) {
+    var values = data;
+    for (const val of values) {
+        var option = document.createElement("option");
+        var option2 = document.createElement("option");
+        option.value = val.id;
+        option.text = val.name;
+        option2.value = val.id;
+        option2.text = val.name;
+        addPdvCategorySelect.appendChild(option);
+        editPdvCategorySelect.appendChild(option2);
+      }
+  })
+.catch(function(error) {
+    console.log(error);
+});
 
 //add
 document.getElementById("add-service-group").addEventListener('click',function (event){
@@ -35,14 +54,15 @@ document.getElementById("add-service-group-button").addEventListener('click',fun
             alert("Popunite sva polja!");
             return;
         }
+        console.log(document.getElementById('pdv-category-dropdown').value);
         var serviceGroup = {
             name: document.getElementById('name').value,
-            PDVCategory: {
+            pdvcategory: {
                 id: document.getElementById('pdv-category-dropdown').value
-            },
+                    },
             firm: { //? enterprise
                 enterprise_id: localStorage.getItem("salesystem-enterprise")
-            }
+                     }
             }
         fetch('http://localhost:8080/salesystem/serviceGroups', {
         method: 'post',
@@ -52,8 +72,9 @@ document.getElementById("add-service-group-button").addEventListener('click',fun
         },
         body: JSON.stringify(serviceGroup)
         }).then(res => res.json())
-        .then(res => 
+        .then(res => {
             document.getElementById("add-service-group-window").style.visibility = "hidden"
+            alert('Service group added!');}
             );
         event.preventDefault();
     }  ); 
@@ -82,23 +103,23 @@ fetch("http://localhost:8080/salesystem/serviceGroups")
 });
 
 document.getElementById("delete-service-group").addEventListener('click',function (event){
-        document.getElementById("delete-service-widnow").style.visibility = "visible";
+        document.getElementById("delete-service-group-window").style.visibility = "visible";
     });
     
     document.getElementById("delete-service-group-button").addEventListener('click',function (event)
         {
-            var serviceSelected = document.getElementById('delete-service-group-dropdown').value;
-            fetch('http://localhost:8080/salesystem/serviceGroups/' + serviceSelected, {
+            var id = document.getElementById('delete-service-group-dropdown').value;
+            fetch('http://localhost:8080/salesystem/serviceGroups/' + id, {
             method: 'delete',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            }).then(res => res.json())
-            .then(res => 
+            }).then(res => {
                 document.getElementById("delete-service-group-window").style.visibility = "hidden"
-                );
-            event.preventDefault();
+                alert('Service group deleted!');}
+            )
+            //event.preventDefault();
         }  ); 
 
 document.getElementById("cancel-delete").addEventListener('click',function (event){
@@ -132,9 +153,9 @@ document.getElementById("edit-service-group-button").addEventListener('click',fu
         var groupSelected = document.getElementById('edit-service-group-dropdown').value;
         var serviceGroup = {
             name: document.getElementById('edit-name').value,
-            PDVCategory: {
-                id: document.getElementById('edit-pdv-category-dropdown').value
-            }
+            pdvcategory: {
+                id: document.getElementById('pdv-category-dropdown').value
+                    }
             }
         fetch('http://localhost:8080/salesystem/serviceGroups/' + groupSelected, {
         method: 'put',
@@ -144,8 +165,9 @@ document.getElementById("edit-service-group-button").addEventListener('click',fu
         },
         body: JSON.stringify(serviceGroup)
         }).then(res => res.json())
-        .then(res => 
+        .then(res => {
             document.getElementById("edit-service-group-window").style.visibility = "hidden"
+            alert('Service group edited!');}
             );
         event.preventDefault();
     }  ); 

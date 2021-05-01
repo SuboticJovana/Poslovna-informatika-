@@ -43,7 +43,7 @@ public class ServicesConverter {
 		s.setName(servicesDTO.getName());
 		s.setDescription(servicesDTO.getDescription());
 		s.setGoods(servicesDTO.getGoods());
-		s.setFirm(serviceGroupServiceInterface.findOne(servicesDTO.getServiceGroup().getId()));
+		s.setServiceGroup(serviceGroupServiceInterface.findOne(servicesDTO.getServiceGroup().getId()));
 		s.setUnit(unitOfMeasureServiceInterface.findOne(servicesDTO.getUnitOfMeasure().getId()));
 		return s;
 	}

@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.converters.ServicesConverter;
 import com.example.demo.dto.ServicesDTO;
 import com.example.demo.model.Services;
+import com.example.demo.servis.ServiceGroupServiceInterface;
 import com.example.demo.servis.ServicesServiceInterface;
+import com.example.demo.servis.UnitOfMeasureServiceInterface;
 
 @RestController
 @RequestMapping(value="salesystem/services")
@@ -29,6 +31,12 @@ public class ServicesController {
 	
 	@Autowired
 	ServicesConverter servicesConverter;
+	
+	@Autowired
+	private ServiceGroupServiceInterface groupService;
+	
+	@Autowired
+	private UnitOfMeasureServiceInterface unitService;
 	
 //	http://localhost:8080/salesystem/services/all
 	
@@ -59,8 +67,8 @@ public class ServicesController {
 		services.setDescription(siDTO.getDescription());
 		services.setGoods(siDTO.getGoods());
 		services.setName(siDTO.getName());
-		services.setService_id(siDTO.getServices_id());
-
+		services.setServiceGroup(groupService.findOne(siDTO.getServiceGroup().getId()));
+       services.setUnit(unitService.findOne(siDTO.getUnitOfMeasure().getId()));
 		serviceServiceInterface.save(services);
 		return new ResponseEntity<ServicesDTO>(siDTO, HttpStatus.CREATED);
 	}
@@ -74,18 +82,18 @@ public class ServicesController {
 		services.setDescription(siDTO.getDescription());
 		services.setGoods(siDTO.getGoods());
 		services.setName(siDTO.getName());
-		services.setService_id(siDTO.getServices_id());
-		
+		services.setServiceGroup(groupService.findOne(siDTO.getServiceGroup().getId()));
+       services.setUnit(unitService.findOne(siDTO.getUnitOfMeasure().getId()));
 		serviceServiceInterface.save(services);
 		ServicesDTO serviceDTO = new ServicesDTO(services);
 		return new ResponseEntity<ServicesDTO>(serviceDTO, HttpStatus.OK);	
 	}
 	
-	@DeleteMapping(value="/{price_list_item_id}")
-	public ResponseEntity<Void> deleteItem(@PathVariable("services_id") Integer services_id){
-		Services services = serviceServiceInterface.findOne(services_id);
+	@DeleteMapping(value="/{id}")
+	public ResponseEntity<Void> deleteItem(@PathVariable("id") Integer id){
+		Services services = serviceServiceInterface.findOne(id);
 		if (services != null){
-			serviceServiceInterface.remove(services_id);
+			serviceServiceInterface.remove(id);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}		
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);

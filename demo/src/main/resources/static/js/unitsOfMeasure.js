@@ -46,7 +46,7 @@ document.getElementById("add-unit-button").addEventListener('click',function (ev
         }).then(res => res.json())
         .then(res => { 
             document.getElementById("add-unit-window").style.visibility = "hidden";
-            alert('unit of measure added!') }
+            alert('Unit of measure added!') }
             );
         event.preventDefault();
     }  ); 
@@ -84,10 +84,10 @@ document.getElementById("delete-unit").addEventListener('click',function (event)
             console.log(unitSelected);
             fetch('http://localhost:8080/salesystem/unitOfMeasures/' + unitSelected, {
             method: 'DELETE',
-            }).then(res => res.json())
+            })
             .then(res => {
                 document.getElementById("delete-unit-window").style.visibility = "hidden"
-                alert('unit of measure deleted!');}
+                alert('Unit of measure deleted!');}
                 );
             event.preventDefault();
         }  ); 
@@ -142,6 +142,6 @@ document.getElementById("edit-unit-button").addEventListener('click',function (e
     }  ); 
 
 document.getElementById("cancel-edit").addEventListener('click',function (event){
-    document.getElementById("edit-unit-widnow").style.visibility = "hidden";
+    document.getElementById("edit-unit-window").style.visibility = "hidden";
 });
 

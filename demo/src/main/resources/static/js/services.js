@@ -31,30 +31,40 @@ fetch("http://localhost:8080/salesystem/services")
 
 //add
 var GroupSelect = document.getElementById('service-group-dropdown');
+var editGroupSelect = document.getElementById('edit-service-group-dropdown');
 fetch("http://localhost:8080/salesystem/serviceGroups")
 .then((resp) => resp.json())
 .then(function(data) {
     var values = data;
     for (const val of values) {
         var option = document.createElement("option");
+        var option2 = document.createElement("option");
         option.value = val.id;
         option.text = val.name;
+        option2.value = val.id;
+        option2.text = val.name;
         GroupSelect.appendChild(option);
+        editGroupSelect.appendChild(option2);
       }
   })
 .catch(function(error) {
     console.log(error);
 });
 var UnitSelect = document.getElementById('unit-dropdown');
+var editUnitSelect = document.getElementById('edit-unit-dropdown');
 fetch("http://localhost:8080/salesystem/unitOfMeasures")
 .then((resp) => resp.json())
 .then(function(data) {
     var values = data;
     for (const val of values) {
         var option = document.createElement("option");
+        var option2 = document.createElement("option");
         option.value = val.id;
         option.text = val.name + " - " + val.short_name;
+        option2.value = val.id;
+        option2.text = val.name + " - " + val.short_name;
         UnitSelect.appendChild(option);
+        editUnitSelect.appendChild(option2);
       }
   })
 .catch(function(error) {
@@ -76,7 +86,7 @@ document.getElementById("add-service-button").addEventListener('click',function 
         var service = {
             name: document.getElementById('name').value,
             description: document.getElementById('description').value,
-            goods: document.getElementById('goods').value,
+            goods: document.getElementById('goods').checked,
             serviceGroup: {
                 id: document.getElementById('service-group-dropdown').value
             },
@@ -92,8 +102,9 @@ document.getElementById("add-service-button").addEventListener('click',function 
         },
         body: JSON.stringify(service)
         }).then(res => res.json())
-        .then(res => 
+        .then(res => {
             document.getElementById("add-service-window").style.visibility = "hidden"
+            alert('Service added!');}
             );
         event.preventDefault();
     }  ); 
@@ -119,21 +130,22 @@ fetch("http://localhost:8080/salesystem/services")
     console.log(error);
 });
 document.getElementById("delete-service").addEventListener('click',function (event){
-        document.getElementById("delete-service-widnow").style.visibility = "visible";
+        document.getElementById("delete-service-window").style.visibility = "visible";
     });
     
     document.getElementById("delete-service-button").addEventListener('click',function (event)
         {
-            var serviceSelected = document.getElementById('delete-service-dropdown').value;
-            fetch('http://localhost:8080/salesystem/services/' + serviceSelected, {
+            var id = document.getElementById('delete-service-dropdown').value;
+            fetch('http://localhost:8080/salesystem/services/' + id, {
             method: 'delete',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            }).then(res => res.json())
-            .then(res => 
+            })
+            .then(res => {
                 document.getElementById("delete-service-window").style.visibility = "hidden"
+                alert('Service deleted!');}
                 );
             event.preventDefault();
         }  ); 
@@ -170,7 +182,7 @@ document.getElementById("edit-service-button").addEventListener('click',function
         var service = {
             name: document.getElementById('edit-name').value,
             description: document.getElementById('edit-description').value,
-            goods: document.getElementById('edit-goods').value,
+            goods: document.getElementById('edit-goods').checked,
             serviceGroup: {
                 id: document.getElementById('edit-service-group-dropdown').value
             },
@@ -185,9 +197,10 @@ document.getElementById("edit-service-button").addEventListener('click',function
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(service)
-        }).then(res => res.json())
-        .then(res => 
+        })
+        .then(res => {
             document.getElementById("edit-service-window").style.visibility = "hidden"
+            alert('Service edited!');}
             );
         event.preventDefault();
     }  ); 
