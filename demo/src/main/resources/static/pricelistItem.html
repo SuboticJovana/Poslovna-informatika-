@@ -25,7 +25,9 @@
 	<div class="containter">
 		
 		<div class="toolbar">
-			<button id="add" type="button" class="btn btn-outline-secondary">Dodaj stavku</button>
+			<button id="add" type="button" class="btn btn-outline-secondary">Dodaj</button>
+			<button id="edit" type="button" class="btn btn-outline-secondary">Izmeni</button>
+			<button id="delete" type="button" class="btn btn-outline-secondary">Obriši</button>
 		</div>
 		
 		<table id="dataTable" class="table">
@@ -80,6 +82,70 @@
 			</div>
 			<!-- ADD END-->
 	
+			<!-- EDIT -->
+			<div class="modal fade" id="updateModalScrollable" tabindex="-1" role="dialog" aria-labelledby="updateModalScrollableTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-scrollable" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="updateModalScrollableTitle">Izmena stavke cenovnika</h5>
+							<button type="button" class="close updateModalClose" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form>
+							<div class="form-group">
+							    <label for="stavkaEditSelect">Izaberite stavku</label>
+							    <select class="form-control"  id="stavkaEditSelect">					    
+							    </select>
+							  </div>
+					  			<div class="form-group">
+					    			<label for="cenaIzmeniInput">Cena stavke</label>
+					    			<input type="text" class="form-control" id="cenaIzmeniInput" aria-describedby="cenaIzmeniHelp" placeholder="Unesite cenu">
+					  			</div>
+					  			<div class="form-group">
+					    			<label for="cenovnikIzmeniSelect">Cenovnik</label>
+					    			<select class="form-control"  id="cenovnikIzmeniSelect">
+					    			</select>
+					  			</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary updateModalClose">Otkaži</button>
+							<button type="button" id="doUpdate" class="btn btn-primary">Sačuvaj</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- EDIT END-->
+			
+			<!-- DELETE  -->
+			<div class="modal fade" id="deletePromptModal" tabindex="-1" role="dialog" aria-labelledby="deletePromptLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="deletePromptLabel">Jeste li sigurni?</h5>
+			        <button type="button" class="close deletePromptClose" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <p id="deletePromptText"></p>
+			      </div>
+			      <div class="form-group">
+					 <label for="stavkaDeleteSelect">Izaberite stavku</label>
+					 <select class="form-control"  id="stavkaDeleteSelect">					    
+					 </select>
+					</div>
+			      
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary deletePromptClose">Otkaži</button>
+			        <button type="button" id="doDelete" class="btn btn-primary">Obriši</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- DELETE END -->
 	</div>
 	
 	</body>

@@ -1,10 +1,29 @@
 function getPricelistItem(){
 	readItems();
-	readPricelists();
-	readServices();
+//	readPricelists();
+//	readServices();
+	addItemToSelect();
+	addItemToSelect2();
+	var item = [];
+	
+	$(document).on("click",'tr',function(event){
+		highlightRow(this);
+		$('#dataTable').on('click','tr', function(event){ //ili izbrisati ovu liniju
+			item.length = 0;
+			var selectedRow = $(this);
+			var td = selectedRow.children('td');
+			for (var i = 0; i < td.length; ++i) {
+				item.push(td.eq(i).text());
+				
+			}
+		}); //i ovu
+		console.log(item);
+	});
 
 
 $(document).on("click", '#add', function(event){
+	readPricelists();
+	readServices();
 	$('#addModalScrollable').modal('show');
 });
 
@@ -17,6 +36,33 @@ $(document).on("click", '.addModalClose', function(event){
 	$('#addModalScrollable').modal('hide');
 });
 
+$(document).on("click", '#edit', function(event){
+	readPricelists2();
+	readServices2();;
+	$('#updateModalScrollable').modal('show');
+});
+
+$(document).on("click", "#doUpdate", function(event) {
+	updateItem();
+	$('#updateModalScrollable').modal('hide');
+});
+
+$(document).on("click", '.updateModalClose', function(event) {
+	$('#updateModalScrollable').modal('hide');
+});
+
+$(document).on("click", '#delete', function(event){
+	$('#deletePromptModal').modal('show');
+});
+
+$(document).on("click", '.deletePromptClose', function(event){
+	$('#deletePromptModal').modal('hide');
+});
+
+$(document).on("click", '#doDelete', function(event){
+	deletePricelist();
+	$('#deletePromptModal').modal('hide');
+});
 }
 function readItems() {
 	$.ajax({
@@ -53,6 +99,21 @@ function readPricelists(){
 			});
 }
 
+function readPricelist2(){
+	$.ajax({
+		url:"http://localhost:8080/salesystem/pricelists/all"
+	}).then(
+			function(data){
+				$("#cenovnikIzmeniSelect").empty();
+				$.each(data, function(i,item){
+					$('#cenovnikIzmeniSelect').append($('<option>',{
+						value : item.pricelist_id,
+						text : item.date_from
+					}));
+				});
+			});
+}
+
 function readServices(){
 	$.ajax({
 		url : "http://localhost:8080/salesystem/services/all"
@@ -66,7 +127,54 @@ function readServices(){
 		});
 	});
 }
-	function addPricelistItem(){
+
+function readServices2(){
+	$.ajax({
+		url : "http://localhost:8080/salesystem/services/all"
+	}).then(function(data){
+		$("#robaIzmeniSelect").empty();
+		$.each(data, function(i,item){
+			$('#robaIzmeniSelect').append($('<option>',{
+				value : item.services_id,
+				text : item.name
+			}));
+		});
+	});
+}
+
+function addItemToSelect(){
+	$.ajax({
+		url : "http://localhost:8080/salesystem/priceListItems/all"
+	}).then(
+		function(data) {
+			$("#stavkaEditSelect").empty();
+			$.each(data, function (i, item) {
+			    $('#stavkaEditSelect').append($('<option>', { 
+			        value: item.price_list_item_id,
+			        text : item.price
+			    }));
+			});	
+		}
+	);
+}
+
+function addItemToSelect2(){
+	$.ajax({
+		url : "http://localhost:8080/salesystem/priceListItems/all"
+	}).then(
+		function(data) {
+			$("#stavkaDeleteSelect").empty();
+			$.each(data, function (i, item) {
+			    $('#stavkaDeleteSelect').append($('<option>', { 
+			        value: item.price_list_item_id,
+			        text : item.price
+			    }));
+			});	
+		}
+	);
+}
+
+function addPricelistItem(){
 	// $('#doAdd').on('click',function(event){
 		var price = $('#cenaInput').val();
 		var pricelist = $('#cenovnikSelect').val();
@@ -109,4 +217,67 @@ function readServices(){
 		return false;
 	// });
 	
+}
+
+function updatePricelist() {
+	var cenaIzmeniInput = $('#cenaIzmeniInput');
+	var cenovnikIzmeniSelect = $('#cenovnikIzmeniSelect');
+	var robaIzmeniSelect = $('#robaIzmeniSelect');
+	var izaberiStavku = $('#stavkaEditSelect');
+	
+	var price = cenaIzmeniInput.val();
+	var pricelistDTO = cenovnikIzmeniSelect.val();
+	var serviceDTO = robaIzmeniSelect.val();
+	var izabranaStavka = izaberiStavku.val();
+
+	console.log('price: ' + price);
+	console.log('izabranaStavka: ' + izabranaStavka);
+	console.log('pricelist: ' + pricelist);
+	console.log('services: ' + services);
+		
+	var params = {
+			'price_list_item_id': izabranaStavka,
+			'price': price,
+			'pricelist': {
+				'pricelist_id' : pricelist
+			},
+			'services': {
+				'services_id' : services
+			}
+	}
+	
+	$.ajax({
+		url:"http://localhost:8080/salesystem/priceListItems/" + izabranaStavka,
+		type:"PUT",
+		data: JSON.stringify(params),
+		contentType:"application/json; charset=utf-8",
+		dataType:"json",
+		success:function(data){
+			console.log(data);
+			readItems();
+			cenaIzmeniInput.val("");
+			cenovnikIzmeniSelect.val("");
+			robaIzmeniSelect.val("");
+		}
+	});
+
+	console.log('slanje poruke');
+	event.preventDefault();
+	return false;
+	
+	
+// });
+}
+
+function deleteItem(){
+	var izaberiStavku = $('#stavkaDeleteSelect');
+	var izabranaStavka = izaberiStavku.val();
+	$.ajax({
+    	url: "http://localhost:8080/salesystem/priceListItems/" + izabranaStavka,
+    	type: "DELETE",
+    	success: function(){
+    		alert('Izbrisali ste stavku cenovnika!');
+    		readPricelists();
+        }
+	});
 }

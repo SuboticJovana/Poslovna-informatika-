@@ -86,7 +86,77 @@
 			    </div>
 			  </div>
 			</div>
-			<!-- ADD END-->
+			<!-- ADD END-->			
+			
+			<!-- EDIT -->
+			<div class="modal fade" id="updateModalScrollable" tabindex="-1" role="dialog" aria-labelledby="updateModalScrollableTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-scrollable" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="updateModalScrollableTitle">Izmena stope pdv-a</h5>
+							<button type="button" class="close updateModalClose" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form>
+							<div class="form-group">
+							    <label for="stopaEditSelect">Izaberite stopu pdv-a</label>
+							    <select class="form-control"  id="stopaEditSelect">					    
+							    </select>
+							  </div>
+					  			<div class="form-group">
+					    			<label for="procenatIzmeniInput">Procenat</label>
+					    			<input type="text" class="form-control" id="procenatIzmeniInput" aria-describedby="procenatIzmeniHelp" placeholder="Unesite procenat">
+					  			</div>
+					  			<div class="form-group">
+					    			<label for="datumIzmeniInput">Datum</label>
+					    			<input type="date" class="form-control" id="datumIzmeniInput" aria-describedby="datumIzmeniHelp" placeholder="Unesite datum">
+					  			</div>
+					  			<div class="form-group">
+					    			<label for="kategorijaIzmeniSelect">Kategorija</label>
+					    			<select class="form-control"  id="kategorijaIzmeniSelect">
+					    
+					    			</select>
+					  			</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary updateModalClose">Otkaži</button>
+							<button type="button" id="doUpdate" class="btn btn-primary">Sačuvaj</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- EDIT END-->
+			
+			<!-- DELETE  -->
+			<div class="modal fade" id="deletePromptModal" tabindex="-1" role="dialog" aria-labelledby="deletePromptLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="deletePromptLabel">Jeste li sigurni?</h5>
+			        <button type="button" class="close deletePromptClose" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			        <p id="deletePromptText"></p>
+			      </div>
+			      <div class="form-group">
+					 <label for="stopaDeleteSelect">Izaberite stopu pdv-a</label>
+					 <select class="form-control"  id="stopaDeleteSelect">					    
+					 </select>
+					</div>
+			      
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary deletePromptClose">Otkaži</button>
+			        <button type="button" id="doDelete" class="btn btn-primary">Obriši</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+			<!-- DELETE END -->
 	
 	</div>
 	
