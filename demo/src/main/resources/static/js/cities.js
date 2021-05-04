@@ -1,7 +1,5 @@
 function getCities(){
 	readCities();
-	addCityToSelect();
-	addCityToSelect2();
 	var city = [];
 	
 	$(document).on("click",'tr',function(event){
@@ -32,6 +30,7 @@ function getCities(){
 	});
 	
 	$(document).on("click", '#edit', function(event){
+		addCityToSelect();
 		$('#updateModalScrollable').modal('show');
 	});
 	
@@ -45,6 +44,7 @@ function getCities(){
 	});
 	
 	$(document).on("click", '#delete', function(event){
+		addCityToSelect2();
 		$('#deletePromptModal').modal('show');
 	});
 	
@@ -75,8 +75,6 @@ function readCities() {
 					$("#dataTableBody").append(newRow);
 				}
 			});
-	
-
 }
 
 function addCity(){
@@ -97,8 +95,6 @@ function addCity(){
 				'ptt': ptt,
 				'city_name' : city_name,
 		}
-		
-
 		
 		$.ajax({
 			url : 'http://localhost:8080/salesystem/cities/add',
@@ -188,8 +184,6 @@ function updateCity() {
 	event.preventDefault();
 	return false;
 	
-	
-// });
 }
 
 function deleteCity(){

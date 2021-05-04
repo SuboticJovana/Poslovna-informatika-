@@ -1,8 +1,5 @@
 function getRates(){
 	readRates();
-	readCategories();
-	addRateToSelect();
-	addRateToSelect2();
 	var rate = [];
 	
 	$(document).on("click",'tr',function(event){
@@ -13,7 +10,6 @@ function getRates(){
 			var td = selectedRow.children('td');
 			for (var i = 0; i < td.length; ++i) {
 				rate.push(td.eq(i).text());
-				
 			}
 		}); //i ovu
 		console.log(rate);
@@ -34,6 +30,7 @@ function getRates(){
 	});
 	
 	$(document).on("click", '#edit', function(event){
+		addRateToSelect();
 		readCategories2();
 		$('#updateModalScrollable').modal('show');
 	});
@@ -48,6 +45,7 @@ function getRates(){
 	});
 	
 	$(document).on("click", '#delete', function(event){
+		addRateToSelect2();
 		$('#deletePromptModal').modal('show');
 	});
 	
@@ -119,9 +117,7 @@ function readCategories(){
 		url : "http://localhost:8080/salesystem/pdvCategories/all"
 	}).then(
 		function(data) {
-			$("#kategorijaSelect").empty();
-
-				
+			$("#kategorijaSelect").empty();			
 			$.each(data, function (i, item) {
 			    $('#kategorijaSelect').append($('<option>', { 
 			        value: item.id,
@@ -138,14 +134,11 @@ function readCategories2(){
 		url : "http://localhost:8080/salesystem/pdvCategories/all"
 	}).then(
 		function(data) {
-			$("#kategorijaIzmeniSelect").empty();
-
-				
+			$("#kategorijaIzmeniSelect").empty();		
 			$.each(data, function (i, item) {
 			    $('#kategorijaIzmeniSelect').append($('<option>', { 
 			        value: item.id,
 			        text : item.name
-
 			    }));
 			});	
 		}
@@ -153,9 +146,9 @@ function readCategories2(){
 }
 
 function addRate(){
-	var procenatInput = $('#procenatInput');
-	var datumInput = $('#datumInput');
-	var kategorijaSelect = $('#kategorijaSelect');
+		var procenatInput = $('#procenatInput');
+		var datumInput = $('#datumInput');
+		var kategorijaSelect = $('#kategorijaSelect');
 	
 		var percentage = procenatInput.val();
 		var date = datumInput.val();
@@ -177,8 +170,6 @@ function addRate(){
 					'id' : pdvCategoryDTO
 				}
 		}
-		
-
 		
 		$.ajax({
 			url : 'http://localhost:8080/salesystem/pdvRates/add',
@@ -215,10 +206,10 @@ function updateRate() {
 	console.log('date: ' + date);
 	console.log('pdvCategoryDTO: ' + pdvCategoryDTO);
 	console.log('izabranaStopa: ' + izabranaStopa);
-
 		
 	var params = {
 			'pdv_rate_id': izabranaStopa,
+			'percentage' : percentage,
 			'date': date,
 			'pdvCategoryDTO': {
 				'id' : pdvCategoryDTO
@@ -243,10 +234,8 @@ function updateRate() {
 	console.log('slanje poruke');
 	event.preventDefault();
 	return false;
-	
-	
-// });
 }
+
 function deleteRate(){
 	var izaberiStopu = $('#stopaDeleteSelect');
 	var izabranaStopa = izaberiStopu.val();
