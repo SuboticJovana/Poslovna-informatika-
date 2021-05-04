@@ -1,9 +1,5 @@
 function getPricelistItem(){
 	readItems();
-//	readPricelists();
-//	readServices();
-	addItemToSelect();
-	addItemToSelect2();
 	var item = [];
 	
 	$(document).on("click",'tr',function(event){
@@ -20,49 +16,50 @@ function getPricelistItem(){
 		console.log(item);
 	});
 
+	$(document).on("click", '#add', function(event){
+		readPricelists();
+		readServices();
+		$('#addModalScrollable').modal('show');
+	});
+	
+	$(document).on("click", '#doAdd', function(event){
+		addPricelistItem();
+		$('#addModalScrollable').modal('hide');				
+	});
+	
+	$(document).on("click", '.addModalClose', function(event){
+		$('#addModalScrollable').modal('hide');
+	});
 
-$(document).on("click", '#add', function(event){
-	readPricelists();
-	readServices();
-	$('#addModalScrollable').modal('show');
-});
+	$(document).on("click", '#edit', function(event){
+		addItemToSelect();
+		readPricelist2();
+		readServices2();;
+		$('#updateModalScrollable').modal('show');
+	});
+	
+	$(document).on("click", "#doUpdate", function(event) {
+		updateItem();
+		$('#updateModalScrollable').modal('hide');
+	});
 
-$(document).on("click", '#doAdd', function(event){
-	addPricelistItem();
-	$('#addModalScrollable').modal('hide');				
-});
-
-$(document).on("click", '.addModalClose', function(event){
-	$('#addModalScrollable').modal('hide');
-});
-
-$(document).on("click", '#edit', function(event){
-	readPricelists2();
-	readServices2();;
-	$('#updateModalScrollable').modal('show');
-});
-
-$(document).on("click", "#doUpdate", function(event) {
-	updateItem();
-	$('#updateModalScrollable').modal('hide');
-});
-
-$(document).on("click", '.updateModalClose', function(event) {
-	$('#updateModalScrollable').modal('hide');
-});
-
-$(document).on("click", '#delete', function(event){
-	$('#deletePromptModal').modal('show');
-});
-
-$(document).on("click", '.deletePromptClose', function(event){
-	$('#deletePromptModal').modal('hide');
-});
-
-$(document).on("click", '#doDelete', function(event){
-	deletePricelist();
-	$('#deletePromptModal').modal('hide');
-});
+	$(document).on("click", '.updateModalClose', function(event) {
+		$('#updateModalScrollable').modal('hide');
+	});
+	
+	$(document).on("click", '#delete', function(event){
+		addItemToSelect2();
+		$('#deletePromptModal').modal('show');
+	});
+	
+	$(document).on("click", '.deletePromptClose', function(event){
+		$('#deletePromptModal').modal('hide');
+	});
+	
+	$(document).on("click", '#doDelete', function(event){
+		deleteItem();
+		$('#deletePromptModal').modal('hide');
+	});
 }
 function readItems() {
 	$.ajax({
@@ -116,7 +113,7 @@ function readPricelist2(){
 
 function readServices(){
 	$.ajax({
-		url : "http://localhost:8080/salesystem/services/all"
+		url : "http://localhost:8080/salesystem/services/"
 	}).then(function(data){
 		$("#robaSelect").empty();
 		$.each(data, function(i,item){
@@ -130,7 +127,7 @@ function readServices(){
 
 function readServices2(){
 	$.ajax({
-		url : "http://localhost:8080/salesystem/services/all"
+		url : "http://localhost:8080/salesystem/services/"
 	}).then(function(data){
 		$("#robaIzmeniSelect").empty();
 		$.each(data, function(i,item){
@@ -144,7 +141,7 @@ function readServices2(){
 
 function addItemToSelect(){
 	$.ajax({
-		url : "http://localhost:8080/salesystem/priceListItems/all"
+		url : "http://localhost:8080/salesystem/priceListItems"
 	}).then(
 		function(data) {
 			$("#stavkaEditSelect").empty();
@@ -160,7 +157,7 @@ function addItemToSelect(){
 
 function addItemToSelect2(){
 	$.ajax({
-		url : "http://localhost:8080/salesystem/priceListItems/all"
+		url : "http://localhost:8080/salesystem/priceListItems"
 	}).then(
 		function(data) {
 			$("#stavkaDeleteSelect").empty();
@@ -175,7 +172,10 @@ function addItemToSelect2(){
 }
 
 function addPricelistItem(){
-	// $('#doAdd').on('click',function(event){
+		var cenaInput = $('#cenaInput');
+		var cenovnikSelect = $('#cenovnikSelect')
+		var robaSelect = $('#robaSelect')
+	
 		var price = $('#cenaInput').val();
 		var pricelist = $('#cenovnikSelect').val();
 		var services =  $('#robaSelect').val();
@@ -197,7 +197,9 @@ function addPricelistItem(){
 					'services_id' : services
 				}
 		}
+		
 		console.log(params);
+		
 		$.ajax({
 			url : 'http://localhost:8080/salesystem/priceListItems/add',
 			type : 'POST',
@@ -207,33 +209,31 @@ function addPricelistItem(){
 			success:function(data){
 				alert('Dodata je nova stavka cenovnika')
 				readItems();
-				$('#cenaInput').val("");
-				$('#cenovnikSelect').val("");
-				$('#robaSelect').val("");
+				cenaInput.val("");
+				cenovnikSelect.val("");
+				robaSelect.val("");
 			}
 		})
 		console.log('slanje poruke');
 		event.preventDefault();
 		return false;
-	// });
-	
 }
 
-function updatePricelist() {
+function updateItem() {
 	var cenaIzmeniInput = $('#cenaIzmeniInput');
 	var cenovnikIzmeniSelect = $('#cenovnikIzmeniSelect');
 	var robaIzmeniSelect = $('#robaIzmeniSelect');
 	var izaberiStavku = $('#stavkaEditSelect');
 	
 	var price = cenaIzmeniInput.val();
-	var pricelistDTO = cenovnikIzmeniSelect.val();
-	var serviceDTO = robaIzmeniSelect.val();
+	var pricelist = cenovnikIzmeniSelect.val();
+	var services = robaIzmeniSelect.val();
 	var izabranaStavka = izaberiStavku.val();
 
 	console.log('price: ' + price);
-	console.log('izabranaStavka: ' + izabranaStavka);
 	console.log('pricelist: ' + pricelist);
 	console.log('services: ' + services);
+	console.log('izabranaStavka: ' + izabranaStavka);
 		
 	var params = {
 			'price_list_item_id': izabranaStavka,
@@ -264,9 +264,6 @@ function updatePricelist() {
 	console.log('slanje poruke');
 	event.preventDefault();
 	return false;
-	
-	
-// });
 }
 
 function deleteItem(){
@@ -277,7 +274,7 @@ function deleteItem(){
     	type: "DELETE",
     	success: function(){
     		alert('Izbrisali ste stavku cenovnika!');
-    		readPricelists();
+    		readItems();
         }
 	});
 }
