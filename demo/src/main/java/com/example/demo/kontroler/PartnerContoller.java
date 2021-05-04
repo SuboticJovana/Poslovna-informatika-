@@ -62,7 +62,7 @@ public class PartnerContoller {
 	public ResponseEntity<PartnerDTO> updatePartner(@RequestBody PartnerDTO pDTO, @PathVariable("partner_id") Integer partner_id ){
 		Partner partner = partnerServiceInteface.findOne(partner_id);
 		if (partner == null) {
-			return new ResponseEntity<PartnerDTO>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<PartnerDTO>(HttpStatus.NOT_FOUND);
 		}
 		Partner p = partnerServiceInteface.save(partnerConverter.toPartner(pDTO));
 		PartnerDTO partnerDTO = partnerConverter.toDTO(p);
