@@ -38,7 +38,7 @@ function getPartners(){
 		$('#updateModalScrollable').modal('show');
 	});
 	
-	$(document).on("click", "#doUpdate", function(event) {
+	$(document).on("click", '#doUpdate', function(event) {
 		updatePartner();
 		$('#updateModalScrollable').modal('hide');
 	});
@@ -287,7 +287,7 @@ function updatePartner() {
 		url:"http://localhost:8080/salesystem/partners/" + izabranPartner,
 		type:"PUT",
 		data: JSON.stringify(params),
-		contentType:"application/json; charset=utf-8",
+		contentType:'application/json; charset=utf-8',
 		dataType:"json",
 		success:function(data){
 			console.log(data);
