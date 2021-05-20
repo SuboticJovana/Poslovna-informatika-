@@ -20,7 +20,7 @@ public class ServiceGroupDTO implements Serializable{
 		super();
 	}
 
-	public ServiceGroupDTO(String name, PDVCategoryDTO PDVCategory, EnterpriseDTO firm) {
+/*	public ServiceGroupDTO(String name, PDVCategoryDTO PDVCategory, EnterpriseDTO firm) {
 		this.name=name;
 		this.PDVCategory=PDVCategory;
 		this.firm=firm;
@@ -38,7 +38,7 @@ public class ServiceGroupDTO implements Serializable{
 		this(s.getId(), s.getName(), new PDVCategoryDTO(s.getPDVCategory()), new EnterpriseDTO(s.getEnterprise()));
 	}
 
-	
+	*/
 	public Integer getId() {
 		return id;
 	}

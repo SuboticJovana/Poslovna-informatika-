@@ -50,6 +50,9 @@ public class Invoice {
 	@JoinColumn(name="partner_id", referencedColumnName="partner_id", nullable=false)
 	 private Partner partner;
 	
+
+	
+	
 public Invoice() {
 	
 }

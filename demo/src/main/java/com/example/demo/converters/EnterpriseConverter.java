@@ -5,12 +5,20 @@ import org.springframework.stereotype.Component;
 
 import com.example.demo.dto.EnterpriseDTO;
 import com.example.demo.model.Enterprise;
+import com.example.demo.servis.CityServiceInteface;
+import com.example.demo.servis.EnterpriseServiceInterface;
 
 @Component
 public class EnterpriseConverter {
 	
 	@Autowired
 	public EnterpriseConverter enterpriseConverter;
+
+	@Autowired
+	CityConverter cityConverter;
+	
+	@Autowired
+	CityServiceInteface cityServiceInterface;
 	
 	public EnterpriseDTO toDTO(Enterprise enterprise) {
 		EnterpriseDTO dto = new EnterpriseDTO();
@@ -19,6 +27,7 @@ public class EnterpriseConverter {
 		dto.setAddress(enterprise.getAddress());
 		dto.setPhone(enterprise.getPhone());
 		dto.setFax(enterprise.getFax());
+		dto.setCityDTO(cityConverter.toDTO(enterprise.getCity()));
 		return dto;
 	}	
 		public Enterprise toEnterprise(EnterpriseDTO enterpriseDTO) {
@@ -31,6 +40,7 @@ public class EnterpriseConverter {
 			e.setAddress(enterpriseDTO.getNameEnterprise());
 			e.setPhone(enterpriseDTO.getPhone());
 			e.setFax(enterpriseDTO.getFax());
+			e.setCity(cityServiceInterface.findOne(enterpriseDTO.getCityDTO().getCity_id()));
 			return e;	
 	}
 }

@@ -24,4 +24,3 @@ insert into price_list_items(price_list_item_id, price, pricelist_id, service_id
 
 insert into users(user_id, username, password, enterprise_id)values(1, "a", "a",1)
 
-

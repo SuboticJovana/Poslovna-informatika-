@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.converters.ServiceGroupConverter;
 import com.example.demo.dto.PDVCategoryDTO;
+import com.example.demo.dto.PriceListItemDTO;
 import com.example.demo.dto.ServiceGroupDTO;
+import com.example.demo.model.PriceListItem;
 import com.example.demo.model.ServiceGroup;
 import com.example.demo.servis.EnterpriseServiceInterface;
 import com.example.demo.servis.PDVCategoryServiceInterface;
@@ -29,6 +32,9 @@ public class ServiceGroupController {
 	@Autowired
 	private ServiceGroupServiceInterface service;
 	
+	@Autowired 
+	private ServiceGroupConverter converter;
+	
 	@Autowired
 	private PDVCategoryServiceInterface pdvCategoryService;
 	
@@ -40,7 +46,7 @@ public class ServiceGroupController {
 	List<ServiceGroup> groups = service.findAll();
 	List<ServiceGroupDTO> groupsDTO = new ArrayList<ServiceGroupDTO>();
 	for (ServiceGroup u : groups) {
-		groupsDTO.add(new ServiceGroupDTO(u));
+		groupsDTO.add(converter.toDTO(u));
 	}
 	return new ResponseEntity<List<ServiceGroupDTO>>(groupsDTO, HttpStatus.OK);
 

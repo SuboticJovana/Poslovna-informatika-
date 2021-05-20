@@ -13,8 +13,9 @@ public class EnterpriseDTO implements Serializable {
 	private String address;
 	private String phone;
 	private String fax;
+	private CityDTO cityDTO;
 	
-	public EnterpriseDTO(Long enterprise_id, String nameEnterprise, String address, String phone, String fax) {
+	/*public EnterpriseDTO(Long enterprise_id, String nameEnterprise, String address, String phone, String fax) {
 		super();
 		this.enterprise_id = enterprise_id;
 		this.nameEnterprise = nameEnterprise;
@@ -29,7 +30,7 @@ public class EnterpriseDTO implements Serializable {
 	public EnterpriseDTO() {
 		
 	}
-	
+	*/
 	public Long getEnterprise_id() {
 		return enterprise_id;
 	}
@@ -59,6 +60,12 @@ public class EnterpriseDTO implements Serializable {
 	}
 	public void setFax(String fax) {
 		this.fax = fax;
+	}
+	public CityDTO getCityDTO() {
+		return cityDTO;
+	}
+	public void setCityDTO(CityDTO cityDTO) {
+		this.cityDTO = cityDTO;
 	}
 	
 	
