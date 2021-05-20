@@ -14,13 +14,11 @@ public class BusinessYearService implements BusinessYearServiceInterface{
 
 	@Override
 	public BusinessYear findOne(Integer idYear) {
-		// TODO Auto-generated method stub
 		return businessRepository.getOne(idYear);
 	}
 
 	@Override
 	public BusinessYear save(BusinessYear businessYear) {
-		// TODO Auto-generated method stub
 		return businessRepository.save(businessYear);
 	}
 
@@ -31,7 +29,6 @@ public class BusinessYearService implements BusinessYearServiceInterface{
 
 	@Override
 	public List<BusinessYear> findAll() {
-		// TODO Auto-generated method stub
 		return businessRepository.findAll();
 	}
 }

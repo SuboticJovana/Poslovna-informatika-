@@ -15,6 +15,8 @@ public class InvoiceDTO {
 	private Double total_pdv;
 	private String status;
 	private EnterpriseDTO enterpriseDTO;
+	
+	private BussinesYearDTO bussinesYearDTO;
 
 	/*public InvoiceDTO() {
 		
@@ -88,6 +90,13 @@ public class InvoiceDTO {
 	public void setEnterpriseDTO(EnterpriseDTO enterpriseDTO) {
 		this.enterpriseDTO = enterpriseDTO;
 	}
+	public BussinesYearDTO getBussinesYearDTO() {
+		return bussinesYearDTO;
+	}
+	public void setBussinesYearDTO(BussinesYearDTO bussinesYearDTO) {
+		this.bussinesYearDTO = bussinesYearDTO;
+	}
+	
 	
 	
 }

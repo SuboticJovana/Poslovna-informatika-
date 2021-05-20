@@ -50,6 +50,9 @@ public class Invoice {
 	@JoinColumn(name="partner_id", referencedColumnName="partner_id", nullable=false)
 	 private Partner partner;
 	
+	@ManyToOne
+	@JoinColumn(name="idYear", referencedColumnName = "idYear", nullable = false)
+	private BusinessYear businessYear;
 
 	
 	
