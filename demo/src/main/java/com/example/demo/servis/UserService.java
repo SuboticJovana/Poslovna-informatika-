@@ -1,5 +1,7 @@
 package com.example.demo.servis;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,9 +10,18 @@ import com.example.demo.repozitorijum.UserRepository;
 
 @Service
 public class UserService implements UserServiceInterface{
+	
+	
+	
+
 
 	@Autowired
 	private UserRepository repository;
+	
+	@Override
+	public List<User> findAll() {
+		return repository.findAll();
+	}
 	
 	@Override
 	public User findByUsernameAndPassword(String username, String password) {
@@ -26,11 +37,18 @@ public class UserService implements UserServiceInterface{
 	public void remove(Integer id) {
 		 repository.deleteById(id);
 	}
+	
+	
 
 //	@Override
 //	public User findByEnterprise_Enterprise_id(Integer enterprise_id) {
 //		return repository.findByEnterprise_Enterprise_id(enterprise_id);
 //	}
+
+	@Override
+	public User findOne(Integer user_id) {
+		return repository.getOne(user_id);
+	}
 
 	@Override
 	public User findByUsername(String username) {

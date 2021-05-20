@@ -13,34 +13,18 @@ public class UserDTO implements Serializable{
 	
 	private String password;
 	
-	private Long enterprise_id;
+	private EnterpriseDTO enterpriseDTO;
 	
 	public UserDTO() {
 		super();
 	}
 	
-	public UserDTO(String username,String password ) {
-		this.username= username;
-		this.password=password;
-
-	}
-	
-	public UserDTO(Integer user_id, String username,String password,Long enterprise_id) {
+	public UserDTO(Integer user_id, String username,String password,EnterpriseDTO enterpriseDTO) {
 		super();
 		this.user_id = user_id;
 		this.username = username;
 		this.password = password;
-		this.enterprise_id = enterprise_id;
-	}
-	public UserDTO(Integer user_id, String username,String password) {
-		super();
-		this.user_id = user_id;
-		this.username = username;
-		this.password = password;
-	}
-	
-	public UserDTO(User u) {
-		this(u.getUser_id(), u.getUsername(), u.getPassword());
+		this.enterpriseDTO = enterpriseDTO;
 	}
 
 	public Integer getUser_id() {
@@ -67,14 +51,12 @@ public class UserDTO implements Serializable{
 		this.password = password;
 	}
 
-	public Long getEnterprise_id() {
-		return enterprise_id;
+	public EnterpriseDTO getEnterpriseDTO() {
+		return enterpriseDTO;
 	}
 
-	public void setEnterprise_id(Long long1) {
-		this.enterprise_id = long1;
+	public void setEnterpriseDTO(EnterpriseDTO enterpriseDTO) {
+		this.enterpriseDTO = enterpriseDTO;
 	}
-
-	
 
 }

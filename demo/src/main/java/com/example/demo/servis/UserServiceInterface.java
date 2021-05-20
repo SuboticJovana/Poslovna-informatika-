@@ -1,5 +1,7 @@
 package com.example.demo.servis;
 
+import java.util.List;
+
 import com.example.demo.model.User;
 
 public interface UserServiceInterface {
@@ -14,5 +16,8 @@ public interface UserServiceInterface {
 	
 	User findByUsername(String username);
 	
+	List<User> findAll();
+
+	User findOne(Integer user_id);
 
 }
