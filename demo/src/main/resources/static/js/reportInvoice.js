@@ -23,6 +23,7 @@ function readInvoice() {
 				console.log(data);
 				$("#dataTableBody").empty();
 				for (i = 0; i < data.length; i++){
+					console.log('this is data' + data);
 					console.log(data[i].id)
 					newRow = 
 						"<tr>"
@@ -31,7 +32,17 @@ function readInvoice() {
 							+ "<td class=\"invoiceItems\">" + data[i].unitPrice + "</td>"
 							+ "<td class=\"invoiceItems\">" + data[i].pdvBase + "</td>"
 							+ "<td class=\"invoiceItems\">" + data[i].pdvAmount + "</td>"
-							+ "<td class=\"invoiceItems\">" + data[i].totalAmount + "</td>" +
+							+ "<td class=\"invoiceItems\">" + data[i].totalAmount + "</td>"
+							+ "<td class=\"invoiceItems\">" +
+								"Broj:" + data[i].invoiceDTO.invoice_number + "<br>" + 
+								" Datum:" + new Date(data[i].invoiceDTO.date_invoice).toLocaleDateString() +  "<br>" +
+								" Pdv:" + data[i].invoiceDTO.total_pdv + "<br>" +
+								" Iznos:" + data[i].invoiceDTO.total_amount + "<br>" +
+								" Osnovica:" + data[i].invoiceDTO.total_base + 
+							 "</td>" + 
+							"<td>"+ new Date(data[i].invoiceDTO.bussinesYearDTO.dateFrom).toLocaleDateString() +
+							 "-" +new Date(data[i].invoiceDTO.bussinesYearDTO.dateTo).toLocaleDateString()+ "</td>"+ 
+						 "<td class=\"invoiceItems\">" + data[i].invoiceDTO.enterpriseName + "</td>" +
 						"</tr>"
 					$("#dataTableBody").append(newRow);
 				}

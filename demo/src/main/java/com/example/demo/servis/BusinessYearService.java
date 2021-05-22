@@ -1,12 +1,15 @@
 package com.example.demo.servis;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.model.BusinessYear;
 import com.example.demo.repozitorijum.BusinessYearRepository;
 
+@Service
 public class BusinessYearService implements BusinessYearServiceInterface{
 	
 	@Autowired
@@ -30,5 +33,10 @@ public class BusinessYearService implements BusinessYearServiceInterface{
 	@Override
 	public List<BusinessYear> findAll() {
 		return businessRepository.findAll();
+	}
+
+	@Override
+	public BusinessYear getCurrentYear(Date currentDate) {
+		return businessRepository.getYear(currentDate);
 	}
 }

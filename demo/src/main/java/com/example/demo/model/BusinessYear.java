@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "businessyear")
+@Table(name = "Businessyear")
 public class BusinessYear implements Serializable {
 	
 	private static final long serialVersionUID = -6351610115262789313L;

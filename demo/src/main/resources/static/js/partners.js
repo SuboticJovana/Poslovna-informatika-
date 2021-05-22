@@ -36,12 +36,13 @@ function getPartners(){
 		readCities2();
 		readEnterprises2();
 		$('#updateModalScrollable').modal('show');
+		//updatePartner();
 	});
 	
-	$(document).on("click", '#doUpdate', function(event) {
-		updatePartner();
-		$('#updateModalScrollable').modal('hide');
-	});
+	// $(document).on("click", '#doUpdate', function(event) {
+	// 	updatePartner();
+	// 	$('#updateModalScrollable').modal('hide');
+	// });
 	
 	$(document).on("click", '.updateModalClose', function(event) {
 		$('#updateModalScrollable').modal('hide');
@@ -61,16 +62,19 @@ function getPartners(){
 		$('#deletePromptModal').modal('hide');
 	});
 }
-
+var partnersArray = [];
 function readPartners() {
 	$.ajax({
 		url : "http://localhost:8080/salesystem/partners/all" 
 	}).then(
 			function(data, status, request) {
 				console.log(data);
+				partnersArray = data;
+				console.log('this is partners array '+partnersArray);
 				$("#dataTableBody").empty();
 				for (i = 0; i < data.length; i++) {
 					console.log(data[i].partner_id)
+					console.log(data[i].enterpriseDTO.nameEnterprise);
 					newRow = 
 					"<tr>" 
 						+ "<td class=\"partner_name\">" + data[i].partner_name + "</td>"
@@ -78,7 +82,7 @@ function readPartners() {
 						+ "<td class=\"phone_number\">" + data[i].phone_number + "</td>"
 						+ "<td class=\"fax\">" + data[i].fax + "</td>"
 						+ "<td class=\"email\">" + data[i].email + "</td>"
-						+ "<td class=\"cityDTO\">" + data[i].cityDTO.city_name + "</td>" +
+						+ "<td class=\"cityDTO\">" + data[i].cityDTO.city_name + "</td>"
 						+ "<td class=\"enterpriseDTO\">" + data[i].enterpriseDTO.nameEnterprise + "</td>" +
 					"</tr>"
 					$("#dataTableBody").append(newRow);
@@ -249,63 +253,77 @@ function addPartner(){
 		return false;
 }
 
-function updatePartner() {
-	var nazivIzmeniInput = $('#nazivIzmeniInput');
-	var adresaIzmeniInput = $('#adresaIzmeniInput');
-	var telefonIzmeniInput = $('#telefonIzmeniInput');
-	var faxIzmeniInput = $('#faxIzmeniInput');
-	var emailIzmeniInput = $('#emailIzmeniInput');
-	var gradIzmeniSelect = $('#gradIzmeniSelect');
-	var preduzeceIzmeniSelect = $('#preduzeceIzmeniSelect');
-	var izaberiPartnera = $('#partnerEditSelect');
+//EDIT : 
 
-	var partner_name = nazivIzmeniInput.val();
-	var address = adresaIzmeniInput.val();
-	var phone_number = telefonIzmeniInput.val();
-	var fax = faxIzmeniInput.val();
-	var email = emailIzmeniInput.val();
-	var cityDTO = gradIzmeniSelect.val();
-	var enterpriseDTO = preduzeceIzmeniSelect.val();
-	var izabranPartner = izaberiPartnera.val();
-		
-	var params = {
-			'partner_id': izabranPartner,
-			'partner_name': partner_name,
-			'address': address,
-			'phone_number': phone_number,
-			'fax': fax,
-			'email': email,
-			'cityDTO': {
-				'city_id' : cityDTO
-			},
-			'enterpriseDTO': {
-				'enterprise_id' : enterpriseDTO
-			}
-	}
-	
-	$.ajax({
-		url:"http://localhost:8080/salesystem/partners/" + izabranPartner,
-		type:"PUT",
-		data: JSON.stringify(params),
-		contentType:'application/json; charset=utf-8',
-		dataType:"json",
-		success:function(data){
-			console.log(data);
-			readPartners();
-			nazivIzmeniInput.val("");
-			adresaIzmeniInput.val("");
-			telefonIzmeniInput.val("");
-			faxIzmeniInput.val("");
-			emailIzmeniInput.val("");
-			gradIzmeniSelect.val("");
-			preduzeceIzmeniSelect.val("");
+	//popunjavanje forme za edit, "izaberi" dugme
+	$(document).on("click", '#fillOutPartnerFieldsEdit', function(event) {
+		var id = document.getElementById("partnerEditSelect").value;
+		if(!id) {
+			alert("Morate izabrati partnera da biste izvrsili izmenu");
 		}
+		var chosenPartnerData = partnersArray.filter(partner => partner.partner_id == id);
+		//za vanilla js:
+		//var nazivIzmeniInput = document.getElementById("nazivIzmeniInput");
+		// nazivIzmeniInput.innerText = ili .setValue() 
+		console.log(chosenPartnerData[0].partner_name);
+		$('#nazivIzmeniInput').val(chosenPartnerData[0].partner_name);
+		$('#adresaIzmeniInput').val(chosenPartnerData[0].address);
+		$('#telefonIzmeniInput').val(chosenPartnerData[0].phone_number);
+		$('#faxIzmeniInput').val(chosenPartnerData[0].fax);
+		$('#emailIzmeniInput').val(chosenPartnerData[0].email);	
+		event.preventDefault();
 	});
 
-	console.log('slanje poruke');
-	event.preventDefault();
-	return false;
-}
+	//klik za izmenu
+	$(document).on("click", '#doUpdate', function(event){
+		if(!document.getElementById("partnerEditSelect").value){
+			alert('Izaberite partnera za izmenu!');
+			return;
+		}
+		var partner_name = $('#nazivIzmeniInput').val();
+		var address = $('#adresaIzmeniInput').val();
+		var phone_number = $('#telefonIzmeniInput').val();
+		var fax = $('#faxIzmeniInput').val();
+		var email = $('#emailIzmeniInput').val();
+		var cityDTO = $('#gradIzmeniSelect').val();
+		var enterpriseDTO = $('#preduzeceIzmeniSelect').val();
+		var izabranPartner = $('#partnerEditSelect').val();
+		var params = {
+				'partner_id': izabranPartner,
+				'partner_name': partner_name,
+				'address': address,
+				'phone_number': phone_number,
+				'fax': fax,
+				'email': email,
+				'cityDTO': {
+					'city_id' : cityDTO
+				},
+				'enterpriseDTO': {
+					'enterprise_id' : enterpriseDTO
+				}
+		}
+		$.ajax({
+			url:"http://localhost:8080/salesystem/partners/" + izabranPartner,
+			type:"PUT",
+			data: JSON.stringify(params),
+			contentType:'application/json',
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				readPartners();
+				$('#nazivIzmeniInput').val("");
+				$('#adresaIzmeniInput').val("");
+				$('#telefonIzmeniInput').val("");
+				$('#faxIzmeniInput').val("");
+				$('#emailIzmeniInput').val("");
+				//gradIzmeniSelect.val("");
+				//preduzeceIzmeniSelect.val("");
+				$('#updateModalScrollable').modal('hide');
+			}
+		});
+	});
+
+//END EDIT
 
 function deletePartner(){
 	var izaberiPartnera = $('#partnerDeleteSelect');

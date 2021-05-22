@@ -140,6 +140,22 @@ public void setPartner(Partner partner) {
 	this.partner = partner;
 }
 
+public BusinessYear getBusinessYear() {
+	return businessYear;
+}
+
+public void setBusinessYear(BusinessYear businessYear) {
+	this.businessYear = businessYear;
+}
+
+public Integer getNumber() {
+	return number;
+}
+
+public void setDateCurrency(Date dateCurrency) {
+	this.dateCurrency = dateCurrency;
+}
+
 
 
 }

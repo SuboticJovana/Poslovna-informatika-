@@ -10,6 +10,7 @@ if(user!=null || user!=""){
 
 document.getElementById("login").addEventListener('click',function (event)
 {
+    console.log('asdddd');
     if(document.getElementById('username').value == "" || document.getElementById('password').value ==""){
         alert("Molimo Vas, popunite sve podatke!");
         return;
@@ -29,10 +30,11 @@ document.getElementById("login").addEventListener('click',function (event)
     .then(res => 
         {
             if(res!=null){
+                console.log('this is response after login');
                 document.getElementById('loginForm').style.display="none";
                 document.getElementById('menu').style.display="block";
                 localStorage.setItem("salesystem-user", document.getElementById('username').value);
-                localStorage.setItem("salesystem-enterprise", res.enterprise_id);
+                localStorage.setItem("salesystem-enterprise", res.enterpriseDTO.enterprise_id);
             }else{
                 alert("Podaci nisu ispravni, pokusajte ponovo!");
             }

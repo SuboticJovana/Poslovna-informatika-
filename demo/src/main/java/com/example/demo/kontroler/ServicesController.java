@@ -50,7 +50,18 @@ public class ServicesController {
 		return new ResponseEntity<List<ServicesDTO>>(servicesDTO, HttpStatus.OK);
 
 }
+	
+	@GetMapping(value="/all")
+	public ResponseEntity<List<ServicesDTO>> getServicesAll(){
+		List<Services> services = serviceServiceInterface.findAll();
+		List<ServicesDTO> servicesDTO = new ArrayList<ServicesDTO>();
+		for(Services s : services) {
+			servicesDTO.add(servicesConverter.toDTO(s));
+	}
+		return new ResponseEntity<List<ServicesDTO>>(servicesDTO, HttpStatus.OK);
 
+	}
+	
 	@GetMapping(value="/{services_id}")
 	public ResponseEntity<ServicesDTO> getService(@PathVariable("services_id") Integer services_id){
 		Services services = serviceServiceInterface.findOne(services_id);

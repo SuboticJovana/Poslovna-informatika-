@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.converters.EnterpriseConverter;
 import com.example.demo.converters.UserConverter;
 import com.example.demo.dto.UserDTO;
 import com.example.demo.model.User;
@@ -30,6 +31,9 @@ public class UserController {
 	@Autowired
 	UserConverter userConverter;
 	
+	@Autowired
+	EnterpriseConverter enterpriseConverter;
+	
 	@PostMapping(consumes="application/json")
 	public ResponseEntity<UserDTO> login(@RequestBody UserDTO userDTO){
 		User u = service.findByUsernameAndPassword(userDTO.getUsername(),userDTO.getPassword());
@@ -37,7 +41,8 @@ public class UserController {
 			return new ResponseEntity<UserDTO>(HttpStatus.NOT_FOUND); 
 		}else {
 			UserDTO uDTO = new UserDTO();
-//			uDTO.setEnterpriseDTO(u.getEnterprise());
+			uDTO.setUsername(u.getUsername());
+			uDTO.setEnterpriseDTO(enterpriseConverter.toDTO(u.getEnterprise()));
 //			uDTO.setEnterprise_id(u.getEnterprise().getEnterprise_id());
 			return new ResponseEntity<UserDTO>(uDTO, HttpStatus.OK);
 		}

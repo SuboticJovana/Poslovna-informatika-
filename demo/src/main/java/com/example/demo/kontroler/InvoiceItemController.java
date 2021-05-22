@@ -2,6 +2,9 @@ package com.example.demo.kontroler;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -18,9 +21,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.BussinesYearDTO;
+import com.example.demo.dto.InvoiceDTO;
 import com.example.demo.dto.InvoiceItemDTO;
+import com.example.demo.model.BusinessYear;
 import com.example.demo.model.Invoice;
 import com.example.demo.model.InvoiceItem;
+import com.example.demo.servis.BusinessYearServiceInterface;
 import com.example.demo.servis.EnterpriseServiceInterface;
 import com.example.demo.servis.InvoiceItemServiceInterface;
 import com.example.demo.servis.InvoiceServiceInterface;
@@ -46,12 +53,17 @@ public class InvoiceItemController {
 	@Autowired
 	private PartnerServiceInteface partnerService;
 	
+	@Autowired
+	private BusinessYearServiceInterface buisnessYearService;
+	
 	@GetMapping
 	public ResponseEntity<List<InvoiceItemDTO>> getInvoiceItems() {
 	List<InvoiceItem> items = service.findAll();
 	List<InvoiceItemDTO> itemsDTO = new ArrayList<InvoiceItemDTO>();
 	for (InvoiceItem u : items) {
-		itemsDTO.add(new InvoiceItemDTO(u));
+		InvoiceItemDTO newItem = new InvoiceItemDTO(u);
+		newItem.setInvoiceDTO(new InvoiceDTO(u.getInvoice()));
+		itemsDTO.add(newItem);
 	}
 	return new ResponseEntity<List<InvoiceItemDTO>>(itemsDTO, HttpStatus.OK);
 
@@ -69,16 +81,37 @@ public class InvoiceItemController {
 	@Transactional
 	@PostMapping(consumes="application/json")
 	public ResponseEntity<Boolean> saveItem(@RequestBody List<InvoiceItemDTO> invoiceItems){
-		Invoice invoice = new Invoice();
+		Invoice invoice = new Invoice();		
+		//naci trenutnu poslovnu godinu i izvuci fakturu koja ima najveci broj fakture, dodati +1 i setovati za novu
+		//ako nema trenutne poslovne godine(ako je prosao 31.decembar, kreirati novu ovde)
+		
+		BusinessYear currentYear = buisnessYearService.getCurrentYear(new Date());
+		if(currentYear==null) {
+			//make new year
+			BusinessYear newYear = new BusinessYear();
+			//newYear.setDateFrom();
+			//newYear.setDateTo();
+			BusinessYear createdYear = buisnessYearService.save(newYear);
+			invoice.setBusinessYear(createdYear);
+		}else {
+			invoice.setBusinessYear(currentYear);
+		}
+		List<Integer> invoiceIds = new ArrayList<Integer>();
+		for(Invoice in :currentYear.getInvoices()) {
+			invoiceIds.add(in.getNumber());
+		}
+		Collections.sort(invoiceIds);
+		Integer lastId = invoiceIds.get(invoiceIds.size() - 1);
+		invoice.setNumber(lastId+1);
 		Double total_amount = 0.0;
 		Double total_base = 0.0;
 		Double total_pdv = 0.0;
 		InvoiceItemDTO firstItem = invoiceItems.get(0);
 		invoice.setDate_currency(firstItem.getDate_currency());
 		invoice.setDate(firstItem.getDate_invoice());
-		invoice.setNumber((int) Math.random());
-		invoice.setStatus("reserved"); 
-		invoice.setEnterprise(enterpriseService.findOne((long) 1)); //after login function add enterprise
+		invoice.setStatus("poslato"); 
+		//status fakture: otkazano, poslato, odbijeno, odobreno, placeno
+		invoice.setEnterprise(enterpriseService.findOne((long) firstItem.getEnterprise_id())); //after login function add enterprise
 		invoice.setPartner(partnerService.findOne(firstItem.getPartner_id()));
 		for(InvoiceItemDTO uDTO : invoiceItems) {
 			total_amount += uDTO.getQuantity() * uDTO.getUnitPrice();
@@ -102,7 +135,6 @@ public class InvoiceItemController {
 			item.setInvoice(invoice); 
 			service.save(item);
 		}
-		//add false if it fails
 		return new ResponseEntity<Boolean>(true, HttpStatus.CREATED);	
 	}
 	

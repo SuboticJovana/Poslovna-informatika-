@@ -2,7 +2,7 @@
 var serviceSelect = document.getElementById('service-dropdown');
 var invoiceItems = [];
 
-    fetch("http://localhost:8080/salesystem/services/all")
+    fetch("http://localhost:8080/salesystem/services")
     .then((resp) => resp.json())
     .then(function(data) {
         var values = data;
@@ -20,7 +20,7 @@ var invoiceItems = [];
     //get partner for invoice
     var partnerSelect = document.getElementById('partner-dropdown');
 
-    fetch("http://localhost:8080/salesystem/partners")
+    fetch("http://localhost:8080/salesystem/partners/all")
     .then((resp) => resp.json())
     .then(function(data) {
         var values = data;
@@ -35,7 +35,7 @@ var invoiceItems = [];
         console.log(error);
     });
     
-    var datumFakture = document.getElementById('datumFakture');
+var datumFakture = document.getElementById('datumFakture');
 datumFakture.max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
 var datumValute = document.getElementById('datumValute');
 datumValute.max = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().split("T")[0];
@@ -76,7 +76,8 @@ datumValute.max = new Date(new Date().getTime() - new Date().getTimezoneOffset()
             service_id: document.getElementById('service-dropdown').value,
             partner_id: document.getElementById('partner-dropdown').value,
             date_invoice: document.getElementById('datumFakture').value,
-            date_currency: document.getElementById('datumValute').value
+            date_currency: document.getElementById('datumValute').value,
+            enterprise_id : localStorage.getItem('salesystem-enterprise')
             }
         invoiceItems = [...invoiceItems,invoice]
         console.log(invoiceItems);
@@ -106,7 +107,9 @@ document.getElementById("addInvoiceItem").addEventListener('click',function (eve
             service_id: document.getElementById('service-dropdown').value,
             partner_id: document.getElementById('partner-dropdown').value,
             date_invoice: document.getElementById('datumFakture').value,
-            date_currency: document.getElementById('datumValute').value
+            date_currency: document.getElementById('datumValute').value,
+            enterprise_id : localStorage.getItem('salesystem-enterprise')
+            
             }
         invoiceItems = [...invoiceItems,invoice]
         console.log(invoiceItems);
@@ -114,6 +117,4 @@ document.getElementById("addInvoiceItem").addEventListener('click',function (eve
          document.getElementById('discount').value=0;
          document.getElementById('unitPrice').value=0;
          document.getElementById('pdvBase').value=0;
-        //  document.getElementById('pdvAmount').value=0;
-        //  document.getElementById('totalAmount').value=0;//total amount needs to be calculated
     }  ); 

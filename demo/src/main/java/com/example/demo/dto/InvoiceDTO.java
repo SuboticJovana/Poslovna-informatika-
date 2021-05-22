@@ -15,14 +15,14 @@ public class InvoiceDTO {
 	private Double total_pdv;
 	private String status;
 	private EnterpriseDTO enterpriseDTO;
-	
 	private BussinesYearDTO bussinesYearDTO;
+	private String enterpriseName;
 
-	/*public InvoiceDTO() {
+	public InvoiceDTO() {
 		
 	}
 	public InvoiceDTO(Integer id, Integer invoice_number, Date date_invoice, Date date_currency, Double total_base,
-			Double total_amount, Double total_pdv, String status) {
+			Double total_amount, Double total_pdv, String status, BussinesYearDTO bussinesYearDTO, String enterpriseName) {
 		super();
 		this.id = id;
 		this.invoice_number = invoice_number;
@@ -32,10 +32,14 @@ public class InvoiceDTO {
 		this.total_amount = total_amount;
 		this.total_pdv = total_pdv;
 		this.status=status;
+		this.bussinesYearDTO = bussinesYearDTO;
+		this.enterpriseName = enterpriseName;
 	}
 	public InvoiceDTO(Invoice item) {
-		// TODO Auto-generated constructor stub
-	}*/
+		this(item.getId(), item.getNumber(), item.getDate(), item.getDateCurrency(), item.getTotal_base(), item.getTotal_amount(),
+				item.getTotalPdv(), item.getStatus(),new BussinesYearDTO(item.getBusinessYear()), item.getEnterprise().getNameEnterprise());
+		
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -95,6 +99,12 @@ public class InvoiceDTO {
 	}
 	public void setBussinesYearDTO(BussinesYearDTO bussinesYearDTO) {
 		this.bussinesYearDTO = bussinesYearDTO;
+	}
+	public String getEnterpriseName() {
+		return enterpriseName;
+	}
+	public void setEnterpriseName(String enterpriseName) {
+		this.enterpriseName = enterpriseName;
 	}
 	
 	

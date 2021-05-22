@@ -3,6 +3,8 @@ package com.example.demo.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.example.demo.model.BusinessYear;
+
 @SuppressWarnings("serial")
 public class BussinesYearDTO implements Serializable{
 	
@@ -20,6 +22,16 @@ public class BussinesYearDTO implements Serializable{
 	
 	public BussinesYearDTO() {
 		super();
+	}
+
+	public BussinesYearDTO(Integer idYear,Date dateFrom, Date dateTo) {
+		this.idYear = idYear;
+		this.dateFrom=dateFrom;
+		this.dateTo=dateTo;
+	}
+	
+	public BussinesYearDTO(BusinessYear b) {
+		this(b.getIdYear(), b.getDateFrom(), b.getDateTo());
 	}
 
 	public Integer getIdYear() {

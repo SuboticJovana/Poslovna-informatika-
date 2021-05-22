@@ -40,6 +40,17 @@ public class PartnerContoller {
 		return new ResponseEntity<List<PartnerDTO>>(partnersDTO, HttpStatus.OK);
 	}
 	
+	@GetMapping
+	public ResponseEntity<List<PartnerDTO>> getPartnersAll() {
+		List<Partner> partners = partnerServiceInteface.findAll();
+		List<PartnerDTO> partnersDTO = new ArrayList<PartnerDTO>();
+		for (Partner p : partners) {
+			partnersDTO.add(partnerConverter.toDTO(p));
+		}
+		return new ResponseEntity<List<PartnerDTO>>(partnersDTO, HttpStatus.OK);
+	}
+
+	
 	@GetMapping(value="/{partner_id}")
 	public ResponseEntity<PartnerDTO> getPartner(@PathVariable("partner_id") Integer partner_id){
 		Partner partner = partnerServiceInteface.findOne(partner_id);
@@ -58,7 +69,7 @@ public class PartnerContoller {
 		return new ResponseEntity<PartnerDTO>(partnerDTO, HttpStatus.CREATED);
 	}
 	
-	@PutMapping(value="/{partner_id}", consumes="appliction/json")
+	@PutMapping(value="/{partner_id}", consumes="application/json")
 	public ResponseEntity<PartnerDTO> updatePartner(@RequestBody PartnerDTO pDTO, @PathVariable("partner_id") Integer partner_id ){
 		Partner partner = partnerServiceInteface.findOne(partner_id);
 		if (partner == null) {
