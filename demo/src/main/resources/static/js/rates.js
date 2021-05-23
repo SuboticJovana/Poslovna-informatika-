@@ -35,10 +35,10 @@ function getRates(){
 		$('#updateModalScrollable').modal('show');
 	});
 	
-	$(document).on("click", "#doUpdate", function(event) {
-		updateRate();
-		$('#updateModalScrollable').modal('hide');
-	});
+//	$(document).on("click", "#doUpdate", function(event) {
+//		updateRate();
+//		$('#updateModalScrollable').modal('hide');
+//	});
 	
 	$(document).on("click", '.updateModalClose', function(event) {
 		$('#updateModalScrollable').modal('hide');
@@ -58,13 +58,15 @@ function getRates(){
 		$('#deletePromptModal').modal('hide');
 	});
 }
-
+var ratesArray = [];
 function readRates() {
 	$.ajax({
 		url : "http://localhost:8080/salesystem/pdvRates/all" 
 	}).then(
 			function(data, status, request) {
 				console.log(data);
+				ratesArray = data;
+				console.log('this is rates array '+ratesArray);
 				$("#dataTableBody").empty();
 				for (i = 0; i < data.length; i++) {
 					console.log(data[i].pdv_rate_id)
@@ -191,7 +193,26 @@ function addRate(){
 		return false;
 }
 
-function updateRate() {
+//EDIT
+
+	$(document).on("click", '#fillOutRateFieldsEdit', function(event){
+		var id = document.getElementById("stopaEditSelect").value;
+		if(!id) {
+			alert("Morate izabrati stopu da biste izvrsili izmenu");
+		}
+		var chosenRateData = ratesArray.filter(rate => rate.pdv_rate_id == id);
+		console.log(chosenRateData[0].percentage);
+		$('#procenatIzmeniInput').val(chosenRateData[0].percentage);
+		$('#datumIzmeniInput').val(chosenRateData[0].date);
+		event.preventDefault();
+	});
+
+	$(document).on("click", '#doUpdate', function(event){
+		if(!document.getElementById("stopaEditSelect").value){
+			alert('Izaberite stopu za izmenu');
+			return;
+		}
+	
 	var procenatIzmeniInput = $('#procenatIzmeniInput');
 	var datumIzmeniInput = $('#datumIzmeniInput');
 	var kategorijaIzmeniSelect = $('#kategorijaIzmeniSelect');
@@ -227,14 +248,11 @@ function updateRate() {
 			readRates();
 			procenatIzmeniInput.val("");
 			datumIzmeniInput.val("");
-			kategorijaIzmeniSelect.val("");
+		//	kategorijaIzmeniSelect.val("");
+			$('#updateModalScrollable').modal('hide');
 		}
 	});
-
-	console.log('slanje poruke');
-	event.preventDefault();
-	return false;
-}
+});
 
 function deleteRate(){
 	var izaberiStopu = $('#stopaDeleteSelect');

@@ -38,10 +38,10 @@ function getPricelistItem(){
 		$('#updateModalScrollable').modal('show');
 	});
 	
-	$(document).on("click", "#doUpdate", function(event) {
-		updateItem();
-		$('#updateModalScrollable').modal('hide');
-	});
+//	$(document).on("click", "#doUpdate", function(event) {
+//		updateItem();
+//		$('#updateModalScrollable').modal('hide');
+//	});
 
 	$(document).on("click", '.updateModalClose', function(event) {
 		$('#updateModalScrollable').modal('hide');
@@ -61,12 +61,15 @@ function getPricelistItem(){
 		$('#deletePromptModal').modal('hide');
 	});
 }
+var itemsArray = [];
 function readItems() {
 	$.ajax({
 		url : "http://localhost:8080/salesystem/priceListItems"
 	}).then(
 			function(data, status, request){
 				console.log(data);
+				itemsArray = data;
+				console.log('this is items array '+itemsArray);
 				$("#dataTableBody").empty();
 				for (i = 0; i < data.length; i++){
 					console.log(data[i].price_list_item_id)
@@ -219,7 +222,25 @@ function addPricelistItem(){
 		return false;
 }
 
-function updateItem() {
+//EDIT
+
+	$(document).on("click", '#fillOutItemFieldsEdit', function(event){
+		var id = document.getElementById("stavkaEditSelect").value;
+		if(!id){
+			alert("Morate odabrati stavku da biste izvrsili izmenu");
+		}
+		var chosenItemData = itemsArray.filter(item => item.price_list_item_id == id);
+		console.log(chosenItemData[0].price);
+		$('#cenaIzmeniInput').val(chosenItemData[0].price);
+		event.preventDefault();
+	});
+
+	$(document).on("click", '#doUpdate', function(event){
+		if(!document.getElementById("stavkaEditSelect").value){
+			alert('Izaberite stavku za izmenu');
+			return;
+		}
+
 	var cenaIzmeniInput = $('#cenaIzmeniInput');
 	var cenovnikIzmeniSelect = $('#cenovnikIzmeniSelect');
 	var robaIzmeniSelect = $('#robaIzmeniSelect');
@@ -256,15 +277,12 @@ function updateItem() {
 			console.log(data);
 			readItems();
 			cenaIzmeniInput.val("");
-			cenovnikIzmeniSelect.val("");
-			robaIzmeniSelect.val("");
+			//cenovnikIzmeniSelect.val("");
+			//robaIzmeniSelect.val("");
+			$('#updateModalScrollable').modal('hide');
 		}
 	});
-
-	console.log('slanje poruke');
-	event.preventDefault();
-	return false;
-}
+});
 
 function deleteItem(){
 	var izaberiStavku = $('#stavkaDeleteSelect');

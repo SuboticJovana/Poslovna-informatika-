@@ -36,10 +36,10 @@ function getPricelists(){
 		$('#updateModalScrollable').modal('show');
 	});
 	
-	$(document).on("click", "#doUpdate", function(event) {
-		updatePricelist();
-		$('#updateModalScrollable').modal('hide');
-	});
+//	$(document).on("click", "#doUpdate", function(event) {
+//		updatePricelist();
+//		$('#updateModalScrollable').modal('hide');
+//	});
 	
 	$(document).on("click", '.updateModalClose', function(event) {
 		$('#updateModalScrollable').modal('hide');
@@ -73,13 +73,15 @@ function getPricelists(){
 		$('#copyModalScrollable').modal('hide');
 	});
 }
-
+var pricelistsArray = [];
 function readPricelists() {
 		$.ajax({
 			url : "http://localhost:8080/salesystem/pricelists/all" 
 		}).then(
 				function(data, status, request) {
 					console.log(data);
+					pricelistsArray = data;
+					console.log('this is pricelists array '+pricelistsArray);
 					$("#dataTableBody").empty();
 					for (i = 0; i < data.length; i++) {
 						console.log(data[i].pricelist_id)
@@ -264,7 +266,22 @@ function copyPricelist(){
 		return false;
 }
 
-function updatePricelist() {
+	$(document).on("click", '#fillOutPricelistFieldsEdit', function(event){
+		var id = document.getElementById("cenovnikEditSelect").value;
+		if(!id) {
+			alert("Morate izabrati cenovnik da biste izvrsili izmenu");
+		}
+		var chosenPricelistData = pricelistsArray.filter(pricelist => pricelist.pricelist_id == id);
+		console.log(chosenPricelistData[0].date_from);
+		$('#datumIzmeniInput').val(chosenPricelistData[0].date_from);
+		event.preventDefault();
+	});
+
+		$(document).on("click", '#doUpdate', function(event){
+			if(!document.getElementById("cenovnikEditSelect").value){
+				alert('Izaberite cenovnik za izmenu');
+				return;
+			}
 		var datumIzmeniInput = $('#datumIzmeniInput');
 		var izaberiCenovnik = $('#cenovnikEditSelect');
 		var preduzeceIzmeniSelect = $('#preduzeceIzmeniSelect');
@@ -295,14 +312,11 @@ function updatePricelist() {
 				console.log(data);
 				readPricelists();
 				datumIzmeniInput.val("");
-				preduzeceIzmeniSelect.val("");
+				//preduzeceIzmeniSelect.val("");
+				$('#updateModalScrollable').modal('hide');
 			}
 		});
-
-		console.log('slanje poruke');
-		event.preventDefault();
-		return false;
-}
+});
 
 function deletePricelist(){
 	var izaberiCenovnik = $('#cenovnikDeleteSelect');

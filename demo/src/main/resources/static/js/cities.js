@@ -34,10 +34,10 @@ function getCities(){
 		$('#updateModalScrollable').modal('show');
 	});
 	
-	$(document).on("click", "#doUpdate", function(event) {
-		updateCity();
-		$('#updateModalScrollable').modal('hide');
-	});
+//	$(document).on("click", "#doUpdate", function(event) {
+//		updateCity();
+//		$('#updateModalScrollable').modal('hide');
+//	});
 	
 	$(document).on("click", '.updateModalClose', function(event) {
 		$('#updateModalScrollable').modal('hide');
@@ -57,13 +57,15 @@ function getCities(){
 		$('#deletePromptModal').modal('hide');
 	});
 }
-
+var citiesArray = [];
 function readCities() {
 	$.ajax({
 		url : "http://localhost:8080/salesystem/cities/all" 
 	}).then(
 			function(data, status, request) {
 				console.log(data);
+				citiesArray = data;
+				console.log('this is city array '+ citiesArray);
 				$("#dataTableBody").empty();
 				for (i = 0; i < data.length; i++) {
 					console.log(data[i].city_id)
@@ -146,8 +148,26 @@ function addCityToSelect2(){
 		}
 	);
 }
+//EDIT
 
-function updateCity() {
+	$(document).on("click", '#fillOutCityFieldsEdit', function(event) {
+		var id = document.getElementById("gradEditSelect").value;
+		if(!id) {
+			alert("Morate izabrati grad da biste izvrsili izmenu");
+		}
+		var chosenCityData = citiesArray.filter(city => city.city_id == id);
+		console.log(chosenCityData[0].city_name);
+		$('#pttIzmeniInput').val(chosenCityData[0].ptt);
+		$('#nazivIzmeniInput').val(chosenCityData[0].city_name);
+		event.preventDefault();
+	});
+	
+
+	$(document).on("click", '#doUpdate', function(event){
+		if(!document.getElementById("gradEditSelect").value){
+			alert('Izaberite grad za izmenu');
+			return;
+		}
 	var pttIzmeniInput = $('#pttIzmeniInput');
 	var nazivIzmeniInput = $('#nazivIzmeniInput');
 	var izaberiGrad = $('#gradEditSelect');
@@ -177,14 +197,10 @@ function updateCity() {
 			readCities();
 			pttIzmeniInput.val("");
 			nazivIzmeniInput.val("");
+			$('#updateModalScrollable').modal('hide');
 		}
 	});
-
-	console.log('slanje poruke');
-	event.preventDefault();
-	return false;
-	
-}
+});
 
 function deleteCity(){
 	var izaberiGrad = $('#gradDeleteSelect');
