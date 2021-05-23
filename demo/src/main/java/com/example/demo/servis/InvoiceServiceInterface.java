@@ -2,6 +2,7 @@ package com.example.demo.servis;
 
 import java.util.List;
 
+import com.example.demo.model.Enterprise;
 import com.example.demo.model.Invoice;
 
 public interface InvoiceServiceInterface {
@@ -13,4 +14,6 @@ public interface InvoiceServiceInterface {
 	Invoice remove(Integer invoice_id);
 	
 	List<Invoice> findAll();
+	
+	List<Invoice> findByEnterprise(Enterprise enterprise);
 }

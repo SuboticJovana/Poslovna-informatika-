@@ -17,8 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.converters.InvoiceConverter;
 import com.example.demo.dto.InvoiceDTO;
+import com.example.demo.model.Enterprise;
 import com.example.demo.model.Invoice;
+import com.example.demo.servis.EnterpriseServiceInterface;
 import com.example.demo.servis.InvoiceServiceInterface;
+import com.example.demo.servis.PartnerServiceInteface;
+import com.example.demo.servis.ServicesServiceInterface;
 
 @RestController
 @RequestMapping(value="salesystem/invoices")
@@ -28,6 +32,16 @@ public class InvoiceController {
 	private InvoiceServiceInterface service;
 	@Autowired
 	private InvoiceConverter invo;
+	
+	@Autowired
+	private EnterpriseServiceInterface enterpriseService;
+	
+	@Autowired
+	private PartnerServiceInteface partnerService;
+	
+	@Autowired
+	private ServicesServiceInterface serviceInterface;
+
 	
 	@GetMapping
 	public ResponseEntity<List<InvoiceDTO>> getInvoice() {
@@ -39,6 +53,19 @@ public class InvoiceController {
 	return new ResponseEntity<List<InvoiceDTO>>(itemsDTO, HttpStatus.OK);
 
 	}
+	
+	@GetMapping(value="/enterprise/{id}")
+	public ResponseEntity<List<InvoiceDTO>> getInvoiceEnterprise(@PathVariable("id") Integer id) {
+	Enterprise enterprise = enterpriseService.findOne(new Long(id));
+	List<Invoice> items = service.findByEnterprise(enterprise);
+	List<InvoiceDTO> itemsDTO = new ArrayList<InvoiceDTO>();
+	for (Invoice u : items) {
+		itemsDTO.add(invo.toDTO(u));
+	}
+	return new ResponseEntity<List<InvoiceDTO>>(itemsDTO, HttpStatus.OK);
+
+	}
+
 	@GetMapping(value="/{id}")
 	public ResponseEntity<InvoiceDTO> getInvoice(@PathVariable("id") Integer id){
 		Invoice item = service.findOne(id);
@@ -68,18 +95,20 @@ public class InvoiceController {
 	
 	@PutMapping(value="/{id}", consumes="application/json")
 	public ResponseEntity<InvoiceDTO> updateI(@RequestBody InvoiceDTO uDTO, @PathVariable("id") Integer id){
+		System.out.println(id);
 		Invoice item = service.findOne(id);
 		if (item == null) {
+			System.out.println("not found");
 			return new ResponseEntity<InvoiceDTO>(HttpStatus.BAD_REQUEST);
 		}				
-		item.setId(uDTO.getId());
 		item.setDate_currency(uDTO.getDate_currency());
 		item.setDate(uDTO.getDate_invoice());
-		item.setNumber(uDTO.getInvoice_number());
 		item.setStatus(uDTO.getStatus());
-		item.setTotal_amount(uDTO.getTotal_amount());
-		item.setTotal_base(uDTO.getTotal_base());
-		item.setTotalPdv(uDTO.getTotal_pdv());
+		item.setPartner(partnerService.findOne(uDTO.getPartner_id()));
+		//this is calculated
+//		item.setTotal_amount(uDTO.getTotal_amount());
+//		item.setTotal_base(uDTO.getTotal_base());
+//		item.setTotalPdv(uDTO.getTotal_pdv());
 		service.save(item);
 		InvoiceDTO itemDTO = invo.toDTO(item);
 		return new ResponseEntity<InvoiceDTO>(itemDTO, HttpStatus.OK);	

@@ -88,6 +88,7 @@ public class InvoiceItemController {
 		BusinessYear currentYear = buisnessYearService.getCurrentYear(new Date());
 		if(currentYear==null) {
 			//make new year
+			Date date = new Date();
 			BusinessYear newYear = new BusinessYear();
 			//newYear.setDateFrom();
 			//newYear.setDateTo();

@@ -1,27 +1,35 @@
 //read
-fetch("http://localhost:8080/salesystem/serviceGroups")
-.then((resp) => resp.json())
-.then(function(data) {
-    var values = data;
-    console.log(values);
-    var table = document.getElementById("service-group-table");
-    for (const val of values) {
-        var newRow = document.createElement("tr");
-        var td1 = document.createElement("td");
-        var td2 = document.createElement("td");
-        var td3 = document.createElement("td");
-        td1.innerText= val.name;
-        td2.innerText = val.pdvcategory.name;
-        td3.innerText = val.firm.nameEnterprise;
-        newRow.appendChild(td1);
-        newRow.appendChild(td2);
-        newRow.appendChild(td3);
-        table.append(newRow);
-      }
-  })
-.catch(function(error) {
-    console.log(error);
-});
+var serviceGroupsArray = [];
+readServiceGroups();
+
+function readServiceGroups() {
+
+    fetch("http://localhost:8080/salesystem/serviceGroups")
+    .then((resp) => resp.json())
+    .then(function(data) {
+        serviceGroupsArray = data;
+        var values = data;
+        console.log(values);
+        var table = document.getElementById("service-group-table");
+        for (const val of values) {
+            var newRow = document.createElement("tr");
+            var td1 = document.createElement("td");
+            var td2 = document.createElement("td");
+            var td3 = document.createElement("td");
+            td1.innerText= val.name;
+            td2.innerText = val.pdvcategory.name;
+            td3.innerText = val.firm.nameEnterprise;
+            newRow.appendChild(td1);
+            newRow.appendChild(td2);
+            newRow.appendChild(td3);
+            table.append(newRow);
+        }
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
+}
+
 var addPdvCategorySelect = document.getElementById('pdv-category-dropdown');
 var editPdvCategorySelect = document.getElementById('edit-pdv-category-dropdown');
 fetch("http://localhost:8080/salesystem/pdvCategories/all")
@@ -74,7 +82,9 @@ document.getElementById("add-service-group-button").addEventListener('click',fun
         }).then(res => res.json())
         .then(res => {
             document.getElementById("add-service-group-window").style.visibility = "hidden"
-            alert('Service group added!');}
+            alert('Grupa robe je kreirana!');
+            window.location.reload();
+        }
             );
         event.preventDefault();
     }  ); 
@@ -117,7 +127,9 @@ document.getElementById("delete-service-group").addEventListener('click',functio
             },
             }).then(res => {
                 document.getElementById("delete-service-group-window").style.visibility = "hidden"
-                alert('Service group deleted!');}
+                alert('Grupa robe je izbrisana!');
+                window.location.reload();
+            }
             )
             //event.preventDefault();
         }  ); 
@@ -147,10 +159,26 @@ document.getElementById("edit-service-group").addEventListener('click',function 
     document.getElementById("edit-service-group-window").style.visibility = "visible";
 });
 
+//novi deo za popunjenu formu: 
+document.getElementById("fillOutGroupData").addEventListener('click',function (event){
+    var selectedId = document.getElementById('edit-service-group-dropdown').value;
+    if(!selectedId){
+        alert("Morate izabrati grupu robe za izmenu!");
+        return;
+    }
+    var chosenData = serviceGroupsArray.filter(group => group.id == selectedId);
+    document.getElementById('edit-name').value = chosenData[0].name;
+    event.preventDefault();
+});
+
 document.getElementById("edit-service-group-button").addEventListener('click',function (event)
     {
         //find selected item from checkbox
         var groupSelected = document.getElementById('edit-service-group-dropdown').value;
+        if(!groupSelected){
+            alert("Niste izabrali grupu robe za izmenu!");
+            return;
+        }
         var serviceGroup = {
             name: document.getElementById('edit-name').value,
             pdvcategory: {
@@ -167,8 +195,9 @@ document.getElementById("edit-service-group-button").addEventListener('click',fu
         }).then(res => res.json())
         .then(res => {
             document.getElementById("edit-service-group-window").style.visibility = "hidden"
-            alert('Service group edited!');}
-            );
+            alert('Grupa robe je izmenjena!');
+            window.location.reload();
+            });
         event.preventDefault();
     }  ); 
 

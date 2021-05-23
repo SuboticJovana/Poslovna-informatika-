@@ -11,7 +11,7 @@ import com.example.demo.repozitorijum.ServicesRepository;
 public class ServicesService implements ServicesServiceInterface {
 	
 	@Autowired
-	ServicesRepository servicesRepository;
+	private ServicesRepository servicesRepository;
 
 	@Override
 	public Services findOne(Integer services_id) {
@@ -32,9 +32,7 @@ public class ServicesService implements ServicesServiceInterface {
 
 	@Override
 	public void remove(Integer services_id) {
-		// TODO Auto-generated method stub
-	//	return servicesRepository.deleteById(services_id);
-		
+		servicesRepository.deleteById(services_id);
 	}
 
 	@Override

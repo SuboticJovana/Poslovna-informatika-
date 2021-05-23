@@ -72,7 +72,7 @@ function readUsers(){
 					newRow = 
 					"<tr>" 
 						+ "<td class=\"username\">" + data[i].username + "</td>" 
-						+ "<td class=\"password\">" + data[i].password + "</td>" 
+						// + "<td class=\"password\">" + data[i].password + "</td>" 
 						+ "<td class=\"enterprice\">" + data[i].enterpriseDTO.nameEnterprise + "</td>" +
 					"</tr>"
 					$("#dataTableBody").append(newRow);

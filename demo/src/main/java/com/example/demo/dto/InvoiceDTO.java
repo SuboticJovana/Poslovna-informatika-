@@ -17,12 +17,14 @@ public class InvoiceDTO {
 	private EnterpriseDTO enterpriseDTO;
 	private BussinesYearDTO bussinesYearDTO;
 	private String enterpriseName;
+	private Integer partner_id;
+	private Integer service_id;
 
 	public InvoiceDTO() {
 		
 	}
 	public InvoiceDTO(Integer id, Integer invoice_number, Date date_invoice, Date date_currency, Double total_base,
-			Double total_amount, Double total_pdv, String status, BussinesYearDTO bussinesYearDTO, String enterpriseName) {
+			Double total_amount, Double total_pdv, String status, BussinesYearDTO bussinesYearDTO, String enterpriseName,Integer partner_id) {
 		super();
 		this.id = id;
 		this.invoice_number = invoice_number;
@@ -34,10 +36,12 @@ public class InvoiceDTO {
 		this.status=status;
 		this.bussinesYearDTO = bussinesYearDTO;
 		this.enterpriseName = enterpriseName;
+		this.partner_id=partner_id;
 	}
 	public InvoiceDTO(Invoice item) {
 		this(item.getId(), item.getNumber(), item.getDate(), item.getDateCurrency(), item.getTotal_base(), item.getTotal_amount(),
-				item.getTotalPdv(), item.getStatus(),new BussinesYearDTO(item.getBusinessYear()), item.getEnterprise().getNameEnterprise());
+				item.getTotalPdv(), item.getStatus(),new BussinesYearDTO(item.getBusinessYear()),
+				item.getEnterprise().getNameEnterprise(), item.getPartner().getPartner_id());
 		
 	}
 	public Integer getId() {
@@ -105,6 +109,12 @@ public class InvoiceDTO {
 	}
 	public void setEnterpriseName(String enterpriseName) {
 		this.enterpriseName = enterpriseName;
+	}
+	public Integer getPartner_id() {
+		return partner_id;
+	}
+	public void setPartner_id(Integer partner_id) {
+		this.partner_id = partner_id;
 	}
 	
 	

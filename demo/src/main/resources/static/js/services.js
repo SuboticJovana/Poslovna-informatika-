@@ -1,33 +1,45 @@
 //read
-fetch("http://localhost:8080/salesystem/services")
-.then((resp) => resp.json())
-.then(function(data) {
-    var values = data;
-    console.log(values);
-    var table = document.getElementById("services-table");
-    for (const val of values) {
-        var newRow = document.createElement("tr");
-        var td1 = document.createElement("td");
-        var td2 = document.createElement("td");
-        var td3 = document.createElement("td");
-        var td4 = document.createElement("td");
-        var td5 = document.createElement("td");
-        td1.innerText= val.name;
-        td2.innerText = val.description;
-        td3.innerText = val.goods;
-        td4.innerText = val.serviceGroup.name;
-        td5.innerText = val.unitOfMeasure.short_name;
-        newRow.appendChild(td1);
-        newRow.appendChild(td2);
-        newRow.appendChild(td3);
-        newRow.appendChild(td4);
-        newRow.appendChild(td5);
-        table.append(newRow);
-      }
-  })
-.catch(function(error) {
-    console.log(error);
-});
+var servicesArray = [];
+readServices();
+
+function readServices() {
+
+    fetch("http://localhost:8080/salesystem/services")
+    .then((resp) => resp.json())
+    .then(function(data) {
+        servicesArray = data;
+        console.log('this is array from read' + servicesArray);
+        var values = data;
+        console.log(values);
+        var table = document.getElementById("services-table");
+        for (const val of values) {
+            var newRow = document.createElement("tr");
+            var td1 = document.createElement("td");
+            var td2 = document.createElement("td");
+            var td3 = document.createElement("td");
+            var td4 = document.createElement("td");
+            var td5 = document.createElement("td");
+            td1.innerText= val.name;
+            td2.innerText = val.description;
+            if(val.goods){
+                td3.innerText = "da";
+            }else{
+                td3.innerText = "ne";
+            }
+            td4.innerText = val.serviceGroup.name;
+            td5.innerText = val.unitOfMeasure.short_name;
+            newRow.appendChild(td1);
+            newRow.appendChild(td2);
+            newRow.appendChild(td3);
+            newRow.appendChild(td4);
+            newRow.appendChild(td5);
+            table.append(newRow);
+        }
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
+}
 
 //add
 var GroupSelect = document.getElementById('service-group-dropdown');
@@ -104,7 +116,9 @@ document.getElementById("add-service-button").addEventListener('click',function 
         }).then(res => res.json())
         .then(res => {
             document.getElementById("add-service-window").style.visibility = "hidden"
-            alert('Service added!');}
+            alert('Roba je kreirana!');
+            window.location.reload();
+        }
             );
         event.preventDefault();
     }  ); 
@@ -145,10 +159,13 @@ document.getElementById("delete-service").addEventListener('click',function (eve
             })
             .then(res => {
                 document.getElementById("delete-service-window").style.visibility = "hidden"
-                alert('Service deleted!');}
+                alert('Roba je izbrisana!');
+                window.location.reload();
+            }
                 );
             event.preventDefault();
-        }  ); 
+        }  
+    ); 
  document.getElementById("cancel-delete").addEventListener('click',function (event){
   document.getElementById("delete-service-window").style.visibility = "hidden";
         });
@@ -170,8 +187,21 @@ fetch("http://localhost:8080/salesystem/services")
 .catch(function(error) {
     console.log(error);
 });
+
 document.getElementById("edit-service").addEventListener('click',function (event){
     document.getElementById("edit-service-window").style.visibility = "visible";
+});
+
+document.getElementById("fillOutServiceData").addEventListener('click',function (event){
+    var selectedId = document.getElementById('edit-service-dropdown').value;
+    if(!selectedId){
+        alert("Morate izabrati robu za izmenu!");
+        return;
+    }
+    var chosenData = servicesArray.filter(service => service.services_id == selectedId);
+    document.getElementById('edit-name').value = chosenData[0].name;
+    document.getElementById('edit-description').value = chosenData[0].description;
+    event.preventDefault();
 });
 
 document.getElementById("edit-service-button").addEventListener('click',function (event)
@@ -200,7 +230,9 @@ document.getElementById("edit-service-button").addEventListener('click',function
         })
         .then(res => {
             document.getElementById("edit-service-window").style.visibility = "hidden"
-            alert('Service edited!');}
+            alert('Roba je izmenjena!');
+            window.location.reload();
+        }
             );
         event.preventDefault();
     }  ); 

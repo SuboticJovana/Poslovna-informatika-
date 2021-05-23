@@ -1,24 +1,33 @@
 //read
-fetch("http://localhost:8080/salesystem/unitOfMeasures")
-.then((resp) => resp.json())
-.then(function(data) {
-    var values = data;
-    console.log(values);
-    var table = document.getElementById("units-table");
-    for (const val of values) {
-        var newRow = document.createElement("tr");
-        var td1 = document.createElement("td");
-        var td2 = document.createElement("td");
-        td1.innerText= val.name;
-        td2.innerText = val.short_name;
-        newRow.appendChild(td1);
-        newRow.appendChild(td2);
-        table.append(newRow);
-      }
-  })
-.catch(function(error) {
-    console.log(error);
-});
+readUnits();
+
+var unitsOfMeasureArray = [];
+
+function readUnits(){
+
+    fetch("http://localhost:8080/salesystem/unitOfMeasures")
+    .then((resp) => resp.json())
+    .then(function(data) {
+        var values = data;
+        unitsOfMeasureArray = data;
+        console.log(values);
+        var table = document.getElementById("units-table");
+        for (const val of values) {
+            var newRow = document.createElement("tr");
+            var td1 = document.createElement("td");
+            var td2 = document.createElement("td");
+            td1.innerText= val.name;
+            td2.innerText = val.short_name;
+            newRow.appendChild(td1);
+            newRow.appendChild(td2);
+            table.append(newRow);
+        }
+    })
+    .catch(function(error) {
+        alert(error);
+    });
+}
+
 
 //add
 
@@ -46,7 +55,9 @@ document.getElementById("add-unit-button").addEventListener('click',function (ev
         }).then(res => res.json())
         .then(res => { 
             document.getElementById("add-unit-window").style.visibility = "hidden";
-            alert('Unit of measure added!') }
+            alert('Jedinica mere je kreirana!');
+            window.location.reload();
+        }
             );
         event.preventDefault();
     }  ); 
@@ -87,7 +98,9 @@ document.getElementById("delete-unit").addEventListener('click',function (event)
             })
             .then(res => {
                 document.getElementById("delete-unit-window").style.visibility = "hidden"
-                alert('Unit of measure deleted!');}
+                alert('Jedinica mere je izbrisana!');
+                window.location.reload();
+            }
                 );
             event.preventDefault();
         }  ); 
@@ -98,7 +111,7 @@ document.getElementById("cancel-delete").addEventListener('click',function (even
 });
 
 //edit 
-
+//fillOutUnitData
 var editUnitSelect = document.getElementById('edit-unit-dropdown');
 fetch("http://localhost:8080/salesystem/unitOfMeasures")
 .then((resp) => resp.json())
@@ -118,11 +131,29 @@ document.getElementById("edit-unit").addEventListener('click',function (event){
     document.getElementById("edit-unit-window").style.visibility = "visible";
 });
 
+//novi deo za popunjenu formu : 
+
+document.getElementById("fillOutUnitData").addEventListener('click',function (event){
+    var selectedId = document.getElementById('edit-unit-dropdown').value;
+    if(!selectedId){
+        alert("Morate izabrati jedinicu mere za izmenu!");
+        return;
+    }
+    var chosenUnitData = unitsOfMeasureArray.filter(unit => unit.id == selectedId);
+    document.getElementById('edit-name').value = chosenUnitData[0].name;
+    document.getElementById('edit-short-name').value = chosenUnitData[0].short_name;
+    event.preventDefault();
+});
+
+
 document.getElementById("edit-unit-button").addEventListener('click',function (event)
     {
         //find selected item from checkbox
         var unitSelected = document.getElementById('edit-unit-dropdown').value;
-
+        if(!unitSelected){
+            alert("Niste izabrali jedinicu mere za izmenu!");
+            return;
+        }
         var unitOfMeasure = {
             name: document.getElementById('edit-name').value,
             short_name: document.getElementById('edit-short-name').value,
@@ -135,8 +166,11 @@ document.getElementById("edit-unit-button").addEventListener('click',function (e
         },
         body: JSON.stringify(unitOfMeasure)
         }).then(res => res.json())
-        .then(res => 
-            document.getElementById("edit-unit-window").style.visibility = "hidden"
+        .then(res => { 
+            document.getElementById("edit-unit-window").style.visibility = "hidden";
+            alert("Jedinica mere je izmenjena!");
+            window.location.reload();
+        }
             );
         event.preventDefault();
     }  ); 
