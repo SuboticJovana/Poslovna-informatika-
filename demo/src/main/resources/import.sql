@@ -25,8 +25,5 @@ insert into price_list_items(price_list_item_id, price, pricelist_id, service_id
 insert into users(user_id, username, password, enterprise_id)values(1, "a", "a",1)
 
 insert into businessyear(id_year, date_from, date_to) values (1, "2021-01-01", "2021-12-31")
-insert into invoices(id, number, date_invoice, date_currency, total_base, total_pdv, total_amount, status, enterprise_id, partner_id, id_year)  values(3, 2,"2020-02-02", "2020-02-02",1,1,1,"waiting?", 1,1, 1)
-insert into invoices(id, number, date_invoice, date_currency, total_base, total_pdv, total_amount, status, enterprise_id, partner_id, id_year)  values(4, 3,"2020-02-02", "2020-02-02",1,1,1,"waiting?", 1,1, 1)
-insert into invoices(id, number, date_invoice, date_currency, total_base, total_pdv, total_amount, status, enterprise_id, partner_id, id_year)  values(5, 4,"2020-02-02", "2020-02-02",1,1,1,"waiting?", 1,1, 1)
-insert into invoices(id, number, date_invoice, date_currency, total_base, total_pdv, total_amount, status, enterprise_id, partner_id, id_year)  values(6, 5,"2020-02-02", "2020-02-02",1,1,1,"waiting?", 1,1, 1)
+
 
