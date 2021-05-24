@@ -51,7 +51,7 @@ function readDInvoice() {
 										'<td>' +  data.pdvAmount + '</td>' + 
 							    	  '</tr>' +
 									  '<tr>'+
-								      '<th scope="col">Distributer</th> ' + 	
+								      '<th scope="col">Ukupan iznos</th> ' + 	
 										'<td>' +  data.totalAmount + '</td>' + 
 							    	  '</tr>' +
 										'</td>'+
