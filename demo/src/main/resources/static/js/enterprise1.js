@@ -126,6 +126,7 @@ function readRates() {
 					$("#dataTableBody").append(newRow);
 				}
 			});
+}
 
 function addRateToSelect(){
 	$.ajax({
@@ -300,6 +301,5 @@ function addRate(){
 	        }
 		});
 	}
-}
 
 
