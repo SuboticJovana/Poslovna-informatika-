@@ -1,7 +1,8 @@
 package com.example.demo.dto;
 
 import java.io.Serializable;
-import java.util.Date;
+//import java.util.Date;
+import java.sql.Date;
 
 import com.example.demo.model.PDVRate;
 
