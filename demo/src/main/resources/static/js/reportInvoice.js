@@ -13,8 +13,25 @@ $(document).on("click", '#doAdd', function(event){
 $(document).on("click", '.addModalClose', function(event){
 	$('#addModalScrollable').modal('hide');
 });
+$(document).on("click", '.updateModalClose', function(event) {
+	$('#updateModalScrollable').modal('hide');
+});
 
+$(document).on("click", '#delete', function(event){
+	addRateToSelect2();
+	$('#deletePromptModal').modal('show');
+});
+
+$(document).on("click", '.deletePromptClose', function(event){
+	$('#deletePromptModal').modal('hide');
+});
+
+$(document).on("click", '#doDelete', function(event){
+	deleteRate();
+	$('#deletePromptModal').modal('hide');
+});
 }
+
 function readInvoice() {
 	$.ajax({
 		url : "http://localhost:8080/salesystem/invoiceItems"
@@ -85,6 +102,33 @@ function prikaziOdredjenIzvestaj(id){
 
     		});
     	
+}
+function addRateToSelect2(){
+	$.ajax({
+		url : "http://localhost:8080/salesystem/invoiceItems/all"
+	}).then(
+		function(data) {
+			$("#stopaDeleteSelect").empty();
+			$.each(data, function (i, item) {
+			    $('#stopaDeleteSelect').append($('<option>', { 
+			        value: item.id,
+			        text : item.quantity
+			    }));
+			});	
+		}
+	);
+}
+function deleteRate(){
+	var izaberiStopu = $('#stopaDeleteSelect');
+	var izabranaStopa = izaberiStopu.val();
+	$.ajax({
+    	url: "http://localhost:8080/salesystem/invoiceItems/" + izabranaStopa,
+    	type: "DELETE",
+    	success: function(){
+    		alert('Izbrisali ste stavku izvestaja!');
+    		readInvoice();
+        }
+	});
 }
 
 

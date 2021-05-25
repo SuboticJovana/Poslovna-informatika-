@@ -24,9 +24,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.BussinesYearDTO;
 import com.example.demo.dto.InvoiceDTO;
 import com.example.demo.dto.InvoiceItemDTO;
+import com.example.demo.dto.PartnerDTO;
 import com.example.demo.model.BusinessYear;
 import com.example.demo.model.Invoice;
 import com.example.demo.model.InvoiceItem;
+import com.example.demo.model.Partner;
 import com.example.demo.servis.BusinessYearServiceInterface;
 import com.example.demo.servis.EnterpriseServiceInterface;
 import com.example.demo.servis.InvoiceItemServiceInterface;
@@ -55,6 +57,18 @@ public class InvoiceItemController {
 	
 	@Autowired
 	private BusinessYearServiceInterface buisnessYearService;
+	
+	@GetMapping(value="/all")
+	public ResponseEntity<List<InvoiceItemDTO>> getInvoiceItem() {
+		List<InvoiceItem> partners = service.findAll();
+		List<InvoiceItemDTO> partnersDTO = new ArrayList<InvoiceItemDTO>();
+		for (InvoiceItem u : partners) {
+			InvoiceItemDTO newItem = new InvoiceItemDTO(u);
+			newItem.setInvoiceDTO(new InvoiceDTO(u.getInvoice()));
+			partnersDTO.add(newItem);
+		}
+		return new ResponseEntity<List<InvoiceItemDTO>>(partnersDTO, HttpStatus.OK);
+	}
 	
 	@GetMapping
 	public ResponseEntity<List<InvoiceItemDTO>> getInvoiceItems() {
