@@ -36,10 +36,10 @@ function getUsers(){
 		$('#updateModalScrollable').modal('show');
 	});
 	
-	$(document).on("click", "#doUpdate", function(event) {
-		updateUser();
-		$('#updateModalScrollable').modal('hide');
-	});
+//	$(document).on("click", "#doUpdate", function(event) {
+//		updateUser();
+//		$('#updateModalScrollable').modal('hide');
+//	});
 	
 	$(document).on("click", '.updateModalClose', function(event) {
 		$('#updateModalScrollable').modal('hide');
@@ -59,13 +59,15 @@ function getUsers(){
 		$('#deletePromptModal').modal('hide');
 	});
 }
-
+var usersArray = [];
 function readUsers(){
 	$.ajax({
 		url:"http://localhost:8080/salesystem/users/all"
 	}).then(
 			function(data, status, request) {
 				console.log(data);
+				usersArray = data;
+				console.log('this is users array '+usersArray);
 				$("#dataTableBody").empty();
 				for (i = 0; i < data.length; i++) {
 					console.log(data[i].user_id)
@@ -191,7 +193,24 @@ function addUserToSelect2(){
 	);
 }
 
-function updateUser() {
+//EDIT
+	$(document).on("click", '#fillOutUserFieldsEdit', function(event){
+		var id = document.getElementById("korisnikEditSelect").value;
+		if(!id){
+			alert("Morate izabrati korisnika da biste izvrsili izmenu");
+		}
+		var chosenUserData = usersArray.filter(user => user.user_id == id);
+		console.log(chosenUserData[0].username);
+		$('#korisnickoImeIzmeniInput').val(chosenUserData[0].username);
+		$('#lozinkaIzmeniInput').val(chosenUserData[0].password);
+		event.preventDefault();
+	});
+
+	$(document).on("click", '#doUpdate', function(event){
+		if(!document.getElementById("korisnikEditSelect").value){
+			alert('Izaberite korisnika za izmenu');
+			return;
+		}	
 	var korisnickoImeIzmeniInput = $('#korisnickoImeIzmeniInput');
 	var lozinkaIzmeniInput = $('#lozinkaIzmeniInput');
 	var izaberiKorisnika = $('#korisnikEditSelect');
@@ -228,13 +247,10 @@ function updateUser() {
 			korisnickoImeIzmeniInput.val("");
 			lozinkaIzmeniInput.val("");
 			preduzeceIzmeniSelect.val("");
+			$('#updateModalScrollable').modal('hide');
 		}
 	});
-
-	console.log('slanje poruke');
-	event.preventDefault();
-	return false;
-}
+});
 
 function deleteUser(){
 	var izaberiKorisnika = $('#korisnikDeleteSelect');
