@@ -49,7 +49,7 @@ public class EnterpriseController {
 		return new ResponseEntity<EnterpriseDTO>(entDTO, HttpStatus.OK);
 	}
 	
-	@PostMapping(consumes = "application/json")
+	@PostMapping(consumes = "application/json", value="/add")
 	public ResponseEntity<EnterpriseDTO> saveEnterprise(@RequestBody EnterpriseDTO eDTO){
 		Enterprise e = ent.save(enterpriseConverter.toEnterprise(eDTO));
 		EnterpriseDTO enterpriseDTO = enterpriseConverter.toDTO(e);

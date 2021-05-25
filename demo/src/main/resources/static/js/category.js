@@ -128,7 +128,7 @@ function addRate(){
 		}
 		
 		var params = {
-				'percentage': name,
+				'name' : name
 			
 		}
 		

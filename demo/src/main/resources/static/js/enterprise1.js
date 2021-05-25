@@ -192,7 +192,7 @@ function addRate(){
 			'phone' : phone,
 			'fax': fax,
 			'cityDTO': {
-				'id' : cityDTO
+				'city_id' : cityDTO
 			}
 	}
 		
@@ -221,16 +221,17 @@ function addRate(){
 //EDIT
 
 	$(document).on("click", '#fillOutRateFieldsEdit', function(event){
+	//ovde bio id samo
 		var id = document.getElementById("stopaEditSelect").value;
 		if(!id) {
 			alert("Morate izabrati preduzece da biste izvrsili izmenu");
 		}
 		var chosenRateData = ratesArray.filter(enterprise => enterprise.enterprise_id == id);
-		console.log(chosenRateData[0].percentage);
+		console.log(chosenRateData[0].nameEnterpise);
 		$('#nazivIzmeniInput').val(chosenRateData[0].nameEnterprise);
-		$('#adresaIzmeniInput').val(chosenRateData[0].address);
+		/*$('#adresaIzmeniInput').val(chosenRateData[0].address);
 		$('#telefonIzmeniInput').val(chosenRateData[0].phone);
-		$('#faxIzmeniInput').val(chosenRateData[0].fax);
+		$('#faxIzmeniInput').val(chosenRateData[0].fax);*/
 		event.preventDefault();
 	});
 
@@ -267,7 +268,7 @@ function addRate(){
 			'phone' : phone,
 			'fax': fax,
 			'cityDTO': {
-				'id' : cityDTO
+				'city_id' : cityDTO
 			}
 	}
 	

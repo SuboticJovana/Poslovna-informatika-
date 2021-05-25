@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.converters.PDVCategoryConverter;
 import com.example.demo.dto.PDVCategoryDTO;
+import com.example.demo.dto.PDVRateDTO;
 import com.example.demo.model.PDVCategory;
+import com.example.demo.model.PDVRate;
 import com.example.demo.servis.PDVCategoryServiceInterface;
 
 
@@ -51,14 +53,14 @@ public class PDVCategoryController {
 		return new ResponseEntity<PDVCategoryDTO>(pdvtDTO, HttpStatus.OK);
 	}
 	
-	@PostMapping(consumes="application/json")
+	@PostMapping(consumes="application/json", value="/add")
 	public ResponseEntity<PDVCategoryDTO> savePDVCategory(@RequestBody PDVCategoryDTO uDTO){
-		PDVCategory pdv = new PDVCategory();
-		pdv.setName(uDTO.getName());
-		service.save(pdv);
-		return new ResponseEntity<PDVCategoryDTO>(uDTO, HttpStatus.CREATED);	
+		PDVCategory pdv = pdvCategoryConverter.toPDVCategory(uDTO);
+		PDVCategory pr = service.save(pdv);
+		PDVCategoryDTO pdvCategoryDTO = pdvCategoryConverter.toDTO(pr);
+		return new ResponseEntity<PDVCategoryDTO>(pdvCategoryDTO, HttpStatus.CREATED);	
 	}
-	
+
 	@PutMapping(value="/{id}", consumes="application/json")
 	public ResponseEntity<PDVCategoryDTO> updatePDVCategory(@RequestBody PDVCategoryDTO uDTO, @PathVariable("id") Integer id){
 		PDVCategory pdv = service.findOne(id);

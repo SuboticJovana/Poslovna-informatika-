@@ -32,10 +32,10 @@ public class EnterpriseConverter {
 	}	
 		public Enterprise toEnterprise(EnterpriseDTO enterpriseDTO) {
 			Enterprise e = new Enterprise();
-			if(enterpriseDTO.getEnterprise_id()!= null) {
-				e.setEnterprise_id(enterpriseDTO.getEnterprise_id());
-			}
-			//e.setEnterprise_id(enterpriseDTO.getEnteprise_id());
+			//if(enterpriseDTO.getEnterprise_id()!= null) {
+				//e.setEnterprise_id(enterpriseDTO.getEnterprise_id());
+			//}
+			e.setEnterprise_id(enterpriseDTO.getEnterprise_id());
 			e.setNameEnterprise(enterpriseDTO.getNameEnterprise());
 			e.setAddress(enterpriseDTO.getNameEnterprise());
 			e.setPhone(enterpriseDTO.getPhone());
